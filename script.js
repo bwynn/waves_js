@@ -38,7 +38,7 @@ var waveType1 = new WaveType();
 var boardType = new Boards();
 
 //steamers details
-var title = steamers.name + ', ' + steamers.location;
+var title = steamers.name + ': ' + steamers.location;
 var sizeRange = steamers.bestSize();
 var boards = boardType[0];
 
