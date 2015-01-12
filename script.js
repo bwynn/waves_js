@@ -1,4 +1,5 @@
-function Wave(name, location, minHeight, maxHeight) {
+//an object containing
+function Wave(name, location,bestSize) {
   this.name = name;
   this.location = location;
   this.bestSize = function() {
@@ -8,6 +9,7 @@ function Wave(name, location, minHeight, maxHeight) {
   }
 };
 
+//an array of the different wave break options
 function WaveType() {
   var waveArray = [
     'pointbreak',
@@ -17,26 +19,42 @@ function WaveType() {
   return waveArray;
 };
 
+//an array of the different board types available
+function Boards() {
+  var boardsArray = [
+    'shortboard',
+    'longboard',
+    'fish',
+    'step-up'
+  ];
+  return boardsArray;
+}
+
 function Steamers() {
+// calling wave object to add content to page
 var steamers = new Wave('Steamer Lane', 'Santa Cruz, CA.');
+// calling WaveType function
 var waveType1 = new WaveType();
-var boardType = ['shortboard', 'longboard', 'fish', 'gun'];
+var boardType = new Boards();
 
 //steamers details
-var details1 = steamers.name + ', ' + steamers.location;
-var range1 = steamers.bestSize();
+var title = steamers.name + ', ' + steamers.location;
+var sizeRange = steamers.bestSize();
 var boards = boardType[0];
 
+//getting and displaying waveTitle
 var waveTitle = document.getElementById('waveTitle');
-waveTitle.textContent = details1;
+waveTitle.textContent = title;
 
+//getting and displaying waveRange
 var waveRange = document.getElementById('waveRange');
-waveRange.textContent = range1;
+waveRange.textContent = sizeRange;
 
+//getting and displaying waveKind
 var waveKind = document.getElementById('waveType');
-console.log(waveType1[0]);
 waveKind.textContent = waveType1[0];
 
+//getting and displaying boardType
 var boardType = document.getElementById('boardType');
 boardType.textContent = boards;
 };
