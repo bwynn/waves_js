@@ -8,8 +8,15 @@
 .inner-wrap {
   width: 90%;
   margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 h1 {
   font-size: 3em;
+}
+
+h1,
+h2 {
+  margin: 0;
 }
