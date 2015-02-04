@@ -19,9 +19,10 @@ function subNav() {
     $('#subNav a.active').removeClass('active');
     $(this).addClass('active');
 
-    $('#statsWrap').remove();
-    $('#statsSection').load(url + '#statsWrap').hide()fadeIn('slow');
+    $('#statsSection').remove();
+    $('#statsWrap').load(url + '#statsSection').hide().fadeIn('slow');
   });
 }
 
 pageNav();
+subNav();
