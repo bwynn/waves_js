@@ -1,44 +1,36 @@
-function pageNav() {
-  $('nav a, a#subNav').on('click', function(e) {
+function waveLoad() {
+
+  var $bodyWrap = $('#bodyWrap');
+  var $nav = $('#nav a')
+
+  $nav.on('click', function(e){
     e.preventDefault();
-    var url = this.href;
-
-    $('nav a.active').removeClass('active');
-    $(this).addClass('active');
-
-    $('.content').remove();
-    $('#bodyWrap, #statsWrap').load(url + ' .content').hide().fadeIn('slow');
+    $bodyWrap.load('best-conditions.html').hide().fadeIn('slow');
   });
+
 }
 
-function subNav() {
-  $('#subNav').on('click', function(e) {
+$(document).ready(function() {
+  var $subNav = $('#subNav a');
+
+  $subNav.on('click', function(e) {
     e.preventDefault();
-    var subUrl = this.href;                         // this needs to be a dynamic path
-    console.log(statusText);
 
-    $('a.active').removeClass('active');
-    $(this).addClass('active');
+    var $statsWrap = $('#statsWrap');
 
-    $('#statsSection').remove();
-    $('#statsWrap').load(subUrl + '#statsSection').hide().fadeIn('slow');
-  });
-}
-
-function weatherLoad(subNav) {
-  var xhr = new XMLHttpRequest();                   // create xmlhttp request object
-  xhr.onload = function() {                         // when response has loaded
-    if(xhr.status === 200) {      // xhr.status === 200
-      document.getElementById('content').innerHTML = xhr.responseText;
-    } else {
-      console.log('there was an issue');
+    switch($(this).attr('href')) {
+      case 'best-bet.html' :
+        $statsWrap.load('best-bet.html').hide().fadeIn('slow');
+        break;
+      case 'waves.html' :
+        $statsWrap.load('waves.html').hide().fadeIn('slow');
+        break;
+      case 'weather.html' :
+        $statsWrap.load('weather.html').hide().fadeIn('slow');
+        break;
     }
-  };
+  });
+});
 
-  xhr.open('GET', 'weather.html', true);
-  xhr.send(null);
-}
 
-pageNav();
-//subNav();
-weatherLoad();
+waveLoad();
