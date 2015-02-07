@@ -5,6 +5,8 @@ function topNav() {
   var $nav = $('#nav a');
   $nav.on('click', function(e){
     e.preventDefault();
+    $nav.removeClass('active');
+    $(this).addClass('active');
     switch ($(this).attr('href')) {
       case 'assets/best-conditions.html' :
         $bodyWrap.load('assets/best-conditions.html').hide().fadeIn('slow');
@@ -14,7 +16,7 @@ function topNav() {
         break;
     }
   });
-};
+}
 
 // calls the data response templates -- not the actual data
 // but the html base template the data is place into
@@ -23,7 +25,8 @@ function subNav() {
 
   $subNav.on('click', function(e) {
     e.preventDefault();
-
+    $subNav.removeClass('active');
+    $(this).addClass('active');
     var $statsWrap = $('#statsWrap');
 
     switch($(this).attr('href')) {
@@ -59,7 +62,7 @@ function weatherCalls() {
       },
     error: function(e) {console.log('epic fail')}
     });
-  };
+  }
 
   function santaCruzMarineCall() {                                      // declare santaCruzMarineCall function
           $.ajax({                                                      // jQuery ajax declaration
@@ -75,7 +78,7 @@ function weatherCalls() {
       },
       error: function(e) {console.log('epic marine fail')}
     });
-  };
+  }
 
   function carpenteriaWeather() {
 
@@ -92,7 +95,7 @@ function weatherCalls() {
         },
       error: function(e) {console.log('epic fail')}
       });
-  };
+  }
 
   function carpenteriaMarineCall() {                                      // declare santaCruzMarineCall function
       $.ajax({                                                            // jQuery ajax declaration
@@ -108,7 +111,7 @@ function weatherCalls() {
         },
         error: function(e) {console.log('epic marine fail')}
       });
-  };
+  }
 
   function sanClementeWeather() {
   $.ajax({
@@ -124,7 +127,7 @@ function weatherCalls() {
       },
     error: function(e) {console.log('epic fail')}
     });
-  };
+  }
 
   function sanClementeMarineCall() {                                      // declare santaCruzMarineCall function
       $.ajax({                                                            // jQuery ajax declaration
@@ -140,19 +143,19 @@ function weatherCalls() {
         },
         error: function(e) {console.log('epic marine fail')}
       });
-  };
+  }
 
   function localTime(data) {
     // local time
     var gmt = new Date();
     console.log('Time: ' + gmt);
-  };
+  }
 
   function airTemp(data) {
     //temperature
     var temp = data.data.current_condition[0].temp_F;
     console.log('Degrees f: '+ temp);
-  };
+  }
 
   function windConditions(data) {
     //wind direction
@@ -177,14 +180,14 @@ function weatherCalls() {
     var windDir = "North West";
                   }
     console.log('Wind: From the ' + windDir + ' at ' + w_speed + ' mph');
-  };
+  }
 
   function generalConditions(data) {
     // weather Description
     var w_desc = data.data.current_condition[0].weatherDesc[0].value;
     console.log('Skies: ' + w_desc);
 
-  };
+  }
 
   function swellSize(data) {                                          // declare receive function taking data as the argument
     var wSizeM = data.data.weather[0].hourly[0].swellHeight_m;      // gets swell height in meters
@@ -210,7 +213,7 @@ function weatherCalls() {
     }
     console.log('wave height feet: ' + wSizeF);                     // prints wave size converted to feet
     console.log('wave size: ' + wSize);                     // prints wave size converted to feet
-  };
+  }
 
   function swDir(data) {
       var swellDir = data.data.weather[0].hourly[0].swellDir;         // gets swell direction
@@ -249,7 +252,7 @@ function weatherCalls() {
          sDir = "N"
       }
       console.log('Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.')
-  };
+  }
 
   // Wetsuit Recommendation
   function wetsuit(data) {
@@ -269,7 +272,7 @@ function weatherCalls() {
     }
     console.log('wetsuit: ' + wSuit);
     console.log('water temp today: ' + waterTemp);                  // prints water temp string
-  };
+  }
 
   // Swell Period
   function swellPeriod(data) {
@@ -284,7 +287,7 @@ function weatherCalls() {
        swellSig = "Long period ground swell";
     }
     console.log("Today's swell conditions: " + swellSig);
-  };
+  }
 
   // calls steamers weather data call
   $('#steamers').on('click', function(e) {
