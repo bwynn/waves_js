@@ -6,11 +6,11 @@ function topNav() {
   $nav.on('click', function(e){
     e.preventDefault();
     switch ($(this).attr('href')) {
-      case 'best-conditions.html' :
-        $bodyWrap.load('best-conditions.html').hide().fadeIn('slow');
+      case 'assets/best-conditions.html' :
+        $bodyWrap.load('assets/best-conditions.html').hide().fadeIn('slow');
         break;
       case 'index.html' :
-        $bodyWrap.load('bestbet.html').hide().fadeIn('slow');
+        $bodyWrap.load('assets/bestbet.html').hide().fadeIn('slow');
         break;
     }
   });
@@ -27,14 +27,14 @@ function subNav() {
     var $statsWrap = $('#statsWrap');
 
     switch($(this).attr('href')) {
-      case 'best-conditions.html' :
-        $statsWrap.load('bestbet.html').hide().fadeIn('slow');
+      case 'assets/best-conditions.html' :
+        $statsWrap.load('assets/bestbet.html').hide().fadeIn('slow');
         break;
-      case 'waves.html' :
-        $statsWrap.load('waves.html').hide().fadeIn('slow');
+      case 'assets/waves.html' :
+        $statsWrap.load('assets/waves.html').hide().fadeIn('slow');
         break;
-      case 'weather.html' :
-        $statsWrap.load('weather.html').hide().fadeIn('slow');
+      case 'assets/weather.html' :
+        $statsWrap.load('assets/weather.html').hide().fadeIn('slow');
         break;
     }
   });
