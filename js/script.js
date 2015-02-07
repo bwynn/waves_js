@@ -1,14 +1,9 @@
-//var onLoad = function() {
-function onLoad() {
+function topNav() {
   //using jQuery
   var $bodyWrap = $('#bodyWrap');
   var $nav = $('#nav a');
-  var $statsWrap = $('#statsWrap');
-
-
   $nav.on('click', function(e){
     e.preventDefault();
-
     switch ($(this).attr('href')) {
       case 'best-conditions.html' :
         $bodyWrap.load('best-conditions.html').hide().fadeIn('slow');
@@ -18,11 +13,10 @@ function onLoad() {
         break;
     }
   });
-}
-//}();
+};
 
 
-$(document).ready(function() {
+function subNav() {
   var $subNav = $('#subNav a');
 
   $subNav.on('click', function(e) {
@@ -42,6 +36,7 @@ $(document).ready(function() {
         break;
     }
   });
-});
+}
 
-onLoad();
+topNav();
+subNav();
