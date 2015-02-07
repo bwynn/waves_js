@@ -40,46 +40,15 @@ function subNav() {
   });
 }
 
-var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
-var waves = $(this);                                                  // sets $(this) value globally for wave
+function weatherCalls() {
 
-function santaCruzWeather() {
-$.ajax({
-  type: 'POST',
-  url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=" + api,
-  dataType: 'jsonp',
-  data: waves.serialize(),
-  success: function(data){
-      localTime(data);                                                // calls localTime function
-      airTemp(data);                                                  // calls airTemp function
-      windConditions(data);                                           // calls windDirection function
-      generalConditions(data);                                        // calls generalConditions function
-    },
-  error: function(e) {console.log('epic fail')}
-  });
-};
+  var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
+  var waves = $(this);                                                  // sets $(this) value globally for wave
 
-function santaCruzMarineCall() {                                      // declare santaCruzMarineCall function
-        $.ajax({                                                      // jQuery ajax declaration
-    type: 'POST',                                                     // declare type of ajax call
-    url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=" + api,
-    dataType: 'jsonp',                                                // declare dataType, using parsed json
-    data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
-    success: function(data){                                          // successful api call performs function
-      swellSize(data);                                                // calls swellSize function
-      swDir(data);                                                    // calls swDir function
-      wetsuit(data);                                                  // calls wetsuit function
-      swellPeriod(data);                                              // calls swellPeriod function
-    },
-    error: function(e) {console.log('epic marine fail')}
-  });
-};
-
-function carpenteriaWeather() {
-
+  function santaCruzWeather() {
   $.ajax({
     type: 'POST',
-    url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=93014&format=json&date=today&key=" + api,
+    url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=" + api,
     dataType: 'jsonp',
     data: waves.serialize(),
     success: function(data){
@@ -90,12 +59,12 @@ function carpenteriaWeather() {
       },
     error: function(e) {console.log('epic fail')}
     });
-};
+  };
 
-function carpenteriaMarineCall() {                                      // declare santaCruzMarineCall function
-    $.ajax({                                                            // jQuery ajax declaration
+  function santaCruzMarineCall() {                                      // declare santaCruzMarineCall function
+          $.ajax({                                                      // jQuery ajax declaration
       type: 'POST',                                                     // declare type of ajax call
-      url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=" + api,
+      url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=" + api,
       dataType: 'jsonp',                                                // declare dataType, using parsed json
       data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
       success: function(data){                                          // successful api call performs function
@@ -106,185 +75,217 @@ function carpenteriaMarineCall() {                                      // decla
       },
       error: function(e) {console.log('epic marine fail')}
     });
-};
+  };
 
-function sanClementeWeather() {
-$.ajax({
-  type: 'POST',
-  url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=" + api,
-  dataType: 'jsonp',
-  data: waves.serialize(),
-  success: function(data){
-      localTime(data);                                                // calls localTime function
-      airTemp(data);                                                  // calls airTemp function
-      windConditions(data);                                           // calls windDirection function
-      generalConditions(data);                                        // calls generalConditions function
-    },
-  error: function(e) {console.log('epic fail')}
-  });
-};
+  function carpenteriaWeather() {
 
-function sanClementeMarineCall() {                                      // declare santaCruzMarineCall function
-    $.ajax({                                                            // jQuery ajax declaration
-      type: 'POST',                                                     // declare type of ajax call
-      url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=" + api,
-      dataType: 'jsonp',                                                // declare dataType, using parsed json
-      data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
-      success: function(data){                                          // successful api call performs function
-        swellSize(data);                                                // calls swellSize function
-        swDir(data);                                                    // calls swDir function
-        wetsuit(data);                                                  // calls wetsuit function
-        swellPeriod(data);                                              // calls swellPeriod function
+    $.ajax({
+      type: 'POST',
+      url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=93014&format=json&date=today&key=" + api,
+      dataType: 'jsonp',
+      data: waves.serialize(),
+      success: function(data){
+          localTime(data);                                                // calls localTime function
+          airTemp(data);                                                  // calls airTemp function
+          windConditions(data);                                           // calls windDirection function
+          generalConditions(data);                                        // calls generalConditions function
+        },
+      error: function(e) {console.log('epic fail')}
+      });
+  };
+
+  function carpenteriaMarineCall() {                                      // declare santaCruzMarineCall function
+      $.ajax({                                                            // jQuery ajax declaration
+        type: 'POST',                                                     // declare type of ajax call
+        url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=" + api,
+        dataType: 'jsonp',                                                // declare dataType, using parsed json
+        data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
+        success: function(data){                                          // successful api call performs function
+          swellSize(data);                                                // calls swellSize function
+          swDir(data);                                                    // calls swDir function
+          wetsuit(data);                                                  // calls wetsuit function
+          swellPeriod(data);                                              // calls swellPeriod function
+        },
+        error: function(e) {console.log('epic marine fail')}
+      });
+  };
+
+  function sanClementeWeather() {
+  $.ajax({
+    type: 'POST',
+    url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=" + api,
+    dataType: 'jsonp',
+    data: waves.serialize(),
+    success: function(data){
+        localTime(data);                                                // calls localTime function
+        airTemp(data);                                                  // calls airTemp function
+        windConditions(data);                                           // calls windDirection function
+        generalConditions(data);                                        // calls generalConditions function
       },
-      error: function(e) {console.log('epic marine fail')}
+    error: function(e) {console.log('epic fail')}
     });
-};
+  };
 
-function localTime(data) {
-  // local time
-  var gmt = new Date();
-  console.log('Time: ' + gmt);
-};
+  function sanClementeMarineCall() {                                      // declare santaCruzMarineCall function
+      $.ajax({                                                            // jQuery ajax declaration
+        type: 'POST',                                                     // declare type of ajax call
+        url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=" + api,
+        dataType: 'jsonp',                                                // declare dataType, using parsed json
+        data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
+        success: function(data){                                          // successful api call performs function
+          swellSize(data);                                                // calls swellSize function
+          swDir(data);                                                    // calls swDir function
+          wetsuit(data);                                                  // calls wetsuit function
+          swellPeriod(data);                                              // calls swellPeriod function
+        },
+        error: function(e) {console.log('epic marine fail')}
+      });
+  };
 
-function airTemp(data) {
-  //temperature
-  var temp = data.data.current_condition[0].temp_F;
-  console.log('Degrees f: '+ temp);
-};
+  function localTime(data) {
+    // local time
+    var gmt = new Date();
+    console.log('Time: ' + gmt);
+  };
 
-function windConditions(data) {
-  //wind direction
-  var w_dir = data.data.current_condition[0].winddirDegree;
-  var w_speed = data.data.current_condition[0].windspeedMiles;
+  function airTemp(data) {
+    //temperature
+    var temp = data.data.current_condition[0].temp_F;
+    console.log('Degrees f: '+ temp);
+  };
 
-  if (w_dir < 0) {
-  var windDir = "North";
-    } else if (w_dir < 45) {
-  var windDir = "North East";
-      } else if (w_dir < 90) {
-  var windDir = "East";
-      } else if (w_dir < 135) {
-  var windDir = "South East";
-        } else if (w_dir < 180) {
-  var windDir = "South";
-          } else if (w_dir < 225) {
-  var windDir = "South West";
-            } else if (w_dir < 270) {
-  var windDir = "West";
-              } else if (w_dir < 315) {
-  var windDir = "North West";
-                }
-  console.log('Wind: From the ' + windDir + ' at ' + w_speed + ' mph');
-};
+  function windConditions(data) {
+    //wind direction
+    var w_dir = data.data.current_condition[0].winddirDegree;
+    var w_speed = data.data.current_condition[0].windspeedMiles;
 
-function generalConditions(data) {
-  // weather Description
-  var w_desc = data.data.current_condition[0].weatherDesc[0].value;
-  console.log('Skies: ' + w_desc);
+    if (w_dir < 0) {
+    var windDir = "North";
+      } else if (w_dir < 45) {
+    var windDir = "North East";
+        } else if (w_dir < 90) {
+    var windDir = "East";
+        } else if (w_dir < 135) {
+    var windDir = "South East";
+          } else if (w_dir < 180) {
+    var windDir = "South";
+            } else if (w_dir < 225) {
+    var windDir = "South West";
+              } else if (w_dir < 270) {
+    var windDir = "West";
+                } else if (w_dir < 315) {
+    var windDir = "North West";
+                  }
+    console.log('Wind: From the ' + windDir + ' at ' + w_speed + ' mph');
+  };
 
-};
+  function generalConditions(data) {
+    // weather Description
+    var w_desc = data.data.current_condition[0].weatherDesc[0].value;
+    console.log('Skies: ' + w_desc);
 
-function swellSize(data) {                                          // declare receive function taking data as the argument
-  var wSizeM = data.data.weather[0].hourly[0].swellHeight_m;      // gets swell height in meters
-  var wSizeF = (wSizeM * 3.28).toPrecision(3);                    // meters to feet
-  if ( wSizeF < 1 ) {
-    var wSize = "Flat";
-  } else if ( wSizeF < 3 ) {
-    var wSize = "Knee to waist high";
-  } else if ( wSizeF < 4 ) {
-    var wSize = "Waist to chest high";
-  } else if ( wSizeF < 5 ) {
-    var wSize = "Chest to head high";
-  } else if ( wSizeF < 6 ) {
-    var wSize = "Head high";
-  } else if ( wSizeF < 8 ) {
-    var wSize = "Overhead";
-  } else if ( wSizeF < 12 ) {
-    var wSize = "Overhead to double overhead";
-  } else if ( wSizeF < 18 ) {
-    var wSize = "Double to triple overhead";
-  } else if (wSizeF > 18.1 ) {
-    var wSize = "Triple overhead plus";
-  }
-  console.log('wave height feet: ' + wSizeF);                     // prints wave size converted to feet
-  console.log('wave size: ' + wSize);                     // prints wave size converted to feet
-};
+  };
 
-function swDir(data) {
-    var swellDir = data.data.weather[0].hourly[0].swellDir;         // gets swell direction
-    var sDir;                                                       // initializing sDir variable
-    if ( swellDir < 23 ) {
-       sDir = "NNE";
-    } else if ( swellDir < 45 ) {
-       sDir = "NE";
-    } else if ( swellDir < 69 ) {
-       sDir = "ENE";
-    } else if ( swellDir < 90 ) {
-       sDir = "E";
-    } else if ( swellDir < 116 ) {
-       sDir = "ESE";
-    } else if ( swellDir < 140 ) {
-       sDir = "SE";
-    } else if ( swellDir < 170 ) {
-       sDir = "SSE";
-    } else if ( swellDir < 190 ) {
-       sDir = "S";
-    } else if ( swellDir < 215 ) {
-       sDir = "SSW";
-    } else if ( swellDir < 235 ) {
-       sDir = "SW";
-    } else if ( swellDir < 255 ) {
-       sDir = "WSW";
-    } else if ( swellDir < 280 ) {
-       sDir = "W";
-    } else if ( swellDir < 305 ) {
-       sDir = "WNW";
-    } else if ( swellDir < 320 ) {
-       sDir = "NW";
-    } else if ( swellDir < 340 ) {
-       sDir = "NNW";
-    } else if ( swellDir > 341 ) {
-       sDir = "N"
+  function swellSize(data) {                                          // declare receive function taking data as the argument
+    var wSizeM = data.data.weather[0].hourly[0].swellHeight_m;      // gets swell height in meters
+    var wSizeF = (wSizeM * 3.28).toPrecision(3);                    // meters to feet
+    if ( wSizeF < 1 ) {
+      var wSize = "Flat";
+    } else if ( wSizeF < 3 ) {
+      var wSize = "Knee to waist high";
+    } else if ( wSizeF < 4 ) {
+      var wSize = "Waist to chest high";
+    } else if ( wSizeF < 5 ) {
+      var wSize = "Chest to head high";
+    } else if ( wSizeF < 6 ) {
+      var wSize = "Head high";
+    } else if ( wSizeF < 8 ) {
+      var wSize = "Overhead";
+    } else if ( wSizeF < 12 ) {
+      var wSize = "Overhead to double overhead";
+    } else if ( wSizeF < 18 ) {
+      var wSize = "Double to triple overhead";
+    } else if (wSizeF > 18.1 ) {
+      var wSize = "Triple overhead plus";
     }
-    console.log('Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.')
-};
+    console.log('wave height feet: ' + wSizeF);                     // prints wave size converted to feet
+    console.log('wave size: ' + wSize);                     // prints wave size converted to feet
+  };
 
-// Wetsuit Recommendation
-function wetsuit(data) {
-  var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
-  if ( waterTemp < 55 ) {
-    var wSuit = "5/4 Hooded Fullsuit";
-  } else if ( waterTemp < 60 ) {
-     wSuit = "4/3 Fullsuit";
-  } else if ( waterTemp < 67 ) {
-     wSuit = "3/2 Fullsuit";
-  } else if ( waterTemp < 72 ) {
-     wSuit = "Springsuit";
-  } else if ( waterTemp < 75 ) {
-     wSuit = "Vest & Trunks";
-  } else if ( waterTemp > 75 ) {
-     wSuit = "Trunks";
-  }
-  console.log('wetsuit: ' + wSuit);
-  console.log('water temp today: ' + waterTemp);                  // prints water temp string
-};
+  function swDir(data) {
+      var swellDir = data.data.weather[0].hourly[0].swellDir;         // gets swell direction
+      var sDir;                                                       // initializing sDir variable
+      if ( swellDir < 23 ) {
+         sDir = "NNE";
+      } else if ( swellDir < 45 ) {
+         sDir = "NE";
+      } else if ( swellDir < 69 ) {
+         sDir = "ENE";
+      } else if ( swellDir < 90 ) {
+         sDir = "E";
+      } else if ( swellDir < 116 ) {
+         sDir = "ESE";
+      } else if ( swellDir < 140 ) {
+         sDir = "SE";
+      } else if ( swellDir < 170 ) {
+         sDir = "SSE";
+      } else if ( swellDir < 190 ) {
+         sDir = "S";
+      } else if ( swellDir < 215 ) {
+         sDir = "SSW";
+      } else if ( swellDir < 235 ) {
+         sDir = "SW";
+      } else if ( swellDir < 255 ) {
+         sDir = "WSW";
+      } else if ( swellDir < 280 ) {
+         sDir = "W";
+      } else if ( swellDir < 305 ) {
+         sDir = "WNW";
+      } else if ( swellDir < 320 ) {
+         sDir = "NW";
+      } else if ( swellDir < 340 ) {
+         sDir = "NNW";
+      } else if ( swellDir > 341 ) {
+         sDir = "N"
+      }
+      console.log('Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.')
+  };
 
-// Swell Period
-function swellPeriod(data) {
-  var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
-  if ( sPeriod < 7 ) {
-    var swellSig = "Junky, short-period windswell";
-  } else if ( sPeriod < 10 ) {
-     swellSig = "Windswell";
-  } else if ( sPeriod < 12 ) {
-     swellSig = "Short period ground swell";
-  } else if ( sPeriod > 12 ) {
-     swellSig = "Long period ground swell";
-  }
-  console.log("Today's swell conditions: " + swellSig);
-};
+  // Wetsuit Recommendation
+  function wetsuit(data) {
+    var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
+    if ( waterTemp < 55 ) {
+      var wSuit = "5/4 Hooded Fullsuit";
+    } else if ( waterTemp < 60 ) {
+       wSuit = "4/3 Fullsuit";
+    } else if ( waterTemp < 67 ) {
+       wSuit = "3/2 Fullsuit";
+    } else if ( waterTemp < 72 ) {
+       wSuit = "Springsuit";
+    } else if ( waterTemp < 75 ) {
+       wSuit = "Vest & Trunks";
+    } else if ( waterTemp > 75 ) {
+       wSuit = "Trunks";
+    }
+    console.log('wetsuit: ' + wSuit);
+    console.log('water temp today: ' + waterTemp);                  // prints water temp string
+  };
 
-function dataAssignment() {
+  // Swell Period
+  function swellPeriod(data) {
+    var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
+    if ( sPeriod < 7 ) {
+      var swellSig = "Junky, short-period windswell";
+    } else if ( sPeriod < 10 ) {
+       swellSig = "Windswell";
+    } else if ( sPeriod < 12 ) {
+       swellSig = "Short period ground swell";
+    } else if ( sPeriod > 12 ) {
+       swellSig = "Long period ground swell";
+    }
+    console.log("Today's swell conditions: " + swellSig);
+  };
+
   // calls steamers weather data call
   $('#steamers').on('click', function(e) {
     santaCruzWeather();
@@ -299,8 +300,8 @@ function dataAssignment() {
     sanClementeWeather();
     sanClementeMarineCall();
   });
-};
+}
 
 topNav();
 subNav();
-dataAssignment();
+weatherCalls();
