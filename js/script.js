@@ -35,7 +35,7 @@ $(document).ready(function() {
         $statsWrap.load('bestbet.html').hide().fadeIn('slow');
         break;
       case 'waves.html' :
-        $statsWrap.load('waves.html').hide.fadeIn('slow');
+        $statsWrap.load('waves.html').hide().fadeIn('slow');
         break;
       case 'weather.html' :
         $statsWrap.load('weather.html').hide().fadeIn('slow');
