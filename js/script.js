@@ -48,7 +48,7 @@ function weatherCalls() {
   var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
   var waves = $(this);                                                  // sets $(this) value globally for wave
   var $body = $('body');
-  var $waves = $('#waveDetails');
+  var $waveDetails = $('#waveDetails');
   var $weather = $('#weather');
 
   function santaCruzWeather() {
@@ -255,6 +255,7 @@ function weatherCalls() {
          sDir = "N"
       }
       console.log('Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.')
+
   }
 
   // Wetsuit Recommendation
@@ -292,33 +293,57 @@ function weatherCalls() {
     console.log("Today's swell conditions: " + swellSig);
   }
 
-  // calls steamers weather data call
-  $('#steamers').on('click', function(e) {                              //
+  function santaCruzCalls() {
+    // calls steamers weather data call
+    $('#steamers').on('click', function(e) {
+      $body.removeAttr('id');
+      $body.attr('id', 'steamersPage');
+    });
 
-    $body.removeAttr('id');
-    $body.attr('id', 'steamersPage');
-    santaCruzWeather();
-    santaCruzMarineCall();
-  });
+    $('#steamersPage #weatherLink').on('click', function(e) {
+      santaCruzWeather();
+    });
 
+    $('#steamersPage #wavesLink').on('click', function(e) {
+      santaCruzMarineCall();
+    });
+  }
 
-  // calls rincon weather data call
-  $('#rincon').on('click', function(e) {
+  function rinconCalls() {
+    // calls rincon weather data call
+    $('#rincon').on('click', function(e) {
+      $body.removeAttr('id');
+      $body.attr('id', 'rinconPage');
+    });
 
-    $body.removeAttr('id');
-    $body.attr('id', 'rinconPage');
-    carpenteriaWeather();
-    carpenteriaMarineCall();
-  });
+    $('#rinconPage #weatherLink').on('click', function(e) {
+      carpenteriaWeather();
+    });
 
-  // calls tretles
-  $('#trestles').on('click', function(e) {
+    $('#rinconPage #wavesLink').on('click', function(e) {
+      carpenteriaMarineCall();
+    });
+  }
 
-    $body.removeAttr('id');
-    $body.attr('id', 'trestlesPage');
-    sanClementeWeather();
-    sanClementeMarineCall();
-  });
+  function trestlesCall() {
+    // calls tretles
+    $('#trestles').on('click', function(e) {
+      $body.removeAttr('id');
+      $body.attr('id', 'trestlesPage');
+    });
+
+    $('#trestlesPage #weatherLink').on('click', function(e) {
+      sanClementeWeather();
+    });
+
+    $('#trestlesPage #wavesLink').on('click', function(e) {
+      sanClementeMarineCall();
+    });
+  }
+
+  santaCruzCalls();
+  rinconCalls();
+  trestlesCall();
 }
 
 topNav();
