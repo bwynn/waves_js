@@ -48,8 +48,6 @@ function weatherCalls() {
   var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
   var waves = $(this);                                                  // sets $(this) value globally for wave
   var $body = $('body');
-  var $waveDetails = $('#waveDetails');
-  var $weather = $('#weather');
 
   function santaCruzWeather() {
   $.ajax({
@@ -152,12 +150,14 @@ function weatherCalls() {
     // local time
     var gmt = new Date();
     console.log('Time: ' + gmt);
+    $('<li>Time: ' + gmt + '</li>').appendTo($('#weather ul'));
   }
 
   function airTemp(data) {
     //temperature
     var temp = data.data.current_condition[0].temp_F;
     console.log('Degrees f: '+ temp);
+    $('<li>Degrees f: '+ temp + '</li>').appendTo($('#weather ul'));
   }
 
   function windConditions(data) {
@@ -183,13 +183,14 @@ function weatherCalls() {
     var windDir = "North West";
                   }
     console.log('Wind: From the ' + windDir + ' at ' + w_speed + ' mph');
+    $('<li>Wind: From the ' + windDir + ' at ' + w_speed + ' mph.</li>').appendTo($('#weather ul'));
   }
 
   function generalConditions(data) {
     // weather Description
     var w_desc = data.data.current_condition[0].weatherDesc[0].value;
     console.log('Skies: ' + w_desc);
-
+    $('<li>Skies: ' + w_desc + '</li>').appendTo($('#weather ul'));
   }
 
   function swellSize(data) {                                          // declare receive function taking data as the argument
@@ -216,6 +217,7 @@ function weatherCalls() {
     }
     console.log('wave height feet: ' + wSizeF);                     // prints wave size converted to feet
     console.log('wave size: ' + wSize);                     // prints wave size converted to feet
+    $('<li>Wave height: ' + wSizeF + 'ft.</li>').appendTo('#waveDetails ul');
   }
 
   function swDir(data) {
@@ -255,7 +257,7 @@ function weatherCalls() {
          sDir = "N"
       }
       console.log('Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.')
-
+      $('<li>Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.</li>').appendTo('#waveDetails ul');
   }
 
   // Wetsuit Recommendation
@@ -276,6 +278,8 @@ function weatherCalls() {
     }
     console.log('wetsuit: ' + wSuit);
     console.log('water temp today: ' + waterTemp);                  // prints water temp string
+    $('<li>Water temp today: ' + waterTemp + ' degrees</li>').appendTo('#waveDetails ul');
+    $('<li>Recommended wetsuit: ' + wSuit + '</li>').appendTo('#waveDetails ul');
   }
 
   // Swell Period
@@ -291,6 +295,7 @@ function weatherCalls() {
        swellSig = "Long period ground swell";
     }
     console.log("Today's swell conditions: " + swellSig);
+    $("<li>Today's swell conditions: " + swellSig + '</li>').appendTo('#waveDetails ul');
   }
 
   function santaCruzCalls() {
