@@ -4,9 +4,9 @@ function topNav() {
   var $bodyWrap = $('#bodyWrap');
   var $nav = $('#nav a');
   $nav.on('click', function(e){
-    e.preventDefault();
-    $nav.removeClass('active');
-    $(this).addClass('active');
+    e.preventDefault();                                             // prevents default link action
+    $nav.removeClass('active');                                     // removes active class from elements
+    $(this).addClass('active');                                     // reassigns .active to current selection
     switch ($(this).attr('href')) {
       case 'assets/best-conditions.html' :
         $bodyWrap.load('assets/best-conditions.html').hide().fadeIn('slow');
@@ -24,10 +24,10 @@ function subNav() {
   var $subNav = $('#subNav a');
 
   $subNav.on('click', function(e) {
-    e.preventDefault();
-    $subNav.removeClass('active');
-    $(this).addClass('active');
-    var $statsWrap = $('#statsWrap');
+    e.preventDefault();                                             // prevents default link action
+    $subNav.removeClass('active');                                  // removing .active from elements
+    $(this).addClass('active');                                     // reassigns .active to e.target element
+    var $statsWrap = $('#statsWrap');                               // assign variable to #statsWrap
 
     switch($(this).attr('href')) {
       case 'assets/best-conditions.html' :
@@ -47,6 +47,9 @@ function weatherCalls() {
 
   var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
   var waves = $(this);                                                  // sets $(this) value globally for wave
+  var $body = $('body');
+  var $waves = $('#waveDetails');
+  var $weather = $('#weather');
 
   function santaCruzWeather() {
   $.ajax({
@@ -290,16 +293,29 @@ function weatherCalls() {
   }
 
   // calls steamers weather data call
-  $('#steamers').on('click', function(e) {
+  $('#steamers').on('click', function(e) {                              //
+
+    $body.removeAttr('id');
+    $body.attr('id', 'steamersPage');
     santaCruzWeather();
     santaCruzMarineCall();
   });
+
+
   // calls rincon weather data call
   $('#rincon').on('click', function(e) {
+
+    $body.removeAttr('id');
+    $body.attr('id', 'rinconPage');
     carpenteriaWeather();
     carpenteriaMarineCall();
   });
+
+  // calls tretles
   $('#trestles').on('click', function(e) {
+
+    $body.removeAttr('id');
+    $body.attr('id', 'trestlesPage');
     sanClementeWeather();
     sanClementeMarineCall();
   });
