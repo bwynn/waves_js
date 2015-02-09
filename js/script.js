@@ -354,16 +354,23 @@ function weatherCalls() {
 function mobileNav() {
   $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
     $('#nav ul').slideToggle('slow');
-    e.stopImmediatePropagation();                              // added event.stopPropagation to prevent calls from stacking 
+    e.stopImmediatePropagation();
   });
 
   $('#nav > ul > li > a').on('click', function(e) {            // function to hide nav ul when child is clicked
     $('#nav ul').hide();
-    console.log('inside link clicked');
   })
+}
+
+function copywrite() {
+  var today = new Date();
+  var year = today.getFullYear();
+
+  $('footer').append('<p>&copy; ' + year + ' Brian Wynn</p>');
 }
 
 topNav();
 subNav();
 weatherCalls();
 mobileNav();
+copywrite();
