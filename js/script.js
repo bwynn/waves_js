@@ -354,7 +354,7 @@ function weatherCalls() {
 function mobileNav() {
   $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
     $('#nav ul').slideToggle('slow');
-    event.stopPropagation();                              // added event.stopPropagation to prevent calls from stacking 
+    e.stopImmediatePropagation();                              // added event.stopPropagation to prevent calls from stacking 
   });
 
   $('#nav > ul > li > a').on('click', function(e) {            // function to hide nav ul when child is clicked
