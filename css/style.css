@@ -1,3 +1,7 @@
 #subNav {
   color: green;
 }
+
+#nav ul {
+  display: none;
+}

@@ -149,14 +149,14 @@ function weatherCalls() {
   function localTime(data) {
     // local time
     var gmt = new Date();
-    console.log('Time: ' + gmt);
+    //console.log('Time: ' + gmt);
     $('<li>Time: ' + gmt + '</li>').appendTo($('#weather ul'));
   }
 
   function airTemp(data) {
     //temperature
     var temp = data.data.current_condition[0].temp_F;
-    console.log('Degrees f: '+ temp);
+    //console.log('Degrees f: '+ temp);
     $('<li>Degrees f: '+ temp + '</li>').appendTo($('#weather ul'));
   }
 
@@ -182,14 +182,14 @@ function weatherCalls() {
                 } else if (w_dir < 315) {
     var windDir = "North West";
                   }
-    console.log('Wind: From the ' + windDir + ' at ' + w_speed + ' mph');
+    //console.log('Wind: From the ' + windDir + ' at ' + w_speed + ' mph');
     $('<li>Wind: From the ' + windDir + ' at ' + w_speed + ' mph.</li>').appendTo($('#weather ul'));
   }
 
   function generalConditions(data) {
     // weather Description
     var w_desc = data.data.current_condition[0].weatherDesc[0].value;
-    console.log('Skies: ' + w_desc);
+    //console.log('Skies: ' + w_desc);
     $('<li>Skies: ' + w_desc + '</li>').appendTo($('#weather ul'));
   }
 
@@ -215,8 +215,8 @@ function weatherCalls() {
     } else if (wSizeF > 18.1 ) {
       var wSize = "Triple overhead plus";
     }
-    console.log('wave height feet: ' + wSizeF);                     // prints wave size converted to feet
-    console.log('wave size: ' + wSize);                     // prints wave size converted to feet
+    //console.log('wave height feet: ' + wSizeF);                     // prints wave size converted to feet
+    //console.log('wave size: ' + wSize);                     // prints wave size converted to feet
     $('<li>Wave height: ' + wSizeF + 'ft.</li>').appendTo('#waveDetails ul');
   }
 
@@ -256,7 +256,7 @@ function weatherCalls() {
       } else if ( swellDir > 341 ) {
          sDir = "N"
       }
-      console.log('Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.')
+      //console.log('Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.')
       $('<li>Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.</li>').appendTo('#waveDetails ul');
   }
 
@@ -276,8 +276,8 @@ function weatherCalls() {
     } else if ( waterTemp > 75 ) {
        wSuit = "Trunks";
     }
-    console.log('wetsuit: ' + wSuit);
-    console.log('water temp today: ' + waterTemp);                  // prints water temp string
+    //console.log('wetsuit: ' + wSuit);
+    //console.log('water temp today: ' + waterTemp);                  // prints water temp string
     $('<li>Water temp today: ' + waterTemp + ' degrees</li>').appendTo('#waveDetails ul');
     $('<li>Recommended wetsuit: ' + wSuit + '</li>').appendTo('#waveDetails ul');
   }
@@ -294,7 +294,7 @@ function weatherCalls() {
     } else if ( sPeriod > 12 ) {
        swellSig = "Long period ground swell";
     }
-    console.log("Today's swell conditions: " + swellSig);
+    //console.log("Today's swell conditions: " + swellSig);
     $("<li>Today's swell conditions: " + swellSig + '</li>').appendTo('#waveDetails ul');
   }
 
@@ -351,6 +351,17 @@ function weatherCalls() {
   trestlesCall();
 }
 
+function mobileNav() {
+  $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
+    $('#nav ul').slideToggle('slow');
+  });
+
+  $('#nav > ul > li > a').on('click', function(e) {            // function to hide nav ul when child is clicked
+    $('#nav ul').hide().parent();
+  })
+}
+
 topNav();
 subNav();
 weatherCalls();
+mobileNav();
