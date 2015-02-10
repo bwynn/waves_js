@@ -1,7 +1,22 @@
+body {
+  width: 100%;
+  height: 100%;
+}
+
 #subNav {
   color: green;
 }
 
 #nav ul {
   display: none;
+}
+
+#heroImg {
+  width: 100%;
+  height: 800px;
+  background: url('../images/bckgd_lg.jpg') no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+  position: relative;
+  z-index: -1;
 }
