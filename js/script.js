@@ -370,7 +370,6 @@ function copywrite() {
 }
 
 topNav();
-subNav();
 weatherCalls();
 mobileNav();
 copywrite();
