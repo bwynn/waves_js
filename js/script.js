@@ -346,9 +346,17 @@ function weatherCalls() {
     });
   }
 
+  function bestBetCall() {
+    $('#best-bet').on('click', function(e) {
+      $body.removeAttr('id');
+      $body.attr('id', 'bestBetPage');
+    });
+  }
+
   santaCruzCalls();
   rinconCalls();
   trestlesCall();
+  bestBetCall();
 }
 
 function mobileNav() {
@@ -369,7 +377,36 @@ function copywrite() {
   $('footer').append('<p>&copy; ' + year + ' Brian Wynn</p>');
 }
 
+function hires() {
+  if (window.devicePixelRatio == 2) {
+
+    var images = $("img.hires");
+
+    // loop through the images and make them hi-res
+    for(var i = 0; i < images.length; i++) {
+
+    // create new image name
+    var imageType = images[i].src.substr(-4);
+    var imageName = images[i].src.substr(0, images[i].src.length - 4);
+    imageName += "@2x" + imageType;
+
+    //rename image
+    images[i].src = imageName;
+    }
+  }
+}
+
+function pageTitle() {
+  var pageId =  $('body').attr('id');
+  var title = pageId.substr(0, pageId.length -4);
+  console.log(title);
+}
+
+
+
 topNav();
 weatherCalls();
 mobileNav();
 copywrite();
+hires();
+pageTitle();
