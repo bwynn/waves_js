@@ -409,4 +409,3 @@ weatherCalls();
 mobileNav();
 copywrite();
 hires();
-pageTitle();
