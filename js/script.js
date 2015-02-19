@@ -347,7 +347,7 @@ function weatherCalls() {
   }
 
   function bestBetCall() {
-    $('#best-bet').on('click', function(e) {
+    $('#bestChance').on('click', function(e) {
       $body.removeAttr('id');
       $body.attr('id', 'bestBetPage');
     });
@@ -398,8 +398,12 @@ function hires() {
 
 function pageTitle() {
   var pageId =  $('body').attr('id');
-  var title = pageId.substr(0, pageId.length -4);
-  console.log(title);
+  var title = pageId.substr(0, pageId.length - 4);
+  var navLink = $('#nav a');
+  var locationHeader = $('#locationHeader');
+
+    locationHeader.text(title);
+    console.log(title);
 }
 
 
@@ -409,3 +413,4 @@ weatherCalls();
 mobileNav();
 copywrite();
 hires();
+pageTitle();
