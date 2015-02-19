@@ -370,7 +370,7 @@ function mobileNav() {
   })
 }
 
-function copywrite() {
+function copywrite() {                                        // set current year for copyright in footer
   var today = new Date();
   var year = today.getFullYear();
 
@@ -397,16 +397,13 @@ function hires() {
 }
 
 function pageTitle() {
-  var pageId =  $('body').attr('id');
-  var title = pageId.substr(0, pageId.length - 4);
-  var navLink = $('#nav a');
-  var locationHeader = $('#locationHeader');
+  var pageId =  $('body').attr('id');                                     // get body id
+  var title = pageId.substr(0, pageId.length - 4);                        // get body id minus 'Page'
+  var locationHeader = $('#locationHeader');                              // get id locationHeader
 
-    locationHeader.text(title);
-    console.log(title);
+  locationHeader.text(title);                                             // place updated id text as page title
+  //console.log(title);
 }
-
-
 
 topNav();
 weatherCalls();
