@@ -45,7 +45,7 @@ function subNav() {
 
 function footerNav() {
   var $bodyWrap = $('#bodyWrap');
-  var footerLinks = $('footer nav a');                          // get footer links
+  var footerLinks = $('footer nav ul li a');                          // get footer links
   var href = footerLinks.attr('href');                          // get href
 
   footerLinks.on('click', function(e) {
@@ -53,14 +53,14 @@ function footerNav() {
     //footerLinks.removeClass('active');                            // remove active from all footer links
     //footerLinks.addClass('active');                               // add active to this link
 
-    /*switch($(this).attr('href')) {
+    switch($(this).attr('href')) {
       case 'assets/about.html' :
         $bodyWrap.load('assets/about.html').hide().fadeIn('slow');
         break;
       case 'assets/contact.html' :
         $bodyWrap.load('assets/contact.html').hide().fadeIn('slow');
         break;
-    }*/
+    }
   });
 }
 
@@ -340,6 +340,10 @@ function weatherCalls() {
     $('#rincon').on('click', function(e) {
       $body.removeAttr('id');
       $body.attr('id', 'rinconPage');
+      // loop through wave class items
+
+
+
     });
 
     $('#rinconPage #weatherLink').on('click', function(e) {
@@ -398,18 +402,18 @@ function copywrite() {                                        // set current yea
   $('footer').append('<p>&copy; ' + year + ' Brian Wynn</p>');
 }
 
-function hires() {
-  if (window.devicePixelRatio == 2) {
+function hires() {                                                          // function determines devicePixelRatio
+  if (window.devicePixelRatio == 2) {                                       // if ratio is 2
 
-    var images = $("img.hires");
+    var images = $("img.hires");                                            // get hires
 
     // loop through the images and make them hi-res
-    for(var i = 0; i < images.length; i++) {
+    for(var i = 0; i < images.length; i++) {                                // loop through imgs
 
     // create new image name
-    var imageType = images[i].src.substr(-4);
-    var imageName = images[i].src.substr(0, images[i].src.length - 4);
-    imageName += "@2x" + imageType;
+    var imageType = images[i].src.substr(-4);                               // file extension of src
+    var imageName = images[i].src.substr(0, images[i].src.length - 4);      // file name
+    imageName += "@2x" + imageType;                                         // the two have been split, @2x is added to call retina images
 
     //rename image
     images[i].src = imageName;
@@ -433,6 +437,33 @@ function bestBetSection() {                                             // Gets 
     // pull localized wave content
     // conditional to determine if wave gets best bet badge
     };
+}
+
+function jsonData() {
+  var xhr = new XMLHttpRequest();                 // create xmlhttprequest object
+
+  xhr.onload = function() {                       // when response has loaded
+    // the following conditional check will not work locally - only on a server
+    if(xhr.status === 200) {                      // if server status was ok
+      responseObject = JSON.parse(xhr.responseText);
+
+      // build up string with new content (could also use dom manipulation)
+      var newContent = '';
+      for (var i = 0; i < responseObject.locations.length; i++) { // loop through object
+        newContent += '<div class="event">';
+        newContent += '<p>' + responseObject.locations[i].title + '</p>';
+        newContent += '<p>' + responseObject.locations[i].city + '</p>';
+        newContent += '<p>' + responseObject.locations[i].description + '<p>';
+        newContent += '<p>' + responseObject.locations[i].swell-dir + '</p>';
+        newContent += '</div>';
+      }
+
+      document.getElementById('bestbet').innerHTML = newContent;
+    }
+  };
+
+  xhr.open('GET', '../data/data.json', true);        // prepare the request
+  xhr.send(null);                                 // send the request
 }
 
 topNav();
