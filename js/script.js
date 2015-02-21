@@ -400,9 +400,16 @@ function pageTitle() {
   var pageId =  $('body').attr('id');                                     // get body id
   var title = pageId.substr(0, pageId.length - 4);                        // get body id minus 'Page'
   var locationHeader = $('#locationHeader');                              // get id locationHeader
-
-  locationHeader.text(title);                                             // place updated id text as page title
+  var locationName = title.toUpperCase();
+  locationHeader.text(locationName);                                             // place updated id text as page title
   //console.log(title);
+}
+
+function bestBetSection() {                                             // Gets content and removes content from page
+  var subNav = $('#subNav ul')                                          // get subNav ul
+  if ($('body').attr('id') === 'bestBetPage') {                         // if page id is bestBetPage
+    subNav.remove();                                                    // remove subNav menu
+    };
 }
 
 topNav();
