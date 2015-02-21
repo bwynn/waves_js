@@ -50,17 +50,17 @@ function footerNav() {
 
   footerLinks.on('click', function(e) {
     e.preventDefault();
-    footerLinks.removeClass('active');                            // remove active from all footer links
-    footerLinks.addClass('active');                               // add active to this link
+    //footerLinks.removeClass('active');                            // remove active from all footer links
+    //footerLinks.addClass('active');                               // add active to this link
 
-    switch($(this).attr('href')) {
+    /*switch($(this).attr('href')) {
       case 'assets/about.html' :
         $bodyWrap.load('assets/about.html').hide().fadeIn('slow');
         break;
       case 'assets/contact.html' :
         $bodyWrap.load('assets/contact.html').hide().fadeIn('slow');
         break;
-    }
+    }*/
   });
 }
 
@@ -421,8 +421,7 @@ function pageTitle() {
   var pageId =  $('body').attr('id');                                     // get body id
   var title = pageId.substr(0, pageId.length - 4);                        // get body id minus 'Page'
   var locationHeader = $('#locationHeader');                              // get id locationHeader
-  var locationName = title.toUpperCase();
-  locationHeader.text(locationName);                                             // place updated id text as page title
+  locationHeader.text(title);                                             // place updated id text as page title
   //console.log(title);
 }
 
