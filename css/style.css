@@ -1,3 +1,7 @@
 #nav ul {
   display: none;
 }
+
+.active {
+  color: #888;
+}

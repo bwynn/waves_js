@@ -43,6 +43,27 @@ function subNav() {
   });
 }
 
+function footerNav() {
+  var $bodyWrap = $('#bodyWrap');
+  var footerLinks = $('footer nav a');                          // get footer links
+  var href = footerLinks.attr('href');                          // get href
+
+  footerLinks.on('click', function(e) {
+    e.preventDefault();
+    footerLinks.removeClass('active');                            // remove active from all footer links
+    footerLinks.addClass('active');                               // add active to this link
+
+    switch($(this).attr('href')) {
+      case 'assets/about.html' :
+        $bodyWrap.load('assets/about.html').hide().fadeIn('slow');
+        break;
+      case 'assets/contact.html' :
+        $bodyWrap.load('assets/contact.html').hide().fadeIn('slow');
+        break;
+    }
+  });
+}
+
 function weatherCalls() {
 
   var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
@@ -413,6 +434,7 @@ function bestBetSection() {                                             // Gets 
 }
 
 topNav();
+footerNav();
 weatherCalls();
 mobileNav();
 copywrite();
