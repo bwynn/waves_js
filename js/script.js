@@ -429,6 +429,9 @@ function bestBetSection() {                                             // Gets 
   var subNav = $('#subNav ul')                                          // get subNav ul
   if ($('body').attr('id') === 'bestBetPage') {                         // if page id is bestBetPage
     subNav.remove();                                                    // remove subNav menu
+    // add call to json file
+    // pull localized wave content
+    // conditional to determine if wave gets best bet badge
     };
 }
 

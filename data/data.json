@@ -3,17 +3,47 @@
     {
       "title": "Steamer Lane",
       "city": "Santa Cruz, CA.",
-      "gallery": "../images/steamers.png"
+      "gallery": [
+        "../images/steamers.png",
+        "../images/steamers2.png",
+        "../images/steamers3.png"
+        ],
+      "description": "key",
+      "wind-dir": ["E", "NE", "N"],
+      "wave-min": "3",
+      "wave-max": "25",
+      "swell-period": "12",
+      "swell-dir": ["NW", "WNW", "W", "WSW", "SW"]
     },
     {
       "title": "Rincon",
       "city": "Carpenteria, CA.",
-      "gallery": "../images/rincon.png"
+      "gallery": [
+        "../images/rincon.png",
+        "../images/rincon2.png",
+        "../images/rincon3.png"
+        ],
+      "description": "key",
+      "wind-dir": ["E", "NE", "N"],
+      "wave-min": "3",
+      "wave-max": "12",
+      "swell-period": "13",
+      "swell-dir": ["NW", "WNW", "W"]
     },
     {
       "title": "Trestles",
       "city": "San Clemente, CA.",
-      "gallery": "../images/trestles.png"
+      "gallery": [
+        "../images/trestles.png",
+        "../images/trestles2.png",
+        "../images/trestles3.png"
+        ],
+      "description": "key",
+      "wind-dir": ["E", "NE"],
+      "wave-min": "3",
+      "wave-max": "12",
+      "swell-period": "9",
+      "swell-dir": ["W", "WSW", "SW"]
     }
   ]
 }
