@@ -421,14 +421,6 @@ function hires() {                                                          // f
   }
 }
 
-function pageTitle() {
-  var pageId =  $('body').attr('id');                                     // get body id
-  var title = pageId.substr(0, pageId.length - 4);                        // get body id minus 'Page'
-  var locationHeader = $('#locationHeader');                              // get id locationHeader
-  locationHeader.text(title);                                             // place updated id text as page title
-  //console.log(title);
-}
-
 function bestBetSection() {                                             // Gets content and removes content from page
   var subNav = $('#subNav ul')                                          // get subNav ul
   if ($('body').attr('id') === 'bestBetPage') {                         // if page id is bestBetPage
@@ -440,15 +432,24 @@ function bestBetSection() {                                             // Gets 
 }
 
 function jsonData() {
-  $.getJSON('../waves/data/data.json', function(data) {
-    if ()
+  var link = $('#nav ul li a');
+  var header = $('#locationHeader');
+
+    link.on('click', function(e) {
+      $.getJSON("../waves/data/data.json", function(data) {
+        var items = [];
+        $.each(data, function(key, val) {
+          items.push('<li id="' + key + '">' + val + '</li>');
+        })
+        header.text('steamer lane');
+      });
   });
 }
 
+jsonData();
 topNav();
 footerNav();
 weatherCalls();
 mobileNav();
 copywrite();
 hires();
-pageTitle();
