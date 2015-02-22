@@ -50,8 +50,8 @@ function footerNav() {
 
   footerLinks.on('click', function(e) {
     e.preventDefault();
-    //footerLinks.removeClass('active');                            // remove active from all footer links
-    //footerLinks.addClass('active');                               // add active to this link
+    footerLinks.removeClass('active');                            // remove active from all footer links
+    footerLinks.addClass('active');                               // add active to this link
 
     switch($(this).attr('href')) {
       case 'assets/about.html' :
@@ -454,7 +454,6 @@ function jsonData() {
         newContent += '<p>' + responseObject.locations[i].title + '</p>';
         newContent += '<p>' + responseObject.locations[i].city + '</p>';
         newContent += '<p>' + responseObject.locations[i].description + '<p>';
-        newContent += '<p>' + responseObject.locations[i].swell-dir + '</p>';
         newContent += '</div>';
       }
 
@@ -462,7 +461,7 @@ function jsonData() {
     }
   };
 
-  xhr.open('GET', '../data/data.json', true);        // prepare the request
+  xhr.open('GET', '../waves/data/data.json', true);        // prepare the request
   xhr.send(null);                                 // send the request
 }
 
