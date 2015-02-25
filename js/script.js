@@ -445,19 +445,16 @@ function jsonData() {
   xhr.onload = function() {                       // when response has loaded
     // the following conditional check will not work locally - only on a server
     if(xhr.status === 200) {                      // if server status was ok
-      responseObject = JSON.parse(xhr.responseText);
+      var responseObject = JSON.parse(xhr.responseText);
 
       // build up string with new content (could also use dom manipulation)
-      var newContent = '';
-      for (var i = 0; i < responseObject.locations.length; i++) { // loop through object
-        newContent += '<div class="event">';
-        newContent += '<p>' + responseObject.locations[i].title + '</p>';
-        newContent += '<p>' + responseObject.locations[i].city + '</p>';
-        newContent += '<p>' + responseObject.locations[i].description + '<p>';
-        newContent += '</div>';
-      }
-
-      document.getElementById('bestbet').innerHTML = newContent;
+      $('#bestbet').ready(function(data) {
+        var $this = $(this);
+        for (var i = 0; i < responseObject.locations.length; i++) { // loop through object
+          $('<li>' + responseObject.location[i].city + '</li>');
+          $('<li>' + responseObject.location[i].description + '</li>');
+        }
+      });
     }
   };
 
