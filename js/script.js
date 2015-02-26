@@ -171,14 +171,14 @@ function weatherCalls() {
     // local time
     var gmt = new Date();
     //console.log('Time: ' + gmt);
-    $('<li>Time: ' + gmt + '</li>').appendTo($('#weather ul'));
+    $('<li><strong>Current time:</strong> ' + gmt + '</li>').appendTo($('#weather ul'));
   }
 
   function airTemp(data) {
     //temperature
     var temp = data.data.current_condition[0].temp_F;
     //console.log('Degrees f: '+ temp);
-    $('<li>Degrees f: '+ temp + '</li>').appendTo($('#weather ul'));
+    $('<li><strong>Temperature:</strong> '+ temp + '</li>').appendTo($('#weather ul'));
   }
 
   function windConditions(data) {
@@ -204,14 +204,14 @@ function weatherCalls() {
     var windDir = "North West";
                   }
     //console.log('Wind: From the ' + windDir + ' at ' + w_speed + ' mph');
-    $('<li>Wind: From the ' + windDir + ' at ' + w_speed + ' mph.</li>').appendTo($('#weather ul'));
+    $('<li><strong>Wind:</strong> From the ' + windDir + ' at ' + w_speed + ' mph.</li>').appendTo($('#weather ul'));
   }
 
   function generalConditions(data) {
     // weather Description
     var w_desc = data.data.current_condition[0].weatherDesc[0].value;
     //console.log('Skies: ' + w_desc);
-    $('<li>Skies: ' + w_desc + '</li>').appendTo($('#weather ul'));
+    $('<li><strong>Skies:</strong> ' + w_desc + '</li>').appendTo($('#weather ul'));
   }
 
   function swellSize(data) {                                          // declare receive function taking data as the argument
@@ -238,7 +238,7 @@ function weatherCalls() {
     }
     //console.log('wave height feet: ' + wSizeF);                     // prints wave size converted to feet
     //console.log('wave size: ' + wSize);                     // prints wave size converted to feet
-    $('<li>Wave height: ' + wSizeF + 'ft.</li>').appendTo('#waveDetails ul');
+    $('<li><strong>Wave height:</strong> ' + wSizeF + 'ft.</li>').appendTo('#waveDetails ul');
   }
 
   function swDir(data) {
@@ -278,7 +278,7 @@ function weatherCalls() {
          sDir = "N"
       }
       //console.log('Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.')
-      $('<li>Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.</li>').appendTo('#waveDetails ul');
+      $('<li><strong>Primary swell direction:</strong> ' + sDir + ' at ' + swellDir + ' degrees.</li>').appendTo('#waveDetails ul');
   }
 
   // Wetsuit Recommendation
@@ -299,8 +299,8 @@ function weatherCalls() {
     }
     //console.log('wetsuit: ' + wSuit);
     //console.log('water temp today: ' + waterTemp);                  // prints water temp string
-    $('<li>Water temp today: ' + waterTemp + ' degrees</li>').appendTo('#waveDetails ul');
-    $('<li>Recommended wetsuit: ' + wSuit + '</li>').appendTo('#waveDetails ul');
+    $('<li><strong>Water temp today:</strong> ' + waterTemp + ' degrees</li>').appendTo('#waveDetails ul');
+    $('<li><strong>Recommended wetsuit:</strong> ' + wSuit + '</li>').appendTo('#waveDetails ul');
   }
 
   // Swell Period
@@ -316,7 +316,7 @@ function weatherCalls() {
        swellSig = "Long period ground swell";
     }
     //console.log("Today's swell conditions: " + swellSig);
-    $("<li>Today's swell conditions: " + swellSig + '</li>').appendTo('#waveDetails ul');
+    $("<li><strong>Today's swell conditions:</strong> " + swellSig + '</li>').appendTo('#waveDetails ul');
   }
 
   function santaCruzCalls() {
@@ -454,8 +454,9 @@ function jsonData() {
             //console.log(responseObject.locations[0].description);
             locationHeader.text('');                                            // this removes any content currently in locationHeader element
             locationHeader.append(responseObject.locations[0].title);                             // place location.title[i] into locationHeader
-            bestbet.append($('<li>' + responseObject.locations[0].city + '</li>'));               
-            bestbet.append($('<li>' + responseObject.locations[0].description + '</li>'));
+            bestbet.append($('<li><strong>City:</strong> ' + responseObject.locations[0].city + '</li>'));
+            bestbet.append($('<li><strong>About:</strong> ' + responseObject.locations[0].description + '</li>'));
+            bestbet.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[0].waveMin + ' and ' + responseObject.locations[0].waveMax + ' feet</li>'));
       }
     };
 
