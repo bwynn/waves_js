@@ -452,9 +452,9 @@ function jsonData() {
             var locationHeader = $('#locationHeader');
             //console.log(responseObject.locations[0].city);
             //console.log(responseObject.locations[0].description);
-
-            locationHeader.append(responseObject.locations[0].title);
-            bestbet.append($('<li>' + responseObject.locations[0].city + '</li>'));
+            locationHeader.text('');                                            // this removes any content currently in locationHeader element
+            locationHeader.append(responseObject.locations[0].title);                             // place location.title[i] into locationHeader
+            bestbet.append($('<li>' + responseObject.locations[0].city + '</li>'));               
             bestbet.append($('<li>' + responseObject.locations[0].description + '</li>'));
       }
     };
