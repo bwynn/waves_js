@@ -1,4 +1,5 @@
 subNav();
 weatherCalls();
-pageTitle();
+//pageTitle();
 bestBetSection();
+jsonData();

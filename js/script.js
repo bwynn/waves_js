@@ -440,26 +440,28 @@ function bestBetSection() {                                             // Gets 
 }
 
 function jsonData() {
-  var xhr = new XMLHttpRequest();                 // create xmlhttprequest object
+  $('#bestbet').ready(function() {
+    var xhr = new XMLHttpRequest();                 // create xmlhttprequest object
+    xhr.onload = function() {                       // when response has loaded
+      // the following conditional check will not work locally - only on a server
+      if(xhr.status === 200) {                      // if server status was ok
+        var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
 
-  xhr.onload = function() {                       // when response has loaded
-    // the following conditional check will not work locally - only on a server
-    if(xhr.status === 200) {                      // if server status was ok
-      var responseObject = JSON.parse(xhr.responseText);
+        // build up string with new content (could also use dom manipulation)
+            var bestbet = $('#bestbet');
+            var locationHeader = $('#locationHeader');
+            //console.log(responseObject.locations[0].city);
+            //console.log(responseObject.locations[0].description);
 
-      // build up string with new content (could also use dom manipulation)
-      $('#bestbet').ready(function(data) {
-        var $this = $(this);
-        for (var i = 0; i < responseObject.locations.length; i++) { // loop through object
-          $('<li>' + responseObject.location[i].city + '</li>');
-          $('<li>' + responseObject.location[i].description + '</li>');
-        }
-      });
-    }
-  };
+            locationHeader.append(responseObject.locations[0].title);
+            bestbet.append($('<li>' + responseObject.locations[0].city + '</li>'));
+            bestbet.append($('<li>' + responseObject.locations[0].description + '</li>'));
+      }
+    };
 
-  xhr.open('GET', '../waves/data/data.json', true);        // prepare the request
-  xhr.send(null);                                 // send the request
+    xhr.open('GET', '../waves/data/data.json', true);        // prepare the request
+    xhr.send(null);
+  });                              // send the request
 }
 
 topNav();
@@ -468,4 +470,5 @@ weatherCalls();
 mobileNav();
 copywrite();
 hires();
-pageTitle();
+jsonData();
+//pageTitle();
