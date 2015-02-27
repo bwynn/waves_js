@@ -440,30 +440,55 @@ function bestBetSection() {                                             // Gets 
 }
 
 function jsonData() {
-  $('#bestbet').ready(function() {
     var xhr = new XMLHttpRequest();                 // create xmlhttprequest object
+    var bestbet = $('#bestbet');
+    var locationHeader = $('#locationHeader');
+
     xhr.onload = function() {                       // when response has loaded
       // the following conditional check will not work locally - only on a server
       if(xhr.status === 200) {                      // if server status was ok
         var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
 
         // build up string with new content (could also use dom manipulation)
-            var bestbet = $('#bestbet');
-            var locationHeader = $('#locationHeader');
             //console.log(responseObject.locations[0].city);
             //console.log(responseObject.locations[0].description);
-            locationHeader.text('');                                            // this removes any content currently in locationHeader element
-            locationHeader.append(responseObject.locations[0].title);                             // place location.title[i] into locationHeader
-            bestbet.append($('<li><strong>City:</strong> ' + responseObject.locations[0].city + '</li>'));
-            bestbet.append($('<li><strong>About:</strong> ' + responseObject.locations[0].description + '</li>'));
-            bestbet.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[0].waveMin + ' and ' + responseObject.locations[0].waveMax + ' feet</li>'));
+            switch($('body').attr('id'))    {
+              case 'steamersPage' :
+                var i = '0';
+                locationHeader.text('');                                            // this removes any content currently in locationHeader element
+                locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
+                bestbet.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
+                bestbet.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
+                bestbet.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
+                console.log('steamers');
+                break;
+              case 'rinconPage' :
+                var i = '1';
+                locationHeader.text('');                                            // this removes any content currently in locationHeader element
+                locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
+                bestbet.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
+                bestbet.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
+                bestbet.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
+                console.log('rincon');
+                break;
+              case 'trestlesPage' :
+                var i = '2';
+                locationHeader.text('');                                            // this removes any content currently in locationHeader element
+                locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
+                bestbet.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
+                bestbet.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
+                bestbet.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
+                console.log('trestles');
+                break;
+            }
       }
     };
 
-    xhr.open('GET', '../waves/data/data.json', true);        // prepare the request
-    xhr.send(null);
-  });                              // send the request
+    xhr.open('GET', '../waves/data/data.json', false);        // prepare the request
+    xhr.send(null);                             // send the request
+
 }
+
 
 topNav();
 footerNav();
