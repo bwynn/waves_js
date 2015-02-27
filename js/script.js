@@ -452,32 +452,27 @@ function jsonData() {
         // build up string with new content (could also use dom manipulation)
             //console.log(responseObject.locations[0].city);
             //console.log(responseObject.locations[0].description);
+        function content() {
+          locationHeader.text('');                                            // this removes any content currently in locationHeader element
+          locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
+          bestbet.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
+          bestbet.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
+          bestbet.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
+        }
             switch($('body').attr('id'))    {
               case 'steamersPage' :
                 var i = '0';
-                locationHeader.text('');                                            // this removes any content currently in locationHeader element
-                locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
-                bestbet.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
-                bestbet.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
-                bestbet.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
+                content();
                 console.log('steamers');
                 break;
               case 'rinconPage' :
                 var i = '1';
-                locationHeader.text('');                                            // this removes any content currently in locationHeader element
-                locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
-                bestbet.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
-                bestbet.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
-                bestbet.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
+                content();
                 console.log('rincon');
                 break;
               case 'trestlesPage' :
                 var i = '2';
-                locationHeader.text('');                                            // this removes any content currently in locationHeader element
-                locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
-                bestbet.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
-                bestbet.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
-                bestbet.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
+                content();
                 console.log('trestles');
                 break;
             }
