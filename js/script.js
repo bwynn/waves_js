@@ -51,7 +51,7 @@ function footerNav() {
   footerLinks.on('click', function(e) {
     e.preventDefault();
     footerLinks.removeClass('active');                            // remove active from all footer links
-    footerLinks.addClass('active');                               // add active to this link
+    $(this).addClass('active');                               // add active to this link
 
     switch($(this).attr('href')) {
       case 'assets/about.html' :
@@ -340,10 +340,6 @@ function weatherCalls() {
     $('#rincon').on('click', function(e) {
       $body.removeAttr('id');
       $body.attr('id', 'rinconPage');
-      // loop through wave class items
-
-
-
     });
 
     $('#rinconPage #weatherLink').on('click', function(e) {
@@ -433,9 +429,6 @@ function bestBetSection() {                                             // Gets 
   var subNav = $('#subNav ul')                                          // get subNav ul
   if ($('body').attr('id') === 'bestBetPage') {                         // if page id is bestBetPage
     subNav.remove();                                                    // remove subNav menu
-    // add call to json file
-    // pull localized wave content
-    // conditional to determine if wave gets best bet badge
     };
 }
 
@@ -450,8 +443,6 @@ function jsonData() {
         var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
 
         // build up string with new content (could also use dom manipulation)
-            //console.log(responseObject.locations[0].city);
-            //console.log(responseObject.locations[0].description);
         function content() {
           locationHeader.text('');                                            // this removes any content currently in locationHeader element
           locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
@@ -463,17 +454,17 @@ function jsonData() {
               case 'steamersPage' :
                 var i = '0';
                 content();
-                console.log('steamers');
+                //console.log('steamers');
                 break;
               case 'rinconPage' :
-                var i = '1';
+                i = '1';
                 content();
-                console.log('rincon');
+                //console.log('rincon');
                 break;
               case 'trestlesPage' :
-                var i = '2';
+                i = '2';
                 content();
-                console.log('trestles');
+                //console.log('trestles');
                 break;
             }
       }
