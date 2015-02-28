@@ -374,10 +374,25 @@ function weatherCalls() {
     });
   }
 
+  function compareData() {
+    $.ajax({
+      type: 'POST',
+      url: "../waves/data/data.json",
+      dataType: 'json',
+      data: $(this).serialize(),
+      success: function(data) {
+        $(this).ready(swellSize(data));
+        console.log('json file: ' + data.locations[0].waveMin);
+        console.log('wave height feet: ' + wSizeF);
+      }
+    });
+  }
+
   santaCruzCalls();
   rinconCalls();
   trestlesCall();
   bestBetCall();
+  compareData();
 }
 
 function mobileNav() {
@@ -439,10 +454,9 @@ function jsonData() {
     var locationHeader = $('#locationHeader');
 
     xhr.onload = function() {                       // when response has loaded
+      var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
       // the following conditional check will not work locally - only on a server
       if(xhr.status === 200) {                      // if server status was ok
-        var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
-
         // build up string with new content (could also use dom manipulation)
         function content() {
           locationHeader.text('');                                            // this removes any content currently in locationHeader element
@@ -450,7 +464,7 @@ function jsonData() {
           bestbet.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
           bestbet.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
           bestbet.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
-        }
+          }
             switch($('body').attr('id'))    {
               case 'steamersPage' :
                 var i = '0';
