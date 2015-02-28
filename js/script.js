@@ -429,6 +429,7 @@ function bestBetSection() {                                             // Gets 
   var subNav = $('#subNav ul')                                          // get subNav ul
   if ($('body').attr('id') === 'bestBetPage') {                         // if page id is bestBetPage
     subNav.remove();                                                    // remove subNav menu
+    $('#locationHeader').text('Waves Today');
     };
 }
 
