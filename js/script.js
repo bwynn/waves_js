@@ -81,7 +81,7 @@ function santaCruzWeather() {
         windConditions(data);                                           // calls windDirection function
         generalConditions(data);                                        // calls generalConditions function
       },
-    error: function(e) {console.log('epic fail')}
+    error: function() {console.log('epic fail')}
   });
 }
 
@@ -97,7 +97,7 @@ function santaCruzMarineCall() {                                      // declare
         wetsuit(data);                                                  // calls wetsuit function
         swellPeriod(data);                                              // calls swellPeriod function
       },
-      error: function(e) {console.log('epic marine fail')}
+      error: function() {console.log('epic marine fail')}
   });
 }
 
@@ -113,7 +113,7 @@ function carpenteriaWeather() {
           windConditions(data);                                           // calls windDirection function
           generalConditions(data);                                        // calls generalConditions function
         },
-      error: function(e) {console.log('epic fail')}
+      error: function() {console.log('epic fail')}
   });
 }
 
@@ -129,7 +129,7 @@ function carpenteriaMarineCall() {                                      // decla
           wetsuit(data);                                                  // calls wetsuit function
           swellPeriod(data);                                              // calls swellPeriod function
         },
-        error: function(e) {console.log('epic marine fail')}
+        error: function() {console.log('epic marine fail')}
   });
 }
 
@@ -145,7 +145,7 @@ function sanClementeWeather() {
         windConditions(data);                                           // calls windDirection function
         generalConditions(data);                                        // calls generalConditions function
       },
-    error: function(e) {console.log('epic fail')}
+    error: function() {console.log('epic fail')}
   });
 }
 
@@ -161,7 +161,7 @@ function sanClementeMarineCall() {                                      // decla
           wetsuit(data);                                                  // calls wetsuit function
           swellPeriod(data);                                              // calls swellPeriod function
         },
-        error: function(e) {console.log('epic marine fail')}
+        error: function() {console.log('epic marine fail')}
     });
 }
 
@@ -332,7 +332,7 @@ function santaCruzCalls() {
       santaCruzMarineCall();
     });
     $('#steamersPage #bestConditionsLink').on('click', function(e) {
-      
+
     });
 }
 
@@ -381,22 +381,6 @@ function bestBetCall() {
     });
 }
 
-/*function compareData() {
-  $.ajax({
-      type: 'POST',
-      url: "../waves/data/data.json",
-      dataType: 'json',
-      data: $(this).serialize(),
-      success: function(data) {
-        $('#bestbet').append('<li>Best wave size between: ' + data.locations[0].waveMin + ' and ' + data.locations[0].waveMax);
-        $('#bestbet').append('<li>Best swell direction: ' + data.locations[0].swellDir[0] + '</li>');
-        console.log('json file: ' + data.locations[0].waveMin);
-        console.log('json file: ' + data.locations[0].waveMax);
-      }
-  });
-}*/
-
-
 function mobileNav() {
   $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
     $('#nav ul').slideToggle('slow');
@@ -444,22 +428,24 @@ function bestBetSection() {                                             // Gets 
 
 function jsonData() {
     var xhr = new XMLHttpRequest();                 // create xmlhttprequest object
-    //var bestbet = $('#bestbet');
     var statsWrap = $('#statsWrap');
     var locationHeader = $('#locationHeader');
 
+
     xhr.onload = function() {                       // when response has loaded
-      var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
-      // the following conditional check will not work locally - only on a server
-      if(xhr.status === 200) {                      // if server status was ok
+
+      function content() {
+        var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
+
+        locationHeader.text('');                                            // this removes any content currently in locationHeader element
+        locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
+        statsWrap.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
+        statsWrap.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
+        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
+      }
+
+      if (xhr.status === 200) {                      // if server status was ok
         // build up string with new content (could also use dom manipulation)
-        function content() {
-          locationHeader.text('');                                            // this removes any content currently in locationHeader element
-          locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
-          statsWrap.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
-          statsWrap.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
-          statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
-          }
             switch($('body').attr('id'))    {
               case 'steamersPage' :
                 var i = '0';
@@ -477,7 +463,7 @@ function jsonData() {
                 //console.log('trestles');
                 break;
             }
-      }
+        }
     };
 
     xhr.open('GET', '../waves/data/data.json', false);        // prepare the request
