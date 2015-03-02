@@ -470,6 +470,14 @@ function jsonData() {
     xhr.send(null);                             // send the request
 }
 
+function accordion() {
+  $('a.accordion-control').on('click', function(e) {
+    e.preventDefault();
+    $('.accordion-panel').hide('slow');
+    $(this).next('.accordion-panel').not(':animated').slideToggle();
+  });
+}
+
 santaCruzCalls();
 rinconCalls();
 trestlesCall();
@@ -480,3 +488,4 @@ mobileNav();
 copywrite();
 hires();
 jsonData();
+accordion();
