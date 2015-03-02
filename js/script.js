@@ -1,3 +1,8 @@
+var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
+var waves = $(this);                                                  // sets $(this) value globally for wave
+var $body = $('body');
+
+
 // topNav() function sets page template for the application
 function topNav() {
   //using jQuery
@@ -64,13 +69,7 @@ function footerNav() {
   });
 }
 
-function weatherCalls() {
-
-  var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
-  var waves = $(this);                                                  // sets $(this) value globally for wave
-  var $body = $('body');
-
-  function santaCruzWeather() {
+function santaCruzWeather() {
   $.ajax({
     type: 'POST',
     url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=" + api,
@@ -83,11 +82,11 @@ function weatherCalls() {
         generalConditions(data);                                        // calls generalConditions function
       },
     error: function(e) {console.log('epic fail')}
-    });
-  }
+  });
+}
 
-  function santaCruzMarineCall() {                                      // declare santaCruzMarineCall function
-          $.ajax({                                                      // jQuery ajax declaration
+function santaCruzMarineCall() {                                      // declare santaCruzMarineCall function
+    $.ajax({                                                      // jQuery ajax declaration
       type: 'POST',                                                     // declare type of ajax call
       url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=" + api,
       dataType: 'jsonp',                                                // declare dataType, using parsed json
@@ -99,12 +98,11 @@ function weatherCalls() {
         swellPeriod(data);                                              // calls swellPeriod function
       },
       error: function(e) {console.log('epic marine fail')}
-    });
-  }
+  });
+}
 
-  function carpenteriaWeather() {
-
-    $.ajax({
+function carpenteriaWeather() {
+  $.ajax({
       type: 'POST',
       url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=93014&format=json&date=today&key=" + api,
       dataType: 'jsonp',
@@ -116,11 +114,11 @@ function weatherCalls() {
           generalConditions(data);                                        // calls generalConditions function
         },
       error: function(e) {console.log('epic fail')}
-      });
-  }
+  });
+}
 
-  function carpenteriaMarineCall() {                                      // declare santaCruzMarineCall function
-      $.ajax({                                                            // jQuery ajax declaration
+function carpenteriaMarineCall() {                                      // declare santaCruzMarineCall function
+  $.ajax({                                                            // jQuery ajax declaration
         type: 'POST',                                                     // declare type of ajax call
         url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=" + api,
         dataType: 'jsonp',                                                // declare dataType, using parsed json
@@ -132,10 +130,10 @@ function weatherCalls() {
           swellPeriod(data);                                              // calls swellPeriod function
         },
         error: function(e) {console.log('epic marine fail')}
-      });
-  }
+  });
+}
 
-  function sanClementeWeather() {
+function sanClementeWeather() {
   $.ajax({
     type: 'POST',
     url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=" + api,
@@ -148,11 +146,11 @@ function weatherCalls() {
         generalConditions(data);                                        // calls generalConditions function
       },
     error: function(e) {console.log('epic fail')}
-    });
-  }
+  });
+}
 
-  function sanClementeMarineCall() {                                      // declare santaCruzMarineCall function
-      $.ajax({                                                            // jQuery ajax declaration
+function sanClementeMarineCall() {                                      // declare santaCruzMarineCall function
+    $.ajax({                                                            // jQuery ajax declaration
         type: 'POST',                                                     // declare type of ajax call
         url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=" + api,
         dataType: 'jsonp',                                                // declare dataType, using parsed json
@@ -164,24 +162,24 @@ function weatherCalls() {
           swellPeriod(data);                                              // calls swellPeriod function
         },
         error: function(e) {console.log('epic marine fail')}
-      });
-  }
+    });
+}
 
-  function localTime(data) {
+function localTime(data) {
     // local time
     var gmt = new Date();
     //console.log('Time: ' + gmt);
     $('<li><strong>Current time:</strong> ' + gmt + '</li>').appendTo($('#weather ul'));
-  }
+}
 
-  function airTemp(data) {
+function airTemp(data) {
     //temperature
     var temp = data.data.current_condition[0].temp_F;
     //console.log('Degrees f: '+ temp);
     $('<li><strong>Temperature:</strong> '+ temp + '</li>').appendTo($('#weather ul'));
-  }
+}
 
-  function windConditions(data) {
+function windConditions(data) {
     //wind direction
     var w_dir = data.data.current_condition[0].winddirDegree;
     var w_speed = data.data.current_condition[0].windspeedMiles;
@@ -205,16 +203,16 @@ function weatherCalls() {
                   }
     //console.log('Wind: From the ' + windDir + ' at ' + w_speed + ' mph');
     $('<li><strong>Wind:</strong> From the ' + windDir + ' at ' + w_speed + ' mph.</li>').appendTo($('#weather ul'));
-  }
+}
 
-  function generalConditions(data) {
+function generalConditions(data) {
     // weather Description
     var w_desc = data.data.current_condition[0].weatherDesc[0].value;
     //console.log('Skies: ' + w_desc);
     $('<li><strong>Skies:</strong> ' + w_desc + '</li>').appendTo($('#weather ul'));
-  }
+}
 
-  function swellSize(data) {                                          // declare receive function taking data as the argument
+function swellSize(data) {                                          // declare receive function taking data as the argument
     var wSizeM = data.data.weather[0].hourly[0].swellHeight_m;      // gets swell height in meters
     var wSizeF = (wSizeM * 3.28).toPrecision(3);                    // meters to feet
     if ( wSizeF < 1 ) {
@@ -239,9 +237,9 @@ function weatherCalls() {
     console.log('wave height feet: ' + wSizeF);                     // prints wave size converted to feet
     //console.log('wave size: ' + wSize);                     // prints wave size converted to feet
     $('<li><strong>Wave height:</strong> ' + wSizeF + 'ft.</li>').appendTo('#waveDetails ul');
-  }
+}
 
-  function swDir(data) {
+function swDir(data) {
       var swellDir = data.data.weather[0].hourly[0].swellDir;         // gets swell direction
       var sDir;                                                       // initializing sDir variable
       if ( swellDir < 23 ) {
@@ -279,10 +277,10 @@ function weatherCalls() {
       }
       //console.log('Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.')
       $('<li><strong>Primary swell direction:</strong> ' + sDir + ' at ' + swellDir + ' degrees.</li>').appendTo('#waveDetails ul');
-  }
+}
 
-  // Wetsuit Recommendation
-  function wetsuit(data) {
+// Wetsuit Recommendation
+function wetsuit(data) {
     var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
     if ( waterTemp < 55 ) {
       var wSuit = "5/4 Hooded Fullsuit";
@@ -301,10 +299,10 @@ function weatherCalls() {
     //console.log('water temp today: ' + waterTemp);                  // prints water temp string
     $('<li><strong>Water temp today:</strong> ' + waterTemp + ' degrees</li>').appendTo('#waveDetails ul');
     $('<li><strong>Recommended wetsuit:</strong> ' + wSuit + '</li>').appendTo('#waveDetails ul');
-  }
+}
 
-  // Swell Period
-  function swellPeriod(data) {
+// Swell Period
+function swellPeriod(data) {
     var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
     if ( sPeriod < 7 ) {
       var swellSig = "Junky, short-period windswell";
@@ -317,9 +315,9 @@ function weatherCalls() {
     }
     //console.log("Today's swell conditions: " + swellSig);
     $("<li><strong>Today's swell conditions:</strong> " + swellSig + '</li>').appendTo('#waveDetails ul');
-  }
+}
 
-  function santaCruzCalls() {
+function santaCruzCalls() {
     // calls steamers weather data call
     $('#steamers').on('click', function(e) {
       $body.removeAttr('id');
@@ -334,11 +332,11 @@ function weatherCalls() {
       santaCruzMarineCall();
     });
     $('#steamersPage #bestConditionsLink').on('click', function(e) {
-      compareData();
+      
     });
-  }
+}
 
-  function rinconCalls() {
+function rinconCalls() {
     // calls rincon weather data call
     $('#rincon').on('click', function(e) {
       $body.removeAttr('id');
@@ -353,11 +351,11 @@ function weatherCalls() {
       carpenteriaMarineCall();
     });
     $('#rinconPage #bestConditionsLink').on('click', function(e) {
-      compareData();
-    });
-  }
 
-  function trestlesCall() {
+    });
+}
+
+function trestlesCall() {
     // calls tretles
     $('#trestles').on('click', function(e) {
       $body.removeAttr('id');
@@ -372,37 +370,32 @@ function weatherCalls() {
       sanClementeMarineCall();
     });
     $('#trestlesPage #bestConditionsLink').on('click', function(e) {
-      compareData();
-    });
-  }
 
-  function bestBetCall() {
+    });
+}
+
+function bestBetCall() {
     $('#bestChance').on('click', function(e) {
       $body.removeAttr('id');
       $body.attr('id', 'bestBetPage');
     });
-  }
+}
 
-  function compareData() {
-    $.ajax({
+/*function compareData() {
+  $.ajax({
       type: 'POST',
       url: "../waves/data/data.json",
       dataType: 'json',
       data: $(this).serialize(),
       success: function(data) {
         $('#bestbet').append('<li>Best wave size between: ' + data.locations[0].waveMin + ' and ' + data.locations[0].waveMax);
-        $('#bestbet').append('<li>Best swell direction: ' + data.locations[0].swellDir[0, 1, 2] + '</li>');
+        $('#bestbet').append('<li>Best swell direction: ' + data.locations[0].swellDir[0] + '</li>');
         console.log('json file: ' + data.locations[0].waveMin);
         console.log('json file: ' + data.locations[0].waveMax);
       }
-    });
-  }
+  });
+}*/
 
-  santaCruzCalls();
-  rinconCalls();
-  trestlesCall();
-  bestBetCall();
-}
 
 function mobileNav() {
   $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
@@ -439,14 +432,6 @@ function hires() {                                                          // f
     images[i].src = imageName;
     }
   }
-}
-
-function pageTitle() {
-  var pageId =  $('body').attr('id');                                     // get body id
-  var title = pageId.substr(0, pageId.length - 4);                        // get body id minus 'Page'
-  var locationHeader = $('#locationHeader');                              // get id locationHeader
-  locationHeader.text(title);                                             // place updated id text as page title
-  //console.log(title);
 }
 
 function bestBetSection() {                                             // Gets content and removes content from page
@@ -499,12 +484,13 @@ function jsonData() {
     xhr.send(null);                             // send the request
 }
 
-
+santaCruzCalls();
+rinconCalls();
+trestlesCall();
+bestBetCall();
 topNav();
 footerNav();
-weatherCalls();
 mobileNav();
 copywrite();
 hires();
 jsonData();
-//pageTitle();
