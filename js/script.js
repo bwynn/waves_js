@@ -236,7 +236,7 @@ function weatherCalls() {
     } else if (wSizeF > 18.1 ) {
       var wSize = "Triple overhead plus";
     }
-    //console.log('wave height feet: ' + wSizeF);                     // prints wave size converted to feet
+    console.log('wave height feet: ' + wSizeF);                     // prints wave size converted to feet
     //console.log('wave size: ' + wSize);                     // prints wave size converted to feet
     $('<li><strong>Wave height:</strong> ' + wSizeF + 'ft.</li>').appendTo('#waveDetails ul');
   }
@@ -333,6 +333,9 @@ function weatherCalls() {
     $('#steamersPage #wavesLink').on('click', function(e) {
       santaCruzMarineCall();
     });
+    $('#steamersPage #bestConditionsLink').on('click', function(e) {
+      compareData();
+    });
   }
 
   function rinconCalls() {
@@ -348,6 +351,9 @@ function weatherCalls() {
 
     $('#rinconPage #wavesLink').on('click', function(e) {
       carpenteriaMarineCall();
+    });
+    $('#rinconPage #bestConditionsLink').on('click', function(e) {
+      compareData();
     });
   }
 
@@ -365,6 +371,9 @@ function weatherCalls() {
     $('#trestlesPage #wavesLink').on('click', function(e) {
       sanClementeMarineCall();
     });
+    $('#trestlesPage #bestConditionsLink').on('click', function(e) {
+      compareData();
+    });
   }
 
   function bestBetCall() {
@@ -381,9 +390,10 @@ function weatherCalls() {
       dataType: 'json',
       data: $(this).serialize(),
       success: function(data) {
-        $(this).ready(swellSize(data));
+        $('#bestbet').append('<li>Best wave size between: ' + data.locations[0].waveMin + ' and ' + data.locations[0].waveMax);
+        $('#bestbet').append('<li>Best swell direction: ' + data.locations[0].swellDir[0, 1, 2] + '</li>');
         console.log('json file: ' + data.locations[0].waveMin);
-        console.log('wave height feet: ' + wSizeF);
+        console.log('json file: ' + data.locations[0].waveMax);
       }
     });
   }
@@ -392,7 +402,6 @@ function weatherCalls() {
   rinconCalls();
   trestlesCall();
   bestBetCall();
-  compareData();
 }
 
 function mobileNav() {
@@ -450,7 +459,8 @@ function bestBetSection() {                                             // Gets 
 
 function jsonData() {
     var xhr = new XMLHttpRequest();                 // create xmlhttprequest object
-    var bestbet = $('#bestbet');
+    //var bestbet = $('#bestbet');
+    var statsWrap = $('#statsWrap');
     var locationHeader = $('#locationHeader');
 
     xhr.onload = function() {                       // when response has loaded
@@ -461,9 +471,9 @@ function jsonData() {
         function content() {
           locationHeader.text('');                                            // this removes any content currently in locationHeader element
           locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
-          bestbet.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
-          bestbet.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
-          bestbet.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
+          statsWrap.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
+          statsWrap.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
+          statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
           }
             switch($('body').attr('id'))    {
               case 'steamersPage' :
@@ -487,7 +497,6 @@ function jsonData() {
 
     xhr.open('GET', '../waves/data/data.json', false);        // prepare the request
     xhr.send(null);                             // send the request
-
 }
 
 
