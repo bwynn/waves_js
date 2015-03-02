@@ -1,5 +1,23 @@
+/* ================= Global Styles ================= */
+body {
+  width: 100%;
+}
+
+h1 {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
 li {
   list-style-type: none;
+}
+
+a {
+  text-decoration: none;
 }
 
 #nav ul {
@@ -8,4 +26,77 @@ li {
 
 .active {
   color: #888;
+}
+
+#heroImg {
+  margin: 0
+}
+
+/* ================== Header Styles ================== */
+header {
+  background: #444;
+  height: 40px;
+}
+
+header > div {
+  display: inline-block;
+  float: left;
+}
+
+header a {
+  color: white;
+}
+
+nav {
+  width: 100%;
+}
+
+#mobileNav {
+  height: 30px;
+  width: 30px;
+  float: right;
+  margin: 5px 10px;
+  overflow: hidden;
+}
+
+#nav > ul {
+  position: relative;
+  background: #444;
+  clear: both;
+  width: 100%;
+  overflow: auto;
+}
+
+#nav > ul > li {
+  height: 60px;
+  display: inline-block;
+  padding: 0 15px;
+}
+
+/* ========== subNav ============ */
+#subNav {
+  width: 100%;
+  clear: both;
+  height: 30px;
+}
+
+#subNav ul {
+  height: 100%;
+  width: 100%;
+}
+
+#subNav ul li {
+  display: inline-block;
+  float: left;
+  width: 33%;
+  text-align: center;
+}
+
+/* ============ Content ========= */
+.content > h1 {
+  clear: both;
+}
+
+#statsWrap {
+  padding: 20px;
 }

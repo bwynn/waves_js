@@ -473,10 +473,16 @@ function jsonData() {
 function accordion() {
   $('a.accordion-control').on('click', function(e) {
     e.preventDefault();
-    $('.accordion-panel').hide('slow');
-    $(this).next('.accordion-panel').not(':animated').slideToggle();
+    $('.accordion-panel').hide('slow');                                     // hide .accordion-panel
+    $(this).next('.accordion-panel').not(':animated').slideToggle();        // show the next
   });
 }
+
+/*function menuScroll() {
+  var nav = $('#nav ul');
+
+  nav.scrollLeft()
+}*/
 
 santaCruzCalls();
 rinconCalls();
