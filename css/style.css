@@ -59,7 +59,7 @@ nav {
   overflow: hidden;
 }
 
-#nav > ul {
+.nav-wrap {
   position: relative;
   background: #444;
   clear: both;
@@ -67,10 +67,13 @@ nav {
   overflow: auto;
 }
 
-#nav > ul > li {
-  height: 60px;
+.nav-wrap > ul {
+  width: 400px;
+}
+
+.nav-wrap > ul > li {
   display: inline-block;
-  padding: 0 15px;
+  padding: 0 0 0 20px;
 }
 
 /* ========== subNav ============ */
