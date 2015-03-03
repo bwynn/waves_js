@@ -1,6 +1,7 @@
 /* ================= Global Styles ================= */
 body {
   width: 100%;
+  overflow: hidden;
 }
 
 h1 {
@@ -32,10 +33,18 @@ a {
   margin: 0
 }
 
+
+figure.thumb {
+  height: 60px;
+  width: 100px;
+  background-color: #333;
+  margin: 5px 20px;
+}
+
 /* ================== Header Styles ================== */
 header {
   background: #444;
-  height: 40px;
+  height: 3em;
 }
 
 header > div {
@@ -52,10 +61,11 @@ nav {
 }
 
 #mobileNav {
-  height: 30px;
-  width: 30px;
+  height: 2.1em;
+  width: 2.1em;
   float: right;
-  margin: 5px 10px;
+  background: #888;
+  margin: 0.45em;
   overflow: hidden;
 }
 
@@ -67,13 +77,16 @@ nav {
   overflow: auto;
 }
 
-.nav-wrap > ul {
-  width: 400px;
+.nav-wrap a {
+  display: inline-block;
 }
 
-.nav-wrap > ul > li {
-  display: inline-block;
-  padding: 0 0 0 20px;
+.nav-wrap > ul {
+  width: 600px;
+}
+
+.nav-wrap > ul > a > li {
+  text-align: center;
 }
 
 /* ========== subNav ============ */
@@ -102,4 +115,24 @@ nav {
 
 #statsWrap {
   padding: 20px;
+}
+
+/* ============= Footer ============== */
+footer nav {
+  float: left;
+  width: 47%;
+}
+
+footer nav ul li {
+  display: inline-block;
+  padding-left: 5px;
+}
+
+footer nav ul li:last-child {
+  border-left: 1px solid #888;
+}
+
+footer p {
+  margin: 0;
+  float: left;
 }

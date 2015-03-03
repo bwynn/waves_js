@@ -383,11 +383,11 @@ function bestBetCall() {
 
 function mobileNav() {
   $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
-    $('#nav ul').show('slow');
+    $('#nav ul').slideToggle('slow');
     e.stopImmediatePropagation();
   });
 
-  $('#nav > .nav-wrap > ul > li > a').on('click', function(e) {            // function to hide nav ul when child is clicked
+  $('#nav > .nav-wrap > ul > a').on('click', function(e) {            // function to hide nav ul when child is clicked
     $('#nav ul').hide();
   })
 }
@@ -478,11 +478,13 @@ function accordion() {
   });
 }
 
-/*function menuScroll() {
-  var nav = $('#nav ul');
+(function() {
+  var width = this.window.innerWidth;
+  $('.nav-wrap li').before('<figure class="thumb"></figure>');
+  $('body').css('width', width);
+})();
 
-  nav.scrollLeft()
-}*/
+
 
 santaCruzCalls();
 rinconCalls();
