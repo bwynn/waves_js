@@ -1,3 +1,4 @@
+accordion();
 subNav();
 bestBetSection();
 jsonData();
