@@ -481,7 +481,6 @@ function accordion() {
 (function() {
   var width = this.window.innerWidth;
   $('.nav-wrap li').before('<figure class="thumb"></figure>');
-  $('body').css('width', width);
 })();
 
 
