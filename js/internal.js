@@ -1,8 +1,9 @@
 accordion();
 subNav();
 bestBetSection();
-jsonData();
+weatherCalls();
 santaCruzCalls();
 rinconCalls();
 trestlesCall();
 bestBetCall();
+pageTitles();

@@ -47,3 +47,15 @@
     }
   ]
 }
+{
+  "thumbnails": [
+  {
+    "src": [
+      "../waves/img/lane-thumb.jpg",
+      "../waves/img/rincon-thumb.jpg",
+      "../waves/img/trestles-thumb.jpg",
+      "../waves/img/logo.png"
+      ]
+    }
+  ]
+}

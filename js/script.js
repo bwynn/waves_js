@@ -1,6 +1,6 @@
 var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
 var waves = $(this);                                                  // sets $(this) value globally for wave
-var $body = $('body');
+var $body = $('body');                                                // sets body for ajax id changes
 
 
 // topNav() function sets page template for the application
@@ -426,48 +426,75 @@ function bestBetSection() {                                             // Gets 
     };
 }
 
-function jsonData() {
-    var xhr = new XMLHttpRequest();                 // create xmlhttprequest object
-    var statsWrap = $('#statsWrap');
-    var locationHeader = $('#locationHeader');
+function pageTitles() {
+  $.ajax({                                                            // jQuery ajax declaration
+        type: 'POST',                                                     // declare type of ajax call
+        url: "../waves/data/data.json",
+        dataType: 'json',                                                // declare dataType, using parsed json
+        data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
+        success: function(data) {                                        // call data functions
+          var locationHeader = $('#locationHeader');
+          switch($('body').attr('id'))    {
+            case 'steamersPage' :
+              var f = '0';
+              break;
+            case 'rinconPage' :
+              f = '1';
+              break;
+            case 'trestlesPage' :
+              f = '2';
+              break;
+          }
+          locationHeader.text('');                                            // this removes any content currently in locationHeader element
+          locationHeader.append(data.locations[f].title);                             // place location.title[i] into locationHeader                                                      // run data case switch if xhr status code is 200
+          }
+    });
+}
 
+function weatherCalls() {
+  $.ajax({                                                            // jQuery ajax declaration
+        type: 'POST',                                                     // declare type of ajax call
+        url: "../waves/data/data.json",
+        dataType: 'json',                                                // declare dataType, using parsed json
+        data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
+        success: function(data) {                                        // call data functions
+          var statsWrap = $('#statsWrap');
+          switch($('body').attr('id'))    {                              // set 'f' for page ids
+            case 'steamersPage' :
+              var f = '0';
+              break;
+            case 'rinconPage' :
+              f = '1';
+              break;
+            case 'trestlesPage' :
+              f = '2';
+              break;
+          }
+          statsWrap.append($('<li><strong>City:</strong> ' + data.locations[f].city + '</li>'));
+          statsWrap.append($('<li><strong>About:</strong> ' + data.locations[f].description + '</li>'));
+          statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[f].waveMin + ' and ' + data.locations[f].waveMax + ' feet</li>'));
+          }
+    });
+}
 
-    xhr.onload = function() {                       // when response has loaded
+(function() {
+  var width = this.window.innerWidth;
+  $('.nav-wrap li').before('<figure class="thumb"></figure>');
+})();
 
-      function content() {
-        var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
-
-        locationHeader.text('');                                            // this removes any content currently in locationHeader element
-        locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
-        statsWrap.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
-        statsWrap.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
-        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
-      }
-
-      if (xhr.status === 200) {                      // if server status was ok
-        // build up string with new content (could also use dom manipulation)
-            switch($('body').attr('id'))    {
-              case 'steamersPage' :
-                var i = '0';
-                content();
-                //console.log('steamers');
-                break;
-              case 'rinconPage' :
-                i = '1';
-                content();
-                //console.log('rincon');
-                break;
-              case 'trestlesPage' :
-                i = '2';
-                content();
-                //console.log('trestles');
-                break;
-            }
+function thumbs() {
+  $.ajax({                                                            // jQuery ajax declaration
+        type: 'POST',                                                     // declare type of ajax call
+        url: "../waves/data/data.json",
+        dataType: 'json',                                                // declare dataType, using parsed json
+        data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
+        success: function(data) {
+          var thumbnail = $('figure.thumb');
+          for (var i = 0; i < thumbnail.length; i++) {
+            thumbnail.css('background-image', 'url:(' + data.thumbnails[i].src + ')');
+          }
         }
-    };
-
-    xhr.open('GET', '../waves/data/data.json', false);        // prepare the request
-    xhr.send(null);                             // send the request
+    });
 }
 
 function accordion() {
@@ -477,11 +504,6 @@ function accordion() {
     $(this).next('.accordion-panel').not(':animated').slideToggle();        // show the next
   });
 }
-
-(function() {
-  var width = this.window.innerWidth;
-  $('.nav-wrap li').before('<figure class="thumb"></figure>');
-})();
 
 
 
@@ -494,5 +516,5 @@ footerNav();
 mobileNav();
 copywrite();
 hires();
-jsonData();
 accordion();
+thumbs();
