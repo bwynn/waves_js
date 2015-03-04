@@ -477,11 +477,6 @@ function weatherCalls() {
     });
 }
 
-(function() {
-  var width = this.window.innerWidth;
-  $('.nav-wrap li').before('<figure class="thumb"></figure>');
-})();
-
 function thumbs() {
   $.ajax({                                                            // jQuery ajax declaration
         type: 'POST',                                                     // declare type of ajax call
@@ -489,9 +484,10 @@ function thumbs() {
         dataType: 'json',                                                // declare dataType, using parsed json
         data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
         success: function(data) {
-          var thumbnail = $('figure.thumb');
-          for (var i = 0; i < thumbnail.length; i++) {
-            thumbnail.css('background-image', 'url:(' + data.thumbnails[i].src + ')');
+          var thumb = $('.nav-wrap img');
+          for (var i = 0; i < thumb.length; i++) {
+            console.log(data.thumbnails.src[0]);
+            thumb[i].setAttribute('src', data.thumbnails.src[i]);
           }
         }
     });
