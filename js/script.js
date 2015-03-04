@@ -445,7 +445,7 @@ function pageTitles() {
               f = '2';
               break;
           }
-          locationHeader.text('');                                            // this removes any content currently in locationHeader element
+          //locationHeader.text('');                                            // this removes any content currently in locationHeader element
           locationHeader.append(data.locations[f].title);                             // place location.title[i] into locationHeader                                                      // run data case switch if xhr status code is 200
           }
     });
