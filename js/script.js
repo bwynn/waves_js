@@ -2,7 +2,6 @@ var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api cal
 var waves = $(this);                                                  // sets $(this) value globally for wave
 var $body = $('body');                                                // sets body for ajax id changes
 
-
 // topNav() function sets page template for the application
 function topNav() {
   //using jQuery
@@ -85,6 +84,7 @@ function footerNav() {
     });
   }
 
+
   function santaCruzMarineCall() {                                      // declare santaCruzMarineCall function
           $.ajax({                                                      // jQuery ajax declaration
       type: 'POST',                                                     // declare type of ajax call
@@ -146,7 +146,7 @@ function footerNav() {
         windConditions(data);                                           // calls windDirection function
         generalConditions(data);                                        // calls generalConditions function
       },
-    error: function(e) {console.log('epic fail')}
+  error: function(e) {console.log('epic fail')}
     });
   }
 
@@ -397,7 +397,6 @@ function footerNav() {
     });
   }
 
-
 function mobileNav() {
   $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
     $('#nav ul').slideToggle('slow');
@@ -546,6 +545,7 @@ function jsonData() {
           }
     });
 
+<<<<<<< HEAD
     xhr.open('GET', '../waves/data/data.json', false);        // prepare the request
     xhr.send(null);                             // send the request
 
@@ -577,8 +577,13 @@ function accordion() {
 }
 
 
+santaCruzCalls();
+rinconCalls();
+trestlesCall();
+bestBetCall();
 topNav();
 footerNav();
+weatherCalls();
 mobileNav();
 copywrite();
 hires();
@@ -586,8 +591,3 @@ accordion();
 thumbs();
 jsonData();
 accordion();
-santaCruzCalls();
-rinconCalls();
-trestlesCall();
-bestBetCall();
-//pageTitles();
