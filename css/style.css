@@ -28,15 +28,27 @@ a {
 .active {
   color: #888;
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 4733c13d7b97078963747e5e4448eda6ba3d9321
 
 #heroImg {
   margin: 0
 }
 
 
+<<<<<<< HEAD
 figure.thumb {
   height: 60px;
   width: 100px;
+  background-color: #333;
+=======
+img.thumb {
+  height: 60px;
+  width: 100px;
+>>>>>>> 4733c13d7b97078963747e5e4448eda6ba3d9321
   margin: 5px 20px;
 }
 
@@ -135,3 +147,7 @@ footer p {
   margin: 0;
   float: left;
 }
+<<<<<<< HEAD
+>>>>>>> parent of f9fb8dc... Added thumnail json object in data.json file. Removed jsonData() call and replaced with shortened jquery ajax json calls.
+=======
+>>>>>>> 4733c13d7b97078963747e5e4448eda6ba3d9321

@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
 var waves = $(this);                                                  // sets $(this) value globally for wave
 var $body = $('body');                                                // sets body for ajax id changes
 
 
+=======
+>>>>>>> parent of adef085... Removed weatherCalls() function, bringing all internal functions into the global scope for easy access and more precise calling of data. Allows for the comparison of json data and api data.
 // topNav() function sets page template for the application
 function topNav() {
   //using jQuery
@@ -69,7 +72,13 @@ function footerNav() {
   });
 }
 
-function santaCruzWeather() {
+function weatherCalls() {
+
+  var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
+  var waves = $(this);                                                  // sets $(this) value globally for wave
+  var $body = $('body');
+
+  function santaCruzWeather() {
   $.ajax({
     type: 'POST',
     url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=" + api,
@@ -81,12 +90,18 @@ function santaCruzWeather() {
         windConditions(data);                                           // calls windDirection function
         generalConditions(data);                                        // calls generalConditions function
       },
+<<<<<<< HEAD
     error: function() {console.log('epic fail')}
   });
 }
+=======
+    error: function(e) {console.log('epic fail')}
+    });
+  }
+>>>>>>> parent of adef085... Removed weatherCalls() function, bringing all internal functions into the global scope for easy access and more precise calling of data. Allows for the comparison of json data and api data.
 
-function santaCruzMarineCall() {                                      // declare santaCruzMarineCall function
-    $.ajax({                                                      // jQuery ajax declaration
+  function santaCruzMarineCall() {                                      // declare santaCruzMarineCall function
+          $.ajax({                                                      // jQuery ajax declaration
       type: 'POST',                                                     // declare type of ajax call
       url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=" + api,
       dataType: 'jsonp',                                                // declare dataType, using parsed json
@@ -97,12 +112,19 @@ function santaCruzMarineCall() {                                      // declare
         wetsuit(data);                                                  // calls wetsuit function
         swellPeriod(data);                                              // calls swellPeriod function
       },
+<<<<<<< HEAD
       error: function() {console.log('epic marine fail')}
   });
 }
+=======
+      error: function(e) {console.log('epic marine fail')}
+    });
+  }
+>>>>>>> parent of adef085... Removed weatherCalls() function, bringing all internal functions into the global scope for easy access and more precise calling of data. Allows for the comparison of json data and api data.
 
-function carpenteriaWeather() {
-  $.ajax({
+  function carpenteriaWeather() {
+
+    $.ajax({
       type: 'POST',
       url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=93014&format=json&date=today&key=" + api,
       dataType: 'jsonp',
@@ -113,12 +135,18 @@ function carpenteriaWeather() {
           windConditions(data);                                           // calls windDirection function
           generalConditions(data);                                        // calls generalConditions function
         },
+<<<<<<< HEAD
       error: function() {console.log('epic fail')}
   });
 }
+=======
+      error: function(e) {console.log('epic fail')}
+      });
+  }
+>>>>>>> parent of adef085... Removed weatherCalls() function, bringing all internal functions into the global scope for easy access and more precise calling of data. Allows for the comparison of json data and api data.
 
-function carpenteriaMarineCall() {                                      // declare santaCruzMarineCall function
-  $.ajax({                                                            // jQuery ajax declaration
+  function carpenteriaMarineCall() {                                      // declare santaCruzMarineCall function
+      $.ajax({                                                            // jQuery ajax declaration
         type: 'POST',                                                     // declare type of ajax call
         url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=" + api,
         dataType: 'jsonp',                                                // declare dataType, using parsed json
@@ -129,11 +157,17 @@ function carpenteriaMarineCall() {                                      // decla
           wetsuit(data);                                                  // calls wetsuit function
           swellPeriod(data);                                              // calls swellPeriod function
         },
+<<<<<<< HEAD
         error: function() {console.log('epic marine fail')}
   });
 }
+=======
+        error: function(e) {console.log('epic marine fail')}
+      });
+  }
+>>>>>>> parent of adef085... Removed weatherCalls() function, bringing all internal functions into the global scope for easy access and more precise calling of data. Allows for the comparison of json data and api data.
 
-function sanClementeWeather() {
+  function sanClementeWeather() {
   $.ajax({
     type: 'POST',
     url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=" + api,
@@ -145,12 +179,18 @@ function sanClementeWeather() {
         windConditions(data);                                           // calls windDirection function
         generalConditions(data);                                        // calls generalConditions function
       },
+<<<<<<< HEAD
     error: function() {console.log('epic fail')}
   });
 }
+=======
+    error: function(e) {console.log('epic fail')}
+    });
+  }
+>>>>>>> parent of adef085... Removed weatherCalls() function, bringing all internal functions into the global scope for easy access and more precise calling of data. Allows for the comparison of json data and api data.
 
-function sanClementeMarineCall() {                                      // declare santaCruzMarineCall function
-    $.ajax({                                                            // jQuery ajax declaration
+  function sanClementeMarineCall() {                                      // declare santaCruzMarineCall function
+      $.ajax({                                                            // jQuery ajax declaration
         type: 'POST',                                                     // declare type of ajax call
         url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=" + api,
         dataType: 'jsonp',                                                // declare dataType, using parsed json
@@ -161,25 +201,31 @@ function sanClementeMarineCall() {                                      // decla
           wetsuit(data);                                                  // calls wetsuit function
           swellPeriod(data);                                              // calls swellPeriod function
         },
+<<<<<<< HEAD
         error: function() {console.log('epic marine fail')}
     });
 }
+=======
+        error: function(e) {console.log('epic marine fail')}
+      });
+  }
+>>>>>>> parent of adef085... Removed weatherCalls() function, bringing all internal functions into the global scope for easy access and more precise calling of data. Allows for the comparison of json data and api data.
 
-function localTime(data) {
+  function localTime(data) {
     // local time
     var gmt = new Date();
     //console.log('Time: ' + gmt);
     $('<li><strong>Current time:</strong> ' + gmt + '</li>').appendTo($('#weather ul'));
-}
+  }
 
-function airTemp(data) {
+  function airTemp(data) {
     //temperature
     var temp = data.data.current_condition[0].temp_F;
     //console.log('Degrees f: '+ temp);
     $('<li><strong>Temperature:</strong> '+ temp + '</li>').appendTo($('#weather ul'));
-}
+  }
 
-function windConditions(data) {
+  function windConditions(data) {
     //wind direction
     var w_dir = data.data.current_condition[0].winddirDegree;
     var w_speed = data.data.current_condition[0].windspeedMiles;
@@ -203,16 +249,16 @@ function windConditions(data) {
                   }
     //console.log('Wind: From the ' + windDir + ' at ' + w_speed + ' mph');
     $('<li><strong>Wind:</strong> From the ' + windDir + ' at ' + w_speed + ' mph.</li>').appendTo($('#weather ul'));
-}
+  }
 
-function generalConditions(data) {
+  function generalConditions(data) {
     // weather Description
     var w_desc = data.data.current_condition[0].weatherDesc[0].value;
     //console.log('Skies: ' + w_desc);
     $('<li><strong>Skies:</strong> ' + w_desc + '</li>').appendTo($('#weather ul'));
-}
+  }
 
-function swellSize(data) {                                          // declare receive function taking data as the argument
+  function swellSize(data) {                                          // declare receive function taking data as the argument
     var wSizeM = data.data.weather[0].hourly[0].swellHeight_m;      // gets swell height in meters
     var wSizeF = (wSizeM * 3.28).toPrecision(3);                    // meters to feet
     if ( wSizeF < 1 ) {
@@ -237,9 +283,9 @@ function swellSize(data) {                                          // declare r
     console.log('wave height feet: ' + wSizeF);                     // prints wave size converted to feet
     //console.log('wave size: ' + wSize);                     // prints wave size converted to feet
     $('<li><strong>Wave height:</strong> ' + wSizeF + 'ft.</li>').appendTo('#waveDetails ul');
-}
+  }
 
-function swDir(data) {
+  function swDir(data) {
       var swellDir = data.data.weather[0].hourly[0].swellDir;         // gets swell direction
       var sDir;                                                       // initializing sDir variable
       if ( swellDir < 23 ) {
@@ -277,10 +323,10 @@ function swDir(data) {
       }
       //console.log('Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.')
       $('<li><strong>Primary swell direction:</strong> ' + sDir + ' at ' + swellDir + ' degrees.</li>').appendTo('#waveDetails ul');
-}
+  }
 
-// Wetsuit Recommendation
-function wetsuit(data) {
+  // Wetsuit Recommendation
+  function wetsuit(data) {
     var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
     if ( waterTemp < 55 ) {
       var wSuit = "5/4 Hooded Fullsuit";
@@ -299,10 +345,10 @@ function wetsuit(data) {
     //console.log('water temp today: ' + waterTemp);                  // prints water temp string
     $('<li><strong>Water temp today:</strong> ' + waterTemp + ' degrees</li>').appendTo('#waveDetails ul');
     $('<li><strong>Recommended wetsuit:</strong> ' + wSuit + '</li>').appendTo('#waveDetails ul');
-}
+  }
 
-// Swell Period
-function swellPeriod(data) {
+  // Swell Period
+  function swellPeriod(data) {
     var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
     if ( sPeriod < 7 ) {
       var swellSig = "Junky, short-period windswell";
@@ -315,9 +361,9 @@ function swellPeriod(data) {
     }
     //console.log("Today's swell conditions: " + swellSig);
     $("<li><strong>Today's swell conditions:</strong> " + swellSig + '</li>').appendTo('#waveDetails ul');
-}
+  }
 
-function santaCruzCalls() {
+  function santaCruzCalls() {
     // calls steamers weather data call
     $('#steamers').on('click', function(e) {
       $body.removeAttr('id');
@@ -332,11 +378,15 @@ function santaCruzCalls() {
       santaCruzMarineCall();
     });
     $('#steamersPage #bestConditionsLink').on('click', function(e) {
+<<<<<<< HEAD
 
+=======
+      compareData();
+>>>>>>> parent of adef085... Removed weatherCalls() function, bringing all internal functions into the global scope for easy access and more precise calling of data. Allows for the comparison of json data and api data.
     });
-}
+  }
 
-function rinconCalls() {
+  function rinconCalls() {
     // calls rincon weather data call
     $('#rincon').on('click', function(e) {
       $body.removeAttr('id');
@@ -351,11 +401,11 @@ function rinconCalls() {
       carpenteriaMarineCall();
     });
     $('#rinconPage #bestConditionsLink').on('click', function(e) {
-
+      compareData();
     });
-}
+  }
 
-function trestlesCall() {
+  function trestlesCall() {
     // calls tretles
     $('#trestles').on('click', function(e) {
       $body.removeAttr('id');
@@ -370,17 +420,41 @@ function trestlesCall() {
       sanClementeMarineCall();
     });
     $('#trestlesPage #bestConditionsLink').on('click', function(e) {
-
+      compareData();
     });
-}
+  }
 
-function bestBetCall() {
+  function bestBetCall() {
     $('#bestChance').on('click', function(e) {
       $body.removeAttr('id');
       $body.attr('id', 'bestBetPage');
     });
+  }
+
+<<<<<<< HEAD
+=======
+  function compareData() {
+    $.ajax({
+      type: 'POST',
+      url: "../waves/data/data.json",
+      dataType: 'json',
+      data: $(this).serialize(),
+      success: function(data) {
+        $('#bestbet').append('<li>Best wave size between: ' + data.locations[0].waveMin + ' and ' + data.locations[0].waveMax);
+        $('#bestbet').append('<li>Best swell direction: ' + data.locations[0].swellDir[0, 1, 2] + '</li>');
+        console.log('json file: ' + data.locations[0].waveMin);
+        console.log('json file: ' + data.locations[0].waveMax);
+      }
+    });
+  }
+
+  santaCruzCalls();
+  rinconCalls();
+  trestlesCall();
+  bestBetCall();
 }
 
+>>>>>>> parent of adef085... Removed weatherCalls() function, bringing all internal functions into the global scope for easy access and more precise calling of data. Allows for the comparison of json data and api data.
 function mobileNav() {
   $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
     $('#nav ul').slideToggle('slow');
@@ -418,6 +492,14 @@ function hires() {                                                          // f
   }
 }
 
+function pageTitle() {
+  var pageId =  $('body').attr('id');                                     // get body id
+  var title = pageId.substr(0, pageId.length - 4);                        // get body id minus 'Page'
+  var locationHeader = $('#locationHeader');                              // get id locationHeader
+  locationHeader.text(title);                                             // place updated id text as page title
+  //console.log(title);
+}
+
 function bestBetSection() {                                             // Gets content and removes content from page
   var subNav = $('#subNav ul')                                          // get subNav ul
   if ($('body').attr('id') === 'bestBetPage') {                         // if page id is bestBetPage
@@ -426,6 +508,70 @@ function bestBetSection() {                                             // Gets 
     };
 }
 
+<<<<<<< HEAD
+function jsonData() {
+    var xhr = new XMLHttpRequest();                 // create xmlhttprequest object
+<<<<<<< HEAD
+    //var bestbet = $('#bestbet');
+    var statsWrap = $('#statsWrap');
+    var locationHeader = $('#locationHeader');
+
+    xhr.onload = function() {                       // when response has loaded
+      var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
+      // the following conditional check will not work locally - only on a server
+      if(xhr.status === 200) {                      // if server status was ok
+        // build up string with new content (could also use dom manipulation)
+        function content() {
+          locationHeader.text('');                                            // this removes any content currently in locationHeader element
+          locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
+          statsWrap.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
+          statsWrap.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
+          statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
+          }
+=======
+    var statsWrap = $('#statsWrap');
+    var locationHeader = $('#locationHeader');
+
+
+    xhr.onload = function() {                       // when response has loaded
+
+      function content() {
+        var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
+
+        locationHeader.text('');                                            // this removes any content currently in locationHeader element
+        locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
+        statsWrap.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
+        statsWrap.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
+        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
+      }
+
+      if (xhr.status === 200) {                      // if server status was ok
+        // build up string with new content (could also use dom manipulation)
+>>>>>>> parent of f9fb8dc... Added thumnail json object in data.json file. Removed jsonData() call and replaced with shortened jquery ajax json calls.
+            switch($('body').attr('id'))    {
+              case 'steamersPage' :
+                var i = '0';
+                content();
+                //console.log('steamers');
+                break;
+              case 'rinconPage' :
+                i = '1';
+                content();
+                //console.log('rincon');
+                break;
+              case 'trestlesPage' :
+                i = '2';
+                content();
+                //console.log('trestles');
+                break;
+            }
+<<<<<<< HEAD
+      }
+    };
+=======
+        }
+    };
+=======
 function pageTitles() {
   $.ajax({                                                            // jQuery ajax declaration
         type: 'POST',                                                     // declare type of ajax call
@@ -445,11 +591,12 @@ function pageTitles() {
               f = '2';
               break;
           }
-          locationHeader.text('');                                            // this removes any content currently in locationHeader element
+          //locationHeader.text('');                                            // this removes any content currently in locationHeader element
           locationHeader.append(data.locations[f].title);                             // place location.title[i] into locationHeader                                                      // run data case switch if xhr status code is 200
           }
     });
 }
+>>>>>>> 4733c13d7b97078963747e5e4448eda6ba3d9321
 
 function weatherCalls() {
   $.ajax({                                                            // jQuery ajax declaration
@@ -476,12 +623,24 @@ function weatherCalls() {
           }
     });
 }
+>>>>>>> parent of f9fb8dc... Added thumnail json object in data.json file. Removed jsonData() call and replaced with shortened jquery ajax json calls.
 
+    xhr.open('GET', '../waves/data/data.json', false);        // prepare the request
+    xhr.send(null);                             // send the request
+}
+
+<<<<<<< HEAD
+=======
 (function() {
   var width = this.window.innerWidth;
   $('.nav-wrap li').before('<figure class="thumb"></figure>');
 })();
 
+
+
+<<<<<<< HEAD
+>>>>>>> parent of f9fb8dc... Added thumnail json object in data.json file. Removed jsonData() call and replaced with shortened jquery ajax json calls.
+=======
 function thumbs() {
   $.ajax({                                                            // jQuery ajax declaration
         type: 'POST',                                                     // declare type of ajax call
@@ -489,9 +648,10 @@ function thumbs() {
         dataType: 'json',                                                // declare dataType, using parsed json
         data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
         success: function(data) {
-          var thumbnail = $('figure.thumb');
-          for (var i = 0; i < thumbnail.length; i++) {
-            thumbnail.css('background-image', 'url:(' + data.thumbnails[i].src + ')');
+          var thumb = $('.nav-wrap img');
+          for (var i = 0; i < thumb.length; i++) {
+            console.log(data.thumbnails.src[0]);
+            thumb[i].setAttribute('src', data.thumbnails.src[i]);
           }
         }
     });
@@ -506,15 +666,32 @@ function accordion() {
 }
 
 
+<<<<<<< HEAD
 
+>>>>>>> 4733c13d7b97078963747e5e4448eda6ba3d9321
 santaCruzCalls();
 rinconCalls();
 trestlesCall();
 bestBetCall();
+=======
+>>>>>>> parent of adef085... Removed weatherCalls() function, bringing all internal functions into the global scope for easy access and more precise calling of data. Allows for the comparison of json data and api data.
 topNav();
 footerNav();
+weatherCalls();
 mobileNav();
 copywrite();
 hires();
+<<<<<<< HEAD
 accordion();
 thumbs();
+=======
+jsonData();
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+accordion();
+>>>>>>> parent of f9fb8dc... Added thumnail json object in data.json file. Removed jsonData() call and replaced with shortened jquery ajax json calls.
+=======
+//pageTitle();
+>>>>>>> parent of adef085... Removed weatherCalls() function, bringing all internal functions into the global scope for easy access and more precise calling of data. Allows for the comparison of json data and api data.
+>>>>>>> 4733c13d7b97078963747e5e4448eda6ba3d9321
