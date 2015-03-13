@@ -399,11 +399,11 @@ function footerNav() {
 
 function mobileNav() {
   $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
-    $('#nav ul').slideToggle('slow');
+    $('#nav ul').slideToggle();
     e.stopImmediatePropagation();
   });
 
-  $('#nav > ul > li > a').on('click', function(e) {            // function to hide nav ul when child is clicked
+  $('#nav > ul > a').on('click', function(e) {            // function to hide nav ul when child is clicked
     $('#nav ul').hide();
   })
 }
@@ -455,7 +455,6 @@ function jsonData() {
     //var bestbet = $('#bestbet');
     var statsWrap = $('#statsWrap');
     var locationHeader = $('#locationHeader');
-    var thumbs = $('#nav img')
 
     xhr.onload = function() {                       // when response has loaded
       var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
@@ -469,6 +468,7 @@ function jsonData() {
           statsWrap.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
           statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
           }
+
             switch($('body').attr('id'))    {
               case 'steamersPage' :
                 var i = '0';

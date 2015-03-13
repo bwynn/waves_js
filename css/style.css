@@ -9,3 +9,7 @@ li {
 .active {
   color: #888;
 }
+
+#nav a {
+  display: block;
+}
