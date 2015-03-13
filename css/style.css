@@ -1,7 +1,7 @@
 /* ================= Global Styles ================= */
 body {
   width: 100%;
-
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1 {
@@ -33,12 +33,13 @@ a {
   margin: 0
 }
 
+#bodyWrap {
+  padding: .8em;
+}
 
-figure.thumb {
-  height: 60px;
-  width: 100px;
-  margin: 5px 20px;
-  background: #222;
+form {
+  width: 300px;
+  margin: 0 auto;
 }
 
 /* ================== Header Styles ================== */
@@ -102,6 +103,14 @@ nav {
   padding-top: 9px;
 }
 
+figure.thumb {
+  height: 60px;
+  width: 100px;
+  margin: 5px 20px;
+  background: #222;
+}
+
+
 /* ========== subNav ============ */
 #subNav {
   width: 100%;
@@ -124,10 +133,6 @@ nav {
 /* ============ Content ========= */
 .content > h1 {
   clear: both;
-}
-
-#statsWrap {
-  padding: 20px;
 }
 
 /* ============= Footer ============== */

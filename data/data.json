@@ -8,7 +8,7 @@
         "../images/steamers2.png",
         "../images/steamers3.png"
         ],
-      "description": "Minions ipsum underweaaar daa potatoooo. Hahaha uuuhhh poulet tikka masala bee do bee do bee do hana dul sae me want bananaaa! Hahaha potatoooo para tú bee do bee do bee do ti aamoo! Daa baboiii bee do bee do bee do jiji. Po kass potatoooo underweaaar poulet tikka masala jeje gelatooo la bodaaa uuuhhh ti aamoo! Daa. Baboiii butt gelatooo poulet tikka masala tatata bala tu baboiii pepete pepete jeje hana dul sae bappleees. Bappleees tank yuuu! Tank yuuu! Daa aaaaaah bananaaaa poulet tikka masala bananaaaa aaaaaah tulaliloo. Ti aamoo! poopayee pepete uuuhhh.",
+      "description": "Minions ipsum underweaaar daa potatoooo. Hahaha uuuhhh poulet tikka masala bee do bee do bee do hana dul sae me want bananaaa! Hahaha potatoooo para tú bee do bee do bee do ti aamoo!",
       "windDir": ["E", "NE", "N"],
       "waveMin": "3",
       "waveMax": "25",
@@ -23,7 +23,7 @@
         "../images/rincon2.png",
         "../images/rincon3.png"
         ],
-      "description": "Minions ipsum underweaaar daa potatoooo. Hahaha uuuhhh poulet tikka masala bee do bee do bee do hana dul sae me want bananaaa! Hahaha potatoooo para tú bee do bee do bee do ti aamoo! Daa baboiii bee do bee do bee do jiji. Po kass potatoooo underweaaar poulet tikka masala jeje gelatooo la bodaaa uuuhhh ti aamoo! Daa. Baboiii butt gelatooo poulet tikka masala tatata bala tu baboiii pepete pepete jeje hana dul sae bappleees.",
+      "description": "Minions ipsum underweaaar daa potatoooo. Hahaha uuuhhh poulet tikka masala bee do bee do bee do hana dul sae me want bananaaa!",
       "wind-dir": ["E", "NE", "N"],
       "waveMin": "4",
       "waveMax": "12",
@@ -38,22 +38,12 @@
         "../images/trestles2.png",
         "../images/trestles3.png"
         ],
-      "description": "Minions ipsum underweaaar daa potatoooo. Hahaha uuuhhh poulet tikka masala bee do bee do bee do hana dul sae me want bananaaa! Hahaha potatoooo para tú bee do bee do bee do ti aamoo! Daa baboiii bee do bee do bee do jiji. Po kass potatoooo underweaaar poulet tikka masala jeje gelatooo la bodaaa uuuhhh ti aamoo! Daa. Baboiii butt gelatooo poulet tikka masala tatata bala tu baboiii pepete pepete jeje hana dul sae bappleees. Bappleees tank yuuu! Tank yuuu! Daa aaaaaah bananaaaa poulet tikka masala bananaaaa aaaaaah tulaliloo. Ti aamoo! poopayee pepete uuuhhh.",
+      "description": "hana dul sae me want bananaaa! Hahaha potatoooo para tú bee do bee do bee do ti aamoo! Daa baboiii bee do bee do bee do jiji. Po kass potatoooo underweaaar poulet tikka masala jeje gelatooo la bodaaa uuuhhh ti aamoo! Daa. Baboiii butt gelatooo poulet tikka masala tatata bala tu",
       "windDir": ["E", "NE"],
       "waveMin": "3",
       "waveMax": "12",
       "swellPeriod": "9",
       "swellDir": ["W", "WSW", "SW"]
-    }
-  ],
-  "thumbnails" : [
-    {
-      "src" : [
-        "../images/steamers.jpg",
-        "../images/rincon.jpg",
-        "../images/trestles.jpg",
-        "../imgaes/logo.png"
-      ]
     }
   ]
 }

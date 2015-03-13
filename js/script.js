@@ -494,6 +494,23 @@ function jsonData() {
 }
 
 
+// code to sort out the figure tag backgrounds
+/*var thumbnails = function() {                                     // create an anonymous function to place thumnail images as background images
+  var thumbs = $('.nav-wrap figure');                             // get figure element
+  var thumbnails = {                                              // create an array to hold source paths
+      "url" : [
+        "url(../images/steamers.jpg)",
+        "url(../images/rincon.jpg)",
+        "url(../images/trestles.jpg)",
+        "url(../imgaes/logo.png)"
+      ]
+    }
+  for (var i = 0; i < thumbs.length; i++) {                       // loop through figure tags
+    $('.nav-wrap figure').each().css('background-image', thumbnails.url[i]);
+  }
+}();*/
+
+
 topNav();
 footerNav();
 mobileNav();
