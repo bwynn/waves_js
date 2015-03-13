@@ -403,7 +403,7 @@ function mobileNav() {
     e.stopImmediatePropagation();
   });
 
-  $('.nav-wrap > ul > a').on('click', function(e) {            // function to hide nav ul when child is clicked
+  $('.nav-wrap a').on('click', function(e) {            // function to hide nav ul when child is clicked
     $('.nav-wrap ul').hide();
   })
 }
