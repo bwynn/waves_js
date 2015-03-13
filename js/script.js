@@ -1,3 +1,7 @@
+var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
+var waves = $(this);                                                  // sets $(this) value globally for wave
+var $body = $('body');
+
 // topNav() function sets page template for the application
 function topNav() {
   //using jQuery
@@ -64,11 +68,6 @@ function footerNav() {
   });
 }
 
-function weatherCalls() {
-
-  var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
-  var waves = $(this);                                                  // sets $(this) value globally for wave
-  var $body = $('body');
 
   function santaCruzWeather() {
   $.ajax({
@@ -398,12 +397,6 @@ function weatherCalls() {
     });
   }
 
-  santaCruzCalls();
-  rinconCalls();
-  trestlesCall();
-  bestBetCall();
-}
-
 function mobileNav() {
   $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
     $('#nav ul').slideToggle('slow');
@@ -462,6 +455,7 @@ function jsonData() {
     //var bestbet = $('#bestbet');
     var statsWrap = $('#statsWrap');
     var locationHeader = $('#locationHeader');
+    var thumbs = $('#nav img')
 
     xhr.onload = function() {                       // when response has loaded
       var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
@@ -502,9 +496,12 @@ function jsonData() {
 
 topNav();
 footerNav();
-weatherCalls();
 mobileNav();
 copywrite();
 hires();
 jsonData();
 //pageTitle();
+santaCruzCalls();
+rinconCalls();
+trestlesCall();
+bestBetCall();

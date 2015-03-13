@@ -45,5 +45,15 @@
       "swellPeriod": "9",
       "swellDir": ["W", "WSW", "SW"]
     }
+  ],
+  "thumbnails" : [
+    {
+      "src" : [
+        "../images/steamers.jpg",
+        "../images/rincon.jpg",
+        "../images/trestles.jpg",
+        "../imgaes/logo.png"
+      ]
+    }
   ]
 }
