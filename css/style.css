@@ -135,6 +135,12 @@ figure.thumb {
   clear: both;
 }
 
+#statsWrap,
+article {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
 /* ============= Footer ============== */
 footer nav {
   float: left;
