@@ -1,6 +1,6 @@
 var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
 var waves = $(this);                                                  // sets $(this) value globally for wave
-var $body = $('body');                                                // sets body for ajax id changes
+var $body = $('body');
 
 // topNav() function sets page template for the application
 function topNav() {
@@ -68,6 +68,7 @@ function footerNav() {
   });
 }
 
+
   function santaCruzWeather() {
   $.ajax({
     type: 'POST',
@@ -83,7 +84,6 @@ function footerNav() {
     error: function(e) {console.log('epic fail')}
     });
   }
-
 
   function santaCruzMarineCall() {                                      // declare santaCruzMarineCall function
           $.ajax({                                                      // jQuery ajax declaration
@@ -146,7 +146,7 @@ function footerNav() {
         windConditions(data);                                           // calls windDirection function
         generalConditions(data);                                        // calls generalConditions function
       },
-  error: function(e) {console.log('epic fail')}
+    error: function(e) {console.log('epic fail')}
     });
   }
 
@@ -399,12 +399,12 @@ function footerNav() {
 
 function mobileNav() {
   $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
-    $('#nav ul').slideToggle('slow');
+    $('#nav ul').slideToggle();
     e.stopImmediatePropagation();
   });
 
-  $('#nav > .nav-wrap > ul > a').on('click', function(e) {            // function to hide nav ul when child is clicked
-    $('#nav ul').hide();
+  $('.nav-wrap a').on('click', function(e) {            // function to hide nav ul when child is clicked
+    $('.nav-wrap ul').hide();
   })
 }
 
@@ -434,12 +434,24 @@ function hires() {                                                          // f
   }
 }
 
-function pageTitle() {
-  var pageId =  $('body').attr('id');                                     // get body id
-  var title = pageId.substr(0, pageId.length - 4);                        // get body id minus 'Page'
-  var locationHeader = $('#locationHeader');                              // get id locationHeader
-  locationHeader.text(title);                                             // place updated id text as page title
-  //console.log(title);
+function pageTitle() {                                    // get body id
+  var pageHead = $('#locationHeader');                                    // get location header
+  $.getJSON('../waves/data/data.json', function(data) {
+    switch($('body').attr('id'))    {
+      case 'steamersPage' :
+        var i = 0;
+        pageHead.text(data.locations[i].title);
+        break;
+      case 'rinconPage' :
+        var i = 1;
+        pageHead.text(data.locations[i].title);
+        break;
+      case 'trestlesPage' :
+        var i = 2;
+        pageHead.text(data.locations[i].title);
+        break;
+    }
+  });
 }
 
 function bestBetSection() {                                             // Gets content and removes content from page
@@ -451,143 +463,57 @@ function bestBetSection() {                                             // Gets 
 }
 
 function jsonData() {
-    var xhr = new XMLHttpRequest();                 // create xmlhttprequest object
+  $.getJSON('../waves/data/data.json', function(data) {
     var statsWrap = $('#statsWrap');
-    var locationHeader = $('#locationHeader');
-
-
-    xhr.onload = function() {                       // when response has loaded
-
-      function content() {
-        var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
-
-        locationHeader.text('');                                            // this removes any content currently in locationHeader element
-        locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
-        statsWrap.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
-        statsWrap.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
-        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
-      }
-
-      if (xhr.status === 200) {                      // if server status was ok
-        // build up string with new content (could also use dom manipulation)
-            switch($('body').attr('id'))    {
-              case 'steamersPage' :
-                var i = '0';
-                content();
-                //console.log('steamers');
-                break;
-              case 'rinconPage' :
-                i = '1';
-                content();
-                //console.log('rincon');
-                break;
-              case 'trestlesPage' :
-                i = '2';
-                content();
-                //console.log('trestles');
-                break;
-            }
-        }
-    };
-
-    xhr.open('GET', '../waves/data/data.json', false);        // prepare the request
-    xhr.send(null);                             // send the request
-}
-
-
-/*function pageTitles() {
-  $.ajax({                                                            // jQuery ajax declaration
-        type: 'POST',                                                     // declare type of ajax call
-        url: "../waves/data/data.json",
-        dataType: 'json',                                                // declare dataType, using parsed json
-        data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
-        success: function(data) {                                        // call data functions
-          var locationHeader = $('#locationHeader');
-          switch($('body').attr('id'))    {
-            case 'steamersPage' :
-              var f = '0';
-              break;
-            case 'rinconPage' :
-              f = '1';
-              break;
-            case 'trestlesPage' :
-              f = '2';
-              break;
-          }
-          //locationHeader.text('');                                            // this removes any content currently in locationHeader element
-          locationHeader.append(data.locations[f].title);                             // place location.title[i] into locationHeader                                                      // run data case switch if xhr status code is 200
-          }
-    });
-}*/
-
-/*function weatherCalls() {
-  $.ajax({                                                            // jQuery ajax declaration
-        type: 'POST',                                                     // declare type of ajax call
-        url: "../waves/data/data.json",
-        dataType: 'json',                                                // declare dataType, using parsed json
-        data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
-        success: function(data) {                                        // call data functions
-          var statsWrap = $('#statsWrap');
-          switch($('body').attr('id'))    {                              // set 'f' for page ids
-            case 'steamersPage' :
-              var f = '0';
-              break;
-            case 'rinconPage' :
-              f = '1';
-              break;
-            case 'trestlesPage' :
-              f = '2';
-              break;
-          }
-          statsWrap.append($('<li><strong>City:</strong> ' + data.locations[f].city + '</li>'));
-          statsWrap.append($('<li><strong>About:</strong> ' + data.locations[f].description + '</li>'));
-          statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[f].waveMin + ' and ' + data.locations[f].waveMax + ' feet</li>'));
-          }
-    });
-
-<<<<<<< HEAD
-    xhr.open('GET', '../waves/data/data.json', false);        // prepare the request
-    xhr.send(null);                             // send the request
-
-}*/
-
-
-/*(function() {
-  var width = this.window.innerWidth;
-  $('.nav-wrap li').before('<figure class="thumb"></figure>');
-})();*/
-
-
-function thumbs(data) {
-  $.getJSON("../waves/data/data.json", function(data) {
-    console.log('success');
-    var thumbImg = $('.nav-wrap > ul > a');
-    for (var i = 0; i < thumbImg.length; i++) {
-      thumbImg[i].setAttribute('src', thumbnails.src[i]);
+    switch($('body').attr('id'))    {
+      case 'steamersPage' :
+        var i = 0;
+        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        break;
+      case 'rinconPage' :
+        var i = 1;
+        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        break;
+      case 'trestlesPage' :
+        var i = 2;
+        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        break;
     }
   });
 }
 
-function accordion() {
-  $('a.accordion-control').on('click', function(e) {
-    e.preventDefault();
-    $('.accordion-panel').hide('slow');                                     // hide .accordion-panel
-    $(this).next('.accordion-panel').not(':animated').slideToggle();        // show the next
-  });
-}
+
+// code to sort out the figure tag backgrounds
+/*var thumbnails = function() {                                     // create an anonymous function to place thumnail images as background images
+  var thumbs = $('.nav-wrap figure');                             // get figure element
+  var thumbnails = {                                              // create an array to hold source paths
+      "url" : [
+        "url(../images/steamers.jpg)",
+        "url(../images/rincon.jpg)",
+        "url(../images/trestles.jpg)",
+        "url(../imgaes/logo.png)"
+      ]
+    }
+  for (var i = 0; i < thumbs.length; i++) {                       // loop through figure tags
+    $('.nav-wrap figure').each().css('background-image', thumbnails.url[i]);
+  }
+}();*/
 
 
+topNav();
+footerNav();
+mobileNav();
+copywrite();
+hires();
+jsonData();
+pageTitle();
 santaCruzCalls();
 rinconCalls();
 trestlesCall();
 bestBetCall();
-topNav();
-footerNav();
-weatherCalls();
-mobileNav();
-copywrite();
-hires();
-accordion();
-thumbs();
-jsonData();
-accordion();

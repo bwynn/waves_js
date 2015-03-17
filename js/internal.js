@@ -1,12 +1,9 @@
-accordion();
 subNav();
-weatherCalls();
-//pageTitle();
+pageTitle();
 bestBetSection();
+//compareData();
+jsonData();
 santaCruzCalls();
 rinconCalls();
 trestlesCall();
 bestBetCall();
-pageTitles();
-//compareData();
-jsonData();
