@@ -471,6 +471,7 @@ function jsonData() {
         statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
         statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
         statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+
         break;
       case 'rinconPage' :
         var i = 1;
@@ -487,7 +488,6 @@ function jsonData() {
     }
   });
 }
-
 
 // code to sort out the figure tag backgrounds
 /*var thumbnails = function() {                                     // create an anonymous function to place thumnail images as background images
