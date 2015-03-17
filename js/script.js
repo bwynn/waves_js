@@ -434,12 +434,24 @@ function hires() {                                                          // f
   }
 }
 
-function pageTitle() {
-  var pageId =  $('body').attr('id');                                     // get body id
-  var title = pageId.substr(0, pageId.length - 4);                        // get body id minus 'Page'
-  var locationHeader = $('#locationHeader');                              // get id locationHeader
-  locationHeader.text(title);                                             // place updated id text as page title
-  //console.log(title);
+function pageTitle() {                                    // get body id
+  var pageHead = $('#locationHeader');                                    // get location header
+  $.getJSON('../waves/data/data.json', function(data) {
+    switch($('body').attr('id'))    {
+      case 'steamersPage' :
+        var i = 0;
+        pageHead.text(data.locations[i].title);
+        break;
+      case 'rinconPage' :
+        var i = 1;
+        pageHead.text(data.locations[i].title);
+        break;
+      case 'trestlesPage' :
+        var i = 2;
+        pageHead.text(data.locations[i].title);
+        break;
+    }
+  });
 }
 
 function bestBetSection() {                                             // Gets content and removes content from page
@@ -451,46 +463,29 @@ function bestBetSection() {                                             // Gets 
 }
 
 function jsonData() {
-    var xhr = new XMLHttpRequest();                 // create xmlhttprequest object
-    //var bestbet = $('#bestbet');
+  $.getJSON('../waves/data/data.json', function(data) {
     var statsWrap = $('#statsWrap');
-    var locationHeader = $('#locationHeader');
-
-    xhr.onload = function() {                       // when response has loaded
-      var responseObject = JSON.parse(xhr.responseText);      // create variable to hold xhr response
-      // the following conditional check will not work locally - only on a server
-      if(xhr.status === 200) {                      // if server status was ok
-        // build up string with new content (could also use dom manipulation)
-        function content() {
-          locationHeader.text('');                                            // this removes any content currently in locationHeader element
-          locationHeader.append(responseObject.locations[i].title);                             // place location.title[i] into locationHeader
-          statsWrap.append($('<li><strong>City:</strong> ' + responseObject.locations[i].city + '</li>'));
-          statsWrap.append($('<li><strong>About:</strong> ' + responseObject.locations[i].description + '</li>'));
-          statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + responseObject.locations[i].waveMin + ' and ' + responseObject.locations[i].waveMax + ' feet</li>'));
-          }
-
-            switch($('body').attr('id'))    {
-              case 'steamersPage' :
-                var i = '0';
-                content();
-                //console.log('steamers');
-                break;
-              case 'rinconPage' :
-                i = '1';
-                content();
-                //console.log('rincon');
-                break;
-              case 'trestlesPage' :
-                i = '2';
-                content();
-                //console.log('trestles');
-                break;
-            }
-      }
-    };
-
-    xhr.open('GET', '../waves/data/data.json', false);        // prepare the request
-    xhr.send(null);                             // send the request
+    switch($('body').attr('id'))    {
+      case 'steamersPage' :
+        var i = 0;
+        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        break;
+      case 'rinconPage' :
+        var i = 1;
+        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        break;
+      case 'trestlesPage' :
+        var i = 2;
+        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        break;
+    }
+  });
 }
 
 
@@ -517,7 +512,7 @@ mobileNav();
 copywrite();
 hires();
 jsonData();
-//pageTitle();
+pageTitle();
 santaCruzCalls();
 rinconCalls();
 trestlesCall();

@@ -1,5 +1,5 @@
 subNav();
-//pageTitle();
+pageTitle();
 bestBetSection();
 //compareData();
 jsonData();
