@@ -85,8 +85,8 @@ function footerNav() {
     });
   }
 
-  function santaCruzMarineCall() {                                      // declare santaCruzMarineCall function
-          $.ajax({                                                      // jQuery ajax declaration
+  function santaCruzMarineCall() {
+    $.ajax({                                                      // jQuery ajax declaration
       type: 'POST',                                                     // declare type of ajax call
       url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=" + api,
       dataType: 'jsonp',                                                // declare dataType, using parsed json
@@ -489,22 +489,10 @@ function jsonData() {
 }
 
 
-// code to sort out the figure tag backgrounds
-/*var thumbnails = function() {                                     // create an anonymous function to place thumnail images as background images
-  var thumbs = $('.nav-wrap figure');                             // get figure element
-  var thumbnails = {                                              // create an array to hold source paths
-      "url" : [
-        "url(../images/steamers.jpg)",
-        "url(../images/rincon.jpg)",
-        "url(../images/trestles.jpg)",
-        "url(../imgaes/logo.png)"
-      ]
-    }
-  for (var i = 0; i < thumbs.length; i++) {                       // loop through figure tags
-    $('.nav-wrap figure').each().css('background-image', thumbnails.url[i]);
-  }
-}();*/
 
+function blerb() {
+console.log(santaCruzMarineCall.responseJSON.data.weather[0].hourly[0].swellDir);
+}
 
 topNav();
 footerNav();
