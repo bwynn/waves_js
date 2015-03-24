@@ -19,6 +19,7 @@ li {
 
 a {
   text-decoration: none;
+  color: green;
 }
 
 #nav ul {
@@ -35,6 +36,8 @@ a {
 
 #bodyWrap {
   padding: 0 0.8em;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 form {
@@ -157,6 +160,11 @@ article {
 }
 
 /* ============= Footer ============== */
+footer {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
 footer nav {
   float: left;
   width: 47%;
