@@ -488,11 +488,19 @@ function jsonData() {
   });
 }
 
+function gallery() {
+ var gallery = $('#gallery');
+ var btn = $('#galleryBtn');
 
-
-function blerb() {
-console.log(santaCruzMarineCall.responseJSON.data.weather[0].hourly[0].swellDir);
+ btn.on('click', function(e) {
+   e.preventDefault;
+   gallery.slideToggle();
+ });
 }
+
+var blerb = function(){
+  console.log('hello world');
+}();
 
 topNav();
 footerNav();

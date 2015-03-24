@@ -38,6 +38,7 @@ a {
   padding: 0 0.8em;
   max-width: 800px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 form {
@@ -159,10 +160,28 @@ article {
   margin: 0 auto;
 }
 
+/* ============= Gallery ==============*/
+#galleryWrap {
+  overflow: scroll;
+}
+
+#gallery {
+  display: none;
+  width: 2600px;
+  height: 400px;
+}
+
+#gallery img {
+  width: 100%;
+  max-width: 800px;
+  height: 400px;
+  background-color: #333;
+}
+
 /* ============= Footer ============== */
 footer {
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
 }
 footer nav {
