@@ -1,4 +1,8 @@
 /* ================= Global Styles ================= */
+html {
+  height: 100%;
+}
+
 body {
   width: 100%;
   font-family: 'Open Sans', sans-serif;
@@ -32,6 +36,12 @@ a {
 
 #heroImg {
   margin: 0
+}
+
+body,
+#pageWrap,
+#bodyWrap {
+  height: 100%;
 }
 
 #bodyWrap {
@@ -84,6 +94,7 @@ nav {
   clear: both;
   width: 100%;
   overflow: auto;
+  z-index: 3;
 }
 
 .nav-wrap a {
@@ -207,4 +218,32 @@ footer nav ul li:last-child {
 footer p {
   margin: 0;
   float: left;
+}
+
+/* ============== BodyWrap backgrounds ========= */
+@media only screen and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (max-width: 480px) and (min--moz-device-pixel-ratio: 1.5),
+only screen and (max-width: 480px) and (min-device-pixel-ratio: 1.5) {
+  #bodyWrap {
+    background-image: url('../images/bckgd_sm@2x.jpg');
+    background-position: center;
+  }
+}
+
+@media only screen and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (max-width: 1024px) and (min--moz-device-pixel-ratio: 1.5),
+only screen and (max-width: 1024px) and (min-device-pixel-ratio: 1.5) {
+  #bodyWrap {
+    background-image: url('../images/bckgd_md@2x.jpg');
+    background-position: center;
+  }
+}
+
+@media only screen and (max-width: 2560px) and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (max-width: 2560px) and (min--moz-device-pixel-ratio: 1.5),
+only screen and (max-width: 2560px) and (min-device-pixel-ratio: 1.5) {
+  #bodyWrap {
+    background-image: url('../images/bckgd_lg@2x.jpg');
+    background-position: center;
+  }
 }
