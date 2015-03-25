@@ -240,26 +240,46 @@ footer p {
 }
 
 /* ============== BodyWrap backgrounds ========= */
-@media only screen and (min-width: 1025px) and (max-width: 1440px) and (-webkit-min-device-pixel-ratio: 1.5),
-only screen and (min-width: 1025px) and (max-width: 1440px) and (min--moz-device-pixel-ratio: 1.5),
-only screen and (min-width: 1025px) and (max-width: 1440px) and (min-device-pixel-ratio: 1.5) {
+@media only screen and (min-width: 1025px) and (max-width: 1440px) {
   #bodyWrap {
-    background-image: url('../images/bckgd_lg@2x.jpg');
+    background-image: url('../images/backgd_lg.jpg');
+  }
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+    only screen and (min--moz-device-pixel-ratio: 1.5),
+    only screen and (min-device-pixel-ratio: 1.5) {
+      #bodyWrap {
+        background-image: url('../images/bckgd_lg@2x.jpg');
+      }
   }
 }
 
-@media only screen and (min-width: 481px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1.5),
-only screen and (min-width: 481px) and (max-width: 1024px) and (min--moz-device-pixel-ratio: 1.5),
-only screen and (min-width: 481px) and (max-width: 1024px) and (min-device-pixel-ratio: 1.5) {
+
+@media only screen and (min-width: 481px) and (max-width: 1024px) {
   #bodyWrap {
-    background-image: url('../images/bckgd_md@2x.jpg');
+    background-image: url('../images/backgd_md.jpg');
+  }
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+  only screen and (min--moz-device-pixel-ratio: 1.5),
+  only screen and (min-device-pixel-ratio: 1.5) {
+    #bodyWrap {
+      background-image: url('../images/bckgd_md@2x.jpg');
+    }
   }
 }
 
-@media only screen and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 1.5),
-only screen and (max-width: 480px) and (min--moz-device-pixel-ratio: 1.5),
-only screen and (max-width: 480px) and (min-device-pixel-ratio: 1.5) {
+
+@media only screen and (max-width: 480px) {
   #bodyWrap {
-    background-image: url('../images/bckgd_sm@2x.jpg');
+    background-image: url('../images/backgd_sm.jpg');
+  }
+
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+  only screen and (min--moz-device-pixel-ratio: 1.5),
+  only screen and (min-device-pixel-ratio: 1.5) {
+    #bodyWrap {
+      background-image: url('../images/bckgd_sm@2x.jpg');
+    }
   }
 }
