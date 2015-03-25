@@ -57,7 +57,7 @@ form {
 
 /* ================== Header Styles ================== */
 header {
-  background: #E6FBF7;
+  background: #444;
   height: 3em;
 }
 
@@ -91,7 +91,7 @@ nav {
 
 .nav-wrap {
   position: relative;
-  background: #E6FBF7;
+  background: #444;
   clear: both;
   width: 100%;
   overflow: auto;
