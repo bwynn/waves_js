@@ -27,7 +27,7 @@ a {
 }
 
 .active {
-  color: #888;
+  color: #444;
 }
 
 #heroImg {
@@ -35,10 +35,8 @@ a {
 }
 
 #bodyWrap {
-  padding: 0 0.8em;
-  max-width: 800px;
+  padding: 0;
   margin: 0 auto;
-  overflow: hidden;
 }
 
 form {
@@ -129,17 +127,10 @@ figure.thumb {
 #subNav ul li {
   display: inline-block;
   float: left;
-  width: 30%;
+  width: 33.32%;
   padding: 6px 0;
   text-align: center;
-  border: 1px solid green;
-  border-radius: 5px;
-  margin-right: 3.9%;
-}
-
-#subNav ul li:last-child {
-  float: right;
-  margin-right: 0;
+  background-color: #444;
 }
 
 #subNav a {
@@ -147,6 +138,10 @@ figure.thumb {
   font-size: 1em;
   padding: inherit;
   display: block;
+}
+
+#subNav li.active {
+  background-color: hsla(0, 0%, 0%, 0);
 }
 
 /* ============ Content ========= */
@@ -158,6 +153,17 @@ figure.thumb {
 article {
   max-width: 750px;
   margin: 0 auto;
+}
+
+#locationHeader,
+#subNav {
+  position: relative;
+  top: -39px;
+}
+
+h1#locationHeader {
+  color: white;
+  background-color: #444;
 }
 
 /* ============= Gallery ==============*/

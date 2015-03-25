@@ -26,11 +26,12 @@ function topNav() {
 // but the html base template the data is place into
 function subNav() {
   var $subNav = $('#subNav a');
+  var $subList = $('#subNav li');
 
   $subNav.on('click', function(e) {
     e.preventDefault();                                             // prevents default link action
-    $subNav.removeClass('active');                                  // removing .active from elements
-    $(this).addClass('active');                                     // reassigns .active to e.target element
+    $subList.removeClass('active');                                  // removing .active from elements
+    $(this).parent().addClass('active');                                     // reassigns .active to e.target element
     var $statsWrap = $('#statsWrap');                               // assign variable to #statsWrap
 
     switch($(this).attr('href')) {
