@@ -23,15 +23,16 @@ li {
 
 a {
   text-decoration: none;
-  color: green;
+  color: white;
 }
 
 #nav ul {
   display: none;
 }
 
-.active {
+.active a {
   color: #444;
+  font-weight: bold;
 }
 
 #heroImg {
@@ -56,7 +57,7 @@ form {
 
 /* ================== Header Styles ================== */
 header {
-  background: #444;
+  background: #E6FBF7;
   height: 3em;
 }
 
@@ -90,7 +91,7 @@ nav {
 
 .nav-wrap {
   position: relative;
-  background: #444;
+  background: #E6FBF7;
   clear: both;
   width: 100%;
   overflow: auto;
@@ -166,6 +167,12 @@ article {
   margin: 0 auto;
 }
 
+#statsWrap {
+  margin: 0.4em 0.8em;
+  box-sizing: border-box;
+  background: hsla(0, 100%, 100%, .75);
+}
+
 #locationHeader,
 #subNav {
   position: relative;
@@ -195,11 +202,20 @@ h1#locationHeader {
   background-color: #333;
 }
 
+a#galleryBtn {
+  display: block;
+  text-align: center;
+  background: hsla(0, 0%, 0%, 0.7);
+  padding: .8em;
+}
+
+
 /* ============= Footer ============== */
 footer {
   width: 100%;
   position: fixed;
   bottom: 0;
+  background-color: #111;
 }
 footer nav {
   float: left;
@@ -218,19 +234,20 @@ footer nav ul li:last-child {
 footer p {
   margin: 0;
   float: left;
+  color: #999;
 }
 
 /* ============== BodyWrap backgrounds ========= */
-@media only screen and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 1.5),
-only screen and (max-width: 480px) and (min--moz-device-pixel-ratio: 1.5),
-only screen and (max-width: 480px) and (min-device-pixel-ratio: 1.5) {
+@media only screen and (min-width: 1025px) and (max-width: 2560px) and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (max-width: 2560px) and (min--moz-device-pixel-ratio: 1.5),
+only screen and (max-width: 2560px) and (min-device-pixel-ratio: 1.5) {
   #bodyWrap {
-    background-image: url('../images/bckgd_sm@2x.jpg');
+    background-image: url('../images/bckgd_lg@2x.jpg');
     background-position: center;
   }
 }
 
-@media only screen and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1.5),
+@media only screen and (min-width: 481px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1.5),
 only screen and (max-width: 1024px) and (min--moz-device-pixel-ratio: 1.5),
 only screen and (max-width: 1024px) and (min-device-pixel-ratio: 1.5) {
   #bodyWrap {
@@ -239,11 +256,11 @@ only screen and (max-width: 1024px) and (min-device-pixel-ratio: 1.5) {
   }
 }
 
-@media only screen and (max-width: 2560px) and (-webkit-min-device-pixel-ratio: 1.5),
-only screen and (max-width: 2560px) and (min--moz-device-pixel-ratio: 1.5),
-only screen and (max-width: 2560px) and (min-device-pixel-ratio: 1.5) {
+@media only screen and (max-width: 480px) and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (max-width: 480px) and (min--moz-device-pixel-ratio: 1.5),
+only screen and (max-width: 480px) and (min-device-pixel-ratio: 1.5) {
   #bodyWrap {
-    background-image: url('../images/bckgd_lg@2x.jpg');
+    background-image: url('../images/bckgd_sm@2x.jpg');
     background-position: center;
   }
 }
