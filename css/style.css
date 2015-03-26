@@ -163,16 +163,18 @@ figure.thumb {
   clear: both;
 }
 
-#statsWrap,
 article {
   max-width: 750px;
   margin: 0 auto;
 }
 
 #statsWrap {
-  margin: 0.4em 0.8em;
+  position: relative;
+  margin: 0.4em auto;
   box-sizing: border-box;
   background: hsla(0, 100%, 100%, .75);
+  width: 95%;
+  top: 20px;
 }
 
 #locationHeader,
@@ -182,8 +184,9 @@ article {
 }
 
 h1#locationHeader {
-  color: white;
-  background-color: #444;
+  color: #333;
+  background-color: #FCFCF6;
+  border-bottom: 1px solid #333;
 }
 
 /* ============= Gallery ==============*/
@@ -208,7 +211,10 @@ a#galleryBtn {
   display: block;
   text-align: center;
   background: hsla(0, 0%, 0%, 0.7);
-  padding: .8em;
+  padding: .8em 0;
+  position: fixed;
+  width: 100%;
+  bottom: 22px;
 }
 
 
@@ -242,7 +248,7 @@ footer p {
 /* ============== BodyWrap backgrounds ========= */
 @media only screen and (min-width: 1025px) and (max-width: 1440px) {
   #bodyWrap {
-    background-image: url('../images/backgd_lg.jpg');
+    background-image: url('../images/bckgd_lg.jpg');
   }
 
   @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
@@ -257,7 +263,7 @@ footer p {
 
 @media only screen and (min-width: 481px) and (max-width: 1024px) {
   #bodyWrap {
-    background-image: url('../images/backgd_md.jpg');
+    background-image: url('../images/bckgd_md.jpg');
   }
 
   @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
@@ -272,7 +278,7 @@ footer p {
 
 @media only screen and (max-width: 480px) {
   #bodyWrap {
-    background-image: url('../images/backgd_sm.jpg');
+    background-image: url('../images/bckgd_sm.jpg');
   }
 
   @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
