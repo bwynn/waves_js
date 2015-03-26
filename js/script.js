@@ -205,6 +205,7 @@ function footerNav() {
                   }
     //console.log('Wind: From the ' + windDir + ' at ' + w_speed + ' mph');
     $('<li><strong>Wind:</strong> From the ' + windDir + ' at ' + w_speed + ' mph.</li>').appendTo($('#weather ul'));
+    return windDir;
   }
 
   function generalConditions(data) {
@@ -334,7 +335,7 @@ function footerNav() {
       santaCruzMarineCall();
     });
     $('#steamersPage #bestConditionsLink').on('click', function(e) {
-      compareData();
+      //compareData();
     });
   }
 
@@ -353,7 +354,7 @@ function footerNav() {
       carpenteriaMarineCall();
     });
     $('#rinconPage #bestConditionsLink').on('click', function(e) {
-      compareData();
+      //compareData();
     });
   }
 
@@ -372,7 +373,7 @@ function footerNav() {
       sanClementeMarineCall();
     });
     $('#trestlesPage #bestConditionsLink').on('click', function(e) {
-      compareData();
+      //compareData();
     });
   }
 
@@ -492,6 +493,7 @@ function jsonData() {
 function gallery() {
  var gallery = $('#gallery');
  var btn = $('#galleryBtn');
+ var statsWrap = $('#statsWrap');
 
  btn.on('click', function(e) {
    e.preventDefault;

@@ -177,6 +177,10 @@ article {
   top: 20px;
 }
 
+#statsWrap p {
+  margin: 0;
+}
+
 #locationHeader,
 #subNav {
   position: relative;
