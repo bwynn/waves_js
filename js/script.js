@@ -501,9 +501,9 @@ function gallery() {
  });
 }
 
-var blerb = function(){
+var blerb = (function(){
   console.log('hello world');
-}();
+})();
 
 topNav();
 footerNav();
