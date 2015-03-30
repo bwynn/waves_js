@@ -97,6 +97,13 @@ nav {
   width: 100%;
 }
 
+#mobileNav a span {
+  border-bottom: 2px solid black;
+  position: relative;
+  top:16px;
+  display: block;
+}
+
 .nav-wrap {
   position: relative;
   background: #444;
