@@ -91,6 +91,12 @@ nav {
   overflow: hidden;
 }
 
+#mobileNav a {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
 .nav-wrap {
   position: relative;
   background: #444;
