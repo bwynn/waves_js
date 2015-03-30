@@ -237,7 +237,7 @@ function footerNav() {
     } else if (wSizeF > 18.1 ) {
       var wSize = "Triple overhead plus";
     }
-    console.log('wave height feet: ' + wSizeF);                     // prints wave size converted to feet
+    console.log(wSizeF);                     // prints wave size converted to feet
     //console.log('wave size: ' + wSize);                     // prints wave size converted to feet
     $('<li><strong>Wave height:</strong> ' + wSizeF + 'ft.</li>').appendTo('#waveDetails ul');
   }
@@ -385,19 +385,16 @@ function footerNav() {
   }
 
   function compareData() {
-    $.ajax({
-      type: 'POST',
-      url: "../waves/data/data.json",
-      dataType: 'json',
-      data: $(this).serialize(),
-      success: function(data) {
-        $('#bestbet').append('<li>Best wave size between: ' + data.locations[0].waveMin + ' and ' + data.locations[0].waveMax);
-        $('#bestbet').append('<li>Best swell direction: ' + data.locations[0].swellDir[0, 1, 2] + '</li>');
-        console.log('json file: ' + data.locations[0].waveMin);
-        console.log('json file: ' + data.locations[0].waveMax);
+    $.getJSON('../waves/data/data.json', function(data) {
+      var min = data.locations[0].waveMin;
+      var max = data.locations[0].waveMax;
+      var values = {
+      "waveMin": min,
+      "waveMax": max
       }
     });
   }
+
 
 function mobileNav() {
   $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
@@ -503,7 +500,8 @@ function gallery() {
 
 // create blerb object and call the santaCruzMarineCall function as a value
 var weatherCalls = {
-  try: santaCruzMarineCall
+  live: santaCruzMarineCall,
+  file: compareData
 };
 
 
