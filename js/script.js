@@ -501,9 +501,11 @@ function gallery() {
  });
 }
 
-var blerb = (function(){
-  console.log('hello world');
-})();
+// create blerb object and call the santaCruzMarineCall function as a value
+var weatherCalls = {
+  try: santaCruzMarineCall
+};
+
 
 topNav();
 footerNav();

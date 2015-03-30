@@ -17,3 +17,9 @@ assert(typeof b === 'number',
         'b is in scope');
 assert(typeof c === 'number',
         'c is in scope');
+
+var thumbs = (function() {
+  $.getJSON('../waves/data/data.json', function(data) {
+    
+  });
+})
