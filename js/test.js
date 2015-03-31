@@ -6,6 +6,7 @@ function assert(value, desc) {
   document.getElementById('results').appendChild(li);
 }
 
+assert(typeof santaCruzMarineCall === 'function', 'santaCruzMarineCall is in scope');
 // Best Bet component testing
 function santaCruzMarineCall() {
   $.ajax({                                                      // jQuery ajax declaration
@@ -38,6 +39,8 @@ var weatherCalls = {
   live: santaCruzMarineCall,
   file: compareData
 };
+
+assert(typeof weatherCalls === 'object', 'weather calls is an object');
 
 function versus() {
   var a = weatherCalls.live();
