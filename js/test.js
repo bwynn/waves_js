@@ -11,14 +11,13 @@ assert(typeof santaCruzMarineCall === 'function', 'santaCruzMarineCall is in sco
 function santaCruzMarineCall() {
   $.ajax({                                                      // jQuery ajax declaration
     type: 'POST',                                                     // declare type of ajax call
-    url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=" + api,
+    url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
     dataType: 'jsonp',                                                // declare dataType, using parsed json
-    data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
+    data: $(this).serialize(),                                          // setting $(this).serialize() using waves variable
     success: function(data){                                          // successful api call performs function
-      swellSize(data);                                                // calls swellSize function
-      swDir(data);                                                    // calls swDir function
-      wetsuit(data);                                                  // calls wetsuit function
-      swellPeriod(data);                                              // calls swellPeriod function
+      var wSizeM = data.data.weather[0].hourly[0].swellHeight_m;      // gets swell height in meters
+      var wSizeF = (wSizeM * 3.28).toPrecision(3);
+      console.log(parseInt(wSizeF));
     },
     error: function(e) {console.log('epic marine fail')}
   });
@@ -47,3 +46,5 @@ function versus() {
   var b = weatherCalls.file();
   console.log(a + b);
 }
+
+versus();
