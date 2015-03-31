@@ -237,9 +237,10 @@ function footerNav() {
     } else if (wSizeF > 18.1 ) {
       var wSize = "Triple overhead plus";
     }
-    console.log(wSizeF);                     // prints wave size converted to feet
+    console.log(parseInt(wSizeF));                     // prints wave size converted to feet
     //console.log('wave size: ' + wSize);                     // prints wave size converted to feet
     $('<li><strong>Wave height:</strong> ' + wSizeF + 'ft.</li>').appendTo('#waveDetails ul');
+    return parseInt(wSizeF);
   }
 
   function swDir(data) {
@@ -385,14 +386,14 @@ function footerNav() {
   }
 
   function compareData() {
-    $.getJSON('../waves/data/data.json', function(data) {
-      var min = data.locations[0].waveMin;
-      var max = data.locations[0].waveMax;
-      var values = {
-      "waveMin": min,
-      "waveMax": max
+    ($.getJSON('../waves/data/data.json', function(data) {
+      var range = {
+        min: data.locations[0].waveMin,
+        max: data.locations[0].waveMax
       }
-    });
+      console.log(parseInt(range.min));
+      return parseInt(range.min);
+    })());
   }
 
 
@@ -503,6 +504,12 @@ var weatherCalls = {
   live: santaCruzMarineCall,
   file: compareData
 };
+
+function versus() {
+  var a = weatherCalls.live();
+  var b = weatherCalls.file();
+  console.log(a + b);
+}
 
 
 topNav();
