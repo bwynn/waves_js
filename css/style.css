@@ -79,6 +79,10 @@ nav {
   width: 100%;
 }
 
+a.home {
+  display: block;
+}
+
 #nav {
 
   position: relative;
@@ -210,7 +214,7 @@ h1#locationHeader {
   color: #333;
   background-color: #FCFCF6;
   border-bottom: 1px solid #333;
-  padding-left: 1em;
+  text-align: center;
 }
 
 /* ============= Footer ============== */

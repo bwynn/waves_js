@@ -170,8 +170,9 @@ function footerNav() {
   function localTime(data) {
     // local time
     var gmt = new Date();
+    var time = gmt.toLocaleTimeString();
     //console.log('Time: ' + gmt);
-    $('<li><strong>Current time:</strong> ' + gmt + '</li>').appendTo($('#weather ul'));
+    $('<li><strong>Current time:</strong> ' + time + '</li>').appendTo($('#weather ul'));
   }
 
   function airTemp(data) {
