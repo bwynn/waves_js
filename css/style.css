@@ -192,6 +192,7 @@ article {
   background: hsla(0, 100%, 100%, .75);
   width: 95%;
   top: 20px;
+  padding: 1em;
 }
 
 #statsWrap p {
@@ -204,40 +205,13 @@ article {
   top: -39px;
 }
 
+#bodyWrap > h1,
 h1#locationHeader {
   color: #333;
   background-color: #FCFCF6;
   border-bottom: 1px solid #333;
+  padding-left: 1em;
 }
-
-/* ============= Gallery ==============*/
-#galleryWrap {
-  overflow: scroll;
-}
-
-#gallery {
-  display: none;
-  width: 2600px;
-  height: 400px;
-}
-
-#gallery img {
-  width: 100%;
-  max-width: 800px;
-  height: 400px;
-  background-color: #333;
-}
-
-a#galleryBtn {
-  display: block;
-  text-align: center;
-  background: hsla(0, 0%, 0%, 0.7);
-  padding: .8em 0;
-  position: fixed;
-  width: 100%;
-  bottom: 22px;
-}
-
 
 /* ============= Footer ============== */
 footer {
