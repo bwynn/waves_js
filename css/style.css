@@ -40,9 +40,12 @@ a {
 }
 
 body,
-#pageWrap,
-#bodyWrap {
+#pageWrap {
   height: 100%;
+}
+
+#bodyWrap {
+  height: 90%;
 }
 
 #bodyWrap {
@@ -181,7 +184,8 @@ article {
   margin: 0 auto;
 }
 
-#statsWrap {
+#statsWrap,
+article {
   position: relative;
   margin: 0.4em auto;
   box-sizing: border-box;

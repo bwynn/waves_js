@@ -488,29 +488,6 @@ function jsonData() {
   });
 }
 
-function gallery() {
- var gallery = $('#gallery');
- var btn = $('#galleryBtn');
- var statsWrap = $('#statsWrap');
-
- btn.on('click', function(e) {
-   e.preventDefault;
-   gallery.slideToggle();
- });
-}
-
-// create blerb object and call the santaCruzMarineCall function as a value
-var weatherCalls = {
-  live: santaCruzMarineCall,
-  file: compareData
-};
-
-function versus() {
-  var a = weatherCalls.live();
-  var b = weatherCalls.file();
-  console.log(a + b);
-}
-
 
 topNav();
 footerNav();
