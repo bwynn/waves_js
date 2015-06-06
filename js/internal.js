@@ -7,4 +7,3 @@ santaCruzCalls();
 rinconCalls();
 trestlesCall();
 bestBetCall();
-gallery();
