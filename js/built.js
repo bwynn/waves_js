@@ -1,12 +1,6 @@
 // store the ajax object, wave object, weather object all into the same
 // immediately instantiated call
 var local = {
-  time: function(data) {
-    // local time
-    var gmt = new Date();
-    var time = gmt.toLocaleTimeString();
-    return time;
-  },
 
   // get air temp for location
   airTemp: function(data) {
@@ -15,11 +9,11 @@ var local = {
   },
 
   // local time
-  time: function(data) {
+  time: function() {
     var gmt = new Date();
     var time = gmt.toLocaleTimeString();
     // return time as a string
-    return time;
+    return console.log(time);
   },
 
   winddirection: function(data) {
@@ -45,7 +39,7 @@ var local = {
         windDir = "North West";
       }
     // return wind direction as a string
-    return windDir;
+    return console.log(windDir);
   },
 
   windspeed: function(data) {
@@ -62,7 +56,7 @@ var local = {
     var wSizeM = data.data.weather[0].hourly[0].swellHeight_m,
         // translates into feet
         wSizeF = (wSizeM * 3.28).toPrecision(3);
-    return wSizeF;
+    return console.log(wSizeF);
   },
   swellDirection: function(data) {
       // get swell direction as a number
@@ -99,13 +93,14 @@ var local = {
       } else if ( swellDir < 340 ) {
          sDir = "NNW";
       } else if ( swellDir > 341 ) {
-         sDir = "N"
+         sDir = "N";
       }
       // return sDir as a string
       return sDir;
   },
   waterTemp: function(data) {
     // gets water temp as a number
+    var data;
     var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
     return waterTemp;
   },
@@ -152,7 +147,8 @@ var toScale = {
   },
   relativeWaveSize: function() {
     // get local.waveSize() function
-    var wSizeF = local.waveSize();
+    var wSizeF = local.waveSize(),
+        wSize;
     // conditional to determine relative wave size
     if ( wSizeF < 1 ) {
         wSize = "Flat";
@@ -188,28 +184,22 @@ var ajaxCall = {
     "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"
   ],
   // take the info passed back from the server and prepare it
-  dataType: $(this).serialize(),
-  // pass in data argument to sort through the returned data
-  success: function(){},
+  data: $(this).serialize(),
   // set this function to shoot back a message if there are any issues with
   // the external ajax call
-  error: function(){}
+  error: function(){ console.log('better luck next time, bud!');}
 };
 
 
-
-/*var wave = {
-  conditions: $.ajax({
-    type: 'POST',
-    url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=",// + api,
-    dataType: 'jsonp',
-    //data: waves.serialize(),
-    success: function(data){
-        localTime(data);                                                // calls localTime function
-        airTemp(data);                                                  // calls airTemp function
-        windConditions(data);                                           // calls windDirection function
-        generalConditions(data);                                        // calls generalConditions function
-      },
-    error: function(e) {console.log('epic fail')}
-    })
-};*/
+var hello = (function() {
+  $.ajax({
+          type: ajaxCall.type,
+          url: ajaxCall.url[1],
+          dataType: ajaxCall.dataType,
+          //data: waves.serialize(),
+          success: function(data) {
+            local.time();
+            local.winddirection(data);
+          }
+  });
+});
