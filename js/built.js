@@ -5,7 +5,7 @@ var local = {
   // get air temp for location
   airTemp: function(data) {
     // return air temp information as a string
-    return data.data.current_condition[0].temp_F;
+    return console.log(data.data.current_condition[0].temp_F);
   },
 
   // local time
@@ -44,19 +44,19 @@ var local = {
 
   windspeed: function(data) {
     // return windspeed as a string
-    return data.data.current_condition[0].windspeedMiles;
+    return console.log(data.data.current_condition[0].windspeedMiles);
   },
 
   skies: function(data) {
     // weather Description returned as string
-    return data.data.current_condition[0].weatherDesc[0].value;
+    return console.log(data.data.current_condition[0].weatherDesc[0].value);
   },
   waveSize: function(data) {
     // get swell height - returned as a number
     var wSizeM = data.data.weather[0].hourly[0].swellHeight_m,
         // translates into feet
         wSizeF = (wSizeM * 3.28).toPrecision(3);
-    return console.log(wSizeF);
+    return console.log(wSizeF + " feet. Wave size.");
   },
   swellDirection: function(data) {
       // get swell direction as a number
@@ -96,17 +96,18 @@ var local = {
          sDir = "N";
       }
       // return sDir as a string
-      return sDir;
+      return console.log(sDir + " swell direction");
   },
   waterTemp: function(data) {
     // gets water temp as a number
     var data;
     var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
-    return waterTemp;
+    return console.log(waterTemp + " degrees water.")
   },
   swellPeriod: function(data) {
+    // gets swell period in seconds
     var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
-    return sPeriod;
+    return console.log(sPeriod + " swell period");
   }
 };
 
@@ -172,6 +173,24 @@ var toScale = {
     return wSize;
   }
 };
+
+// store the land-based weather calls
+var weatherCall = function(data) {
+  local.time();
+  local.winddirection(data);
+  local.airTemp(data);
+  local.windspeed(data);
+  local.skies(data);
+};
+
+// store the ocean data here
+var marineCall = function(data) {
+  local.waveSize(data);
+  local.swellDirection(data);
+  local.waterTemp(data);
+  local.swellDirection(data);
+};
+
 // data objects that are compartmentalized and passed individual arguments
 // from the wave data object. Allowing for customized and individual
 // ajax calls to the worldweatheronline server
@@ -179,9 +198,21 @@ var ajaxCall = {
   type: "POST",
   dataType: 'jsonp',
   url: [
+    // santa cruz
+      //weather [0]
     "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+      //waves [1]
+    "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+    // carpenteria
+      // weather [2]
     "http://api.worldweatheronline.com/free/v1/weather.ashx?q=93014&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-    "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"
+      // waves [3]
+    "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+    // san clemente
+      // weather [4]
+    "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+      // waves [5]
+      "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"
   ],
   // take the info passed back from the server and prepare it
   data: $(this).serialize(),
@@ -190,16 +221,69 @@ var ajaxCall = {
   error: function(){ console.log('better luck next time, bud!');}
 };
 
-
-var hello = (function() {
+// wrap ajax object into a function to execute when variable is called.
+var santaCruz = function() {
+  $.ajax({
+          type: ajaxCall.type,
+          url: ajaxCall.url[0],
+          dataType: ajaxCall.dataType,
+          success: function(data) {
+            weatherCall(data);
+          },
+  });
+};
+// Marine info call
+var steamers = function() {
   $.ajax({
           type: ajaxCall.type,
           url: ajaxCall.url[1],
           dataType: ajaxCall.dataType,
-          //data: waves.serialize(),
           success: function(data) {
-            local.time();
-            local.winddirection(data);
-          }
+            marineCall(data);
+          },
   });
-});
+};
+// carpenteria weather
+var carpenteria = function() {
+  $.ajax({
+          type: ajaxCall.type,
+          url: ajaxCall.url[2],
+          dataType: ajaxCall.dataType,
+          success: function(data) {
+            weatherCall(data);
+          },
+  });
+};
+// rincon marine data
+var rincon = function() {
+  $.ajax({
+          type: ajaxCall.type,
+          url: ajaxCall.url[3],
+          dataType: ajaxCall.dataType,
+          success: function(data) {
+            marineCall(data);
+          },
+  });
+};
+// san clemente weather
+var sanClemente = function() {
+  $.ajax({
+          type: ajaxCall.type,
+          url: ajaxCall.url[4],
+          dataType: ajaxCall.dataType,
+          success: function(data) {
+            weatherCall(data);
+          },
+  });
+}
+// trestles marine data
+var trestles = function() {
+  $.ajax({
+          type: ajaxCall.type,
+          url: ajaxCall.url[5],
+          dataType: ajaxCall.dataType,
+          success: function(data) {
+            marineCall(data);
+          },
+  });
+};
