@@ -100,9 +100,8 @@ var local = {
   },
   waterTemp: function(data) {
     // gets water temp as a number
-    var data;
     var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
-    return console.log(waterTemp + " degrees water.")
+    return console.log(waterTemp + " degrees water.");
   },
   swellPeriod: function(data) {
     // gets swell period in seconds
@@ -115,8 +114,8 @@ var local = {
 // include wetsuit recommendations, optional wave scale system for your
 // reports (4feet, waist-chest high etc.), optional conditions report
 var toScale = {
-  waveQuality: function() {
-    var period = local.swellPeriod(),
+  waveQuality: function(data) {
+    var period = local.swellPeriod(data),
         swellSig;
     if ( period < 7 ) {
       swellSig = "Junky, short-period windswell";
@@ -127,10 +126,10 @@ var toScale = {
     } else if ( period > 12 ) {
        swellSig = "Long period ground swell";
     }
-    return swellSig;
+    return console.log(swellSig);
   },
-  wetsuit: function() {
-    var waterTemp = local.waterTemp(),
+  wetsuit: function(data) {
+    var waterTemp = local.waterTemp(data),
         wSuit;
     if ( waterTemp < 55 ) {
        wSuit = "5/4 Hooded Fullsuit";
@@ -145,10 +144,11 @@ var toScale = {
     } else if ( waterTemp > 75 ) {
        wSuit = "Trunks";
     }
+    return console.log(wSuit);
   },
-  relativeWaveSize: function() {
+  relativeWaveSize: function(data) {
     // get local.waveSize() function
-    var wSizeF = local.waveSize(),
+    var wSizeF = local.waveSize(data),
         wSize;
     // conditional to determine relative wave size
     if ( wSizeF < 1 ) {
@@ -170,7 +170,7 @@ var toScale = {
     } else if (wSizeF > 18.1 ) {
       wSize = "Triple overhead plus";
     }
-    return wSize;
+    return console.log(wSize);
   }
 };
 
@@ -191,12 +191,16 @@ var marineCall = function(data) {
   local.swellDirection(data);
 };
 
+var relative = function(data) {
+	toScale.relativeWaveSize(data);
+  toScale.waveQuality(data);
+  toScale.wetsuit(data);
+};
+
 // data objects that are compartmentalized and passed individual arguments
 // from the wave data object. Allowing for customized and individual
 // ajax calls to the worldweatheronline server
 var ajaxCall = {
-  type: "POST",
-  dataType: 'jsonp',
   url: [
     // santa cruz
       //weather [0]
@@ -224,66 +228,66 @@ var ajaxCall = {
 // wrap ajax object into a function to execute when variable is called.
 var santaCruz = function() {
   $.ajax({
-          type: ajaxCall.type,
+          type: "POST",
           url: ajaxCall.url[0],
-          dataType: ajaxCall.dataType,
+          dataType: 'jsonp',
           success: function(data) {
             weatherCall(data);
-          },
+          }
   });
 };
 // Marine info call
 var steamers = function() {
   $.ajax({
-          type: ajaxCall.type,
+          type: "POST",
           url: ajaxCall.url[1],
-          dataType: ajaxCall.dataType,
+          dataType: 'jsonp',
           success: function(data) {
             marineCall(data);
-          },
+            relative(data);
+          }
   });
 };
 // carpenteria weather
 var carpenteria = function() {
   $.ajax({
-          type: ajaxCall.type,
+          type: "POST",
           url: ajaxCall.url[2],
-          dataType: ajaxCall.dataType,
+          dataType: 'jsonp',
           success: function(data) {
-            weatherCall(data);
-          },
+          }
   });
 };
 // rincon marine data
 var rincon = function() {
   $.ajax({
-          type: ajaxCall.type,
+          type: "POST",
           url: ajaxCall.url[3],
-          dataType: ajaxCall.dataType,
+          dataType: 'jsonp',
           success: function(data) {
             marineCall(data);
-          },
+          }
   });
 };
 // san clemente weather
 var sanClemente = function() {
   $.ajax({
-          type: ajaxCall.type,
+          type: "POST",
           url: ajaxCall.url[4],
-          dataType: ajaxCall.dataType,
+          dataType: 'jsonp',
           success: function(data) {
             weatherCall(data);
-          },
+          }
   });
-}
+};
 // trestles marine data
 var trestles = function() {
   $.ajax({
-          type: ajaxCall.type,
+          type: "POST",
           url: ajaxCall.url[5],
-          dataType: ajaxCall.dataType,
+          dataType: 'jsonp',
           success: function(data) {
             marineCall(data);
-          },
+          }
   });
 };
