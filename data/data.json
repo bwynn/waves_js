@@ -45,8 +45,5 @@
       "swellPeriod": "9",
       "swellDir": ["W", "WSW", "SW"]
     }
-  ],
-  "thumbnails" : [
-    "../waves/images/"
   ]
 }

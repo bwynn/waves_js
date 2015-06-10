@@ -113,9 +113,9 @@ var local = {
 // toScale object is for processing data into relative information, applications
 // include wetsuit recommendations, optional wave scale system for your
 // reports (4feet, waist-chest high etc.), optional conditions report
-var toScale = {
+var conditionsToScale = {
   waveQuality: function(data) {
-    var period = local.swellPeriod(data),
+    var period = data.data.weather[0].hourly[0].swellPeriod_secs,
         swellSig;
     if ( period < 7 ) {
       swellSig = "Junky, short-period windswell";
@@ -129,7 +129,7 @@ var toScale = {
     return console.log(swellSig);
   },
   wetsuit: function(data) {
-    var waterTemp = local.waterTemp(data),
+    var waterTemp = data.data.weather[0].hourly[0].waterTemp_F,
         wSuit;
     if ( waterTemp < 55 ) {
        wSuit = "5/4 Hooded Fullsuit";
@@ -148,7 +148,8 @@ var toScale = {
   },
   relativeWaveSize: function(data) {
     // get local.waveSize() function
-    var wSizeF = local.waveSize(data),
+    var wSizeM = data.data.weather[0].hourly[0].swellHeight_m,
+        wSizeF = (wSizeM * 3.28).toPrecision(3),
         wSize;
     // conditional to determine relative wave size
     if ( wSizeF < 1 ) {
@@ -170,7 +171,7 @@ var toScale = {
     } else if (wSizeF > 18.1 ) {
       wSize = "Triple overhead plus";
     }
-    return console.log(wSize);
+    return console.log(wSizeF);
   }
 };
 
@@ -192,9 +193,9 @@ var marineCall = function(data) {
 };
 
 var relative = function(data) {
-	toScale.relativeWaveSize(data);
-  toScale.waveQuality(data);
-  toScale.wetsuit(data);
+	conditionsToScale.relativeWaveSize(data);
+  conditionsToScale.waveQuality(data);
+  conditionsToScale.wetsuit(data);
 };
 
 // data objects that are compartmentalized and passed individual arguments
@@ -225,6 +226,33 @@ var ajaxCall = {
   error: function(){ console.log('better luck next time, bud!');}
 };
 
+/*function jsonData() {
+  $.getJSON('../waves/data/data.json', function(data) {
+    var statsWrap = $('#statsWrap');
+    switch($('body').attr('id'))    {
+      case 'steamersPage' :
+        var i = 0;
+        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        break;
+      case 'rinconPage' :
+        var i = 1;
+        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        break;
+      case 'trestlesPage' :
+        var i = 2;
+        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        break;
+    }
+  });
+}*/
+
+
 // wrap ajax object into a function to execute when variable is called.
 var santaCruz = function() {
   $.ajax({
@@ -244,7 +272,6 @@ var steamers = function() {
           dataType: 'jsonp',
           success: function(data) {
             marineCall(data);
-            relative(data);
           }
   });
 };
