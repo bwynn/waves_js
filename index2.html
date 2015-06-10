@@ -2,11 +2,42 @@
 <html>
   <head>
     <title>Json test</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="stylesheet" href="css/flex.css"/>
   </head>
   <body>
-    <div style='height:50px;width:50px;background:#333;cursor:pointer'></div>
-    <div id='content'>
-    </div>
+    <div id="pageWrap">
+      <header id="header">
+        <nav id="mainNav">
+          <h1>Waves</h1>
+        </nav>
+      </header>
+      <section id="content">
+        <nav ="localNav">
+          <ul>
+            <li>Overview</li>
+            <li>Wave Conditions</li>
+            <li>Weather Conditions</li>
+          </ul>
+        </nav>
+        <section id="mainDisplay">
+          <figure class="backgd"></figure>
+          <div id="conditionsInfo">
+            <ul>
+              <li>One</li>
+              <li>Two</li>
+              <li>Three</li>
+              <li>Four</li>
+              <li>Five</li>
+            </ul>
+          </div>
+        </section><!-- end conditions info section -->
+      </section><!-- end content section -->
+      <footer>
+        <p><small>By bwynn<small></p>
+      </footer>
+    </div><!-- end pageWrap -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src='js/built.js'></script>
   </body>
