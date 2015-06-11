@@ -228,25 +228,28 @@ var ajaxCall = {
 
 function jsonData() {
   $.getJSON('../waves/data/data.json', function(data) {
-    var body = $('body');
+    var content = $('#conditionsInfo ul');
     switch($('body').attr('id'))    {
       case 'santaCruz' :
         var i = 0;
-        body.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        body.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        body.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        content.append($('<li><strong>Wave:</strong> ' + data.locations[i].title + '</li>'));
+        content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
         break;
       case 'carpenteria' :
         var i = 1;
-        body.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        body.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        body.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        content.append($('<li><strong>City:</strong> ' + data.locations[i].title + '</li>'));
+        content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
         break;
       case 'sanClementer' :
         var i = 2;
-        body.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        body.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        body.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        content.append($('<li><strong>City:</strong> ' + data.locations[i].title + '</li>'));
+        content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
         break;
     }
   });
