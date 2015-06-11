@@ -226,31 +226,31 @@ var ajaxCall = {
   error: function(){ console.log('better luck next time, bud!');}
 };
 
-/*function jsonData() {
+function jsonData() {
   $.getJSON('../waves/data/data.json', function(data) {
-    var statsWrap = $('#statsWrap');
+    var body = $('body');
     switch($('body').attr('id'))    {
-      case 'steamersPage' :
+      case 'santaCruz' :
         var i = 0;
-        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        body.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        body.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        body.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
         break;
-      case 'rinconPage' :
+      case 'carpenteria' :
         var i = 1;
-        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        body.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        body.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        body.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
         break;
-      case 'trestlesPage' :
+      case 'sanClementer' :
         var i = 2;
-        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        body.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        body.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        body.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
         break;
     }
   });
-}*/
+}
 
 
 // wrap ajax object into a function to execute when variable is called.
@@ -318,3 +318,5 @@ var trestles = function() {
           }
   });
 };
+
+jsonData();
