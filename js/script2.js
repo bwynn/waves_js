@@ -13,7 +13,7 @@ var local = {
     var gmt = new Date();
     var time = gmt.toLocaleTimeString();
     // return time as a string
-    return console.log(time);
+    return time;
   },
 
   winddirection: function(data) {
@@ -177,7 +177,6 @@ var conditionsToScale = {
 
 // store the land-based weather calls
 var weatherCall = function(data) {
-  local.time();
   local.winddirection(data);
   local.airTemp(data);
   local.windspeed(data);
@@ -267,6 +266,37 @@ var santaCruz = function() {
           }
   });
 };
+
+// create a new constructor function to build up the ajaxCalls, based on their indiviual
+// function
+
+var NewCall = function() {};
+
+NewCall.prototype.windDirection = function(i) {
+    var i;
+    $.ajax({
+            type: "POST",
+            url: ajaxCall.url[i],
+            dataType: 'jsonp',
+            success: function(data) {
+              local.winddirection(data);
+            }
+    });
+};
+
+// instantiate a new NewCall
+var lane = new NewCall();
+var rincon = new NewCall();
+
+// set url value based on array index. lane = 0;
+lane.windDirection(0);
+// index is set at 2, because the 1 index is for the santa cruz marine call
+rincon.windDirection(2);
+
+var time = function() {
+  return local.time();
+};
+
 // Marine info call
 var steamers = function() {
   $.ajax({
@@ -321,5 +351,3 @@ var trestles = function() {
           }
   });
 };
-
-jsonData();
