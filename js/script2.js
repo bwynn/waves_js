@@ -239,14 +239,14 @@ function jsonData() {
         content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
         break;
       case 'carpenteria' :
-        var i = 1;
+				i = 1;
         content.append($('<li><strong>City:</strong> ' + data.locations[i].title + '</li>'));
         content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
         content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
         content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
         break;
       case 'sanClementer' :
-        var i = 2;
+        i = 2;
         content.append($('<li><strong>City:</strong> ' + data.locations[i].title + '</li>'));
         content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
         content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
@@ -256,11 +256,14 @@ function jsonData() {
   });
 }
 
-// wrap ajax object into a function to execute when variable is called.
-var santaCruz = function() {
+// create a new constructor function calling the location information
+var Location = function() {};
+
+// create the weather method that pulls the location's weather information.
+Location.prototype.weather = function(arg) {
   $.ajax({
           type: "POST",
-          url: ajaxCall.url[0],
+          url: ajaxCall.url[arg],
           dataType: 'jsonp',
           success: function(data) {
             weatherCall(data);
@@ -268,57 +271,37 @@ var santaCruz = function() {
   });
 };
 
-// Marine info call
-var steamers = function() {
+// create new objects from the constructor, include index in comments to reference
+
+// index 0 -- SANTA CRUZ
+var santaCruz = new Location();
+
+// index 2 -- CARPENTERIA
+var carpenteria = new Location();
+
+// index 4 -- SAN CLEMENTE
+var sanClemente = new Location();
+
+// create a Wave constructor function
+var Wave = function() {};
+
+// build method pulling location's weather url string.
+Wave.prototype.conditions = function(arg) {
   $.ajax({
           type: "POST",
-          url: ajaxCall.url[1],
+          url: ajaxCall.url[arg],
           dataType: 'jsonp',
           success: function(data) {
             marineCall(data);
           }
   });
 };
-// carpenteria weather
-var carpenteria = function() {
-  $.ajax({
-          type: "POST",
-          url: ajaxCall.url[2],
-          dataType: 'jsonp',
-          success: function(data) {
-          }
-  });
-};
-// rincon marine data
-var rincon = function() {
-  $.ajax({
-          type: "POST",
-          url: ajaxCall.url[3],
-          dataType: 'jsonp',
-          success: function(data) {
-            marineCall(data);
-          }
-  });
-};
-// san clemente weather
-var sanClemente = function() {
-  $.ajax({
-          type: "POST",
-          url: ajaxCall.url[4],
-          dataType: 'jsonp',
-          success: function(data) {
-            weatherCall(data);
-          }
-  });
-};
-// trestles marine data
-var trestles = function() {
-  $.ajax({
-          type: "POST",
-          url: ajaxCall.url[5],
-          dataType: 'jsonp',
-          success: function(data) {
-            marineCall(data);
-          }
-  });
-};
+
+// index 1 -- STEAMERS -- SANTA CRUZ
+var steamers = new Wave();
+
+// index 3 -- RINCON -- CARPENTERIA
+var rincon = new Wave();
+
+// index 5 -- TRESTLES -- SAN CLEMENTE
+var trestles = new Wave();
