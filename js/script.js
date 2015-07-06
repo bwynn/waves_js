@@ -1,252 +1,69 @@
-var api = "c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";                 // api call
-var waves = $(this);                                                  // sets $(this) value globally for wave
-var $body = $('body');
+// store the ajax object, wave object, weather object all into the same
+// immediately instantiated call
+var local = {
 
-// topNav() function sets page template for the application
-function topNav() {
-  //using jQuery
-  var $bodyWrap = $('#bodyWrap');
-  var $nav = $('#nav a');
-  $nav.on('click', function(e){
-    e.preventDefault();                                             // prevents default link action
-    $nav.removeClass('active');                                     // removes active class from elements
-    $(this).addClass('active');                                     // reassigns .active to current selection
-    switch ($(this).attr('href')) {
-      case 'assets/best-conditions.html' :
-        $bodyWrap.load('assets/best-conditions.html').hide().fadeIn('slow');
-        break;
-      case 'index.html' :
-        $bodyWrap.load('assets/bestbet.html').hide().fadeIn('slow');
-        break;
-    }
-  });
-}
+  // get air temp for location
+  airTemp: function(data) {
+    // return air temp information as a string
+    return console.log(data.data.current_condition[0].temp_F);
+  },
 
-// calls the data response templates -- not the actual data
-// but the html base template the data is place into
-function subNav() {
-  var $subNav = $('#subNav a');
-  var $subList = $('#subNav li');
-
-  $subNav.on('click', function(e) {
-    e.preventDefault();                                             // prevents default link action
-    $subList.removeClass('active');                                  // removing .active from elements
-    $(this).parent().addClass('active');                                     // reassigns .active to e.target element
-    var $statsWrap = $('#statsWrap');                               // assign variable to #statsWrap
-
-    switch($(this).attr('href')) {
-      case 'assets/best-conditions.html' :
-        $statsWrap.load('assets/bestbet.html').hide().fadeIn('slow');
-        break;
-      case 'assets/waves.html' :
-        $statsWrap.load('assets/waves.html').hide().fadeIn('slow');
-        break;
-      case 'assets/weather.html' :
-        $statsWrap.load('assets/weather.html').hide().fadeIn('slow');
-        break;
-    }
-  });
-}
-
-function footerNav() {
-  var $bodyWrap = $('#bodyWrap');
-  var footerLinks = $('footer nav ul li a');                          // get footer links
-  var href = footerLinks.attr('href');                          // get href
-
-  footerLinks.on('click', function(e) {
-    e.preventDefault();
-    footerLinks.removeClass('active');                            // remove active from all footer links
-    $(this).addClass('active');                               // add active to this link
-
-    switch($(this).attr('href')) {
-      case 'assets/about.html' :
-        $bodyWrap.load('assets/about.html').hide().fadeIn('slow');
-        break;
-      case 'assets/contact.html' :
-        $bodyWrap.load('assets/contact.html').hide().fadeIn('slow');
-        break;
-    }
-  });
-}
-
-
-  function santaCruzWeather() {
-  $.ajax({
-    type: 'POST',
-    url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=" + api,
-    dataType: 'jsonp',
-    data: waves.serialize(),
-    success: function(data){
-        localTime(data);                                                // calls localTime function
-        airTemp(data);                                                  // calls airTemp function
-        windConditions(data);                                           // calls windDirection function
-        generalConditions(data);                                        // calls generalConditions function
-      },
-    error: function(e) {console.log('epic fail')}
-    });
-  }
-
-  function santaCruzMarineCall() {
-    $.ajax({                                                      // jQuery ajax declaration
-      type: 'POST',                                                     // declare type of ajax call
-      url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=" + api,
-      dataType: 'jsonp',                                                // declare dataType, using parsed json
-      data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
-      success: function(data){                                          // successful api call performs function
-        swellSize(data);                                                // calls swellSize function
-        swDir(data);                                                    // calls swDir function
-        wetsuit(data);                                                  // calls wetsuit function
-        swellPeriod(data);                                              // calls swellPeriod function
-      },
-      error: function(e) {console.log('epic marine fail')}
-    });
-  }
-
-  function carpenteriaWeather() {
-
-    $.ajax({
-      type: 'POST',
-      url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=93014&format=json&date=today&key=" + api,
-      dataType: 'jsonp',
-      data: waves.serialize(),
-      success: function(data){
-          localTime(data);                                                // calls localTime function
-          airTemp(data);                                                  // calls airTemp function
-          windConditions(data);                                           // calls windDirection function
-          generalConditions(data);                                        // calls generalConditions function
-        },
-      error: function(e) {console.log('epic fail')}
-      });
-  }
-
-  function carpenteriaMarineCall() {                                      // declare santaCruzMarineCall function
-      $.ajax({                                                            // jQuery ajax declaration
-        type: 'POST',                                                     // declare type of ajax call
-        url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=" + api,
-        dataType: 'jsonp',                                                // declare dataType, using parsed json
-        data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
-        success: function(data){                                          // successful api call performs function
-          swellSize(data);                                                // calls swellSize function
-          swDir(data);                                                    // calls swDir function
-          wetsuit(data);                                                  // calls wetsuit function
-          swellPeriod(data);                                              // calls swellPeriod function
-        },
-        error: function(e) {console.log('epic marine fail')}
-      });
-  }
-
-  function sanClementeWeather() {
-  $.ajax({
-    type: 'POST',
-    url: "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=" + api,
-    dataType: 'jsonp',
-    data: waves.serialize(),
-    success: function(data){
-        localTime(data);                                                // calls localTime function
-        airTemp(data);                                                  // calls airTemp function
-        windConditions(data);                                           // calls windDirection function
-        generalConditions(data);                                        // calls generalConditions function
-      },
-    error: function(e) {console.log('epic fail')}
-    });
-  }
-
-  function sanClementeMarineCall() {                                      // declare santaCruzMarineCall function
-      $.ajax({                                                            // jQuery ajax declaration
-        type: 'POST',                                                     // declare type of ajax call
-        url: "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=" + api,
-        dataType: 'jsonp',                                                // declare dataType, using parsed json
-        data: waves.serialize(),                                          // setting $(this).serialize() using waves variable
-        success: function(data){                                          // successful api call performs function
-          swellSize(data);                                                // calls swellSize function
-          swDir(data);                                                    // calls swDir function
-          wetsuit(data);                                                  // calls wetsuit function
-          swellPeriod(data);                                              // calls swellPeriod function
-        },
-        error: function(e) {console.log('epic marine fail')}
-      });
-  }
-
-  function localTime(data) {
-    // local time
+  // local time -- this needs to be called independent of the ajax calls, as the
+  // functions calling the ajaxCalls are handling data as arguments. Call this
+  // independently.
+  time: function() {
     var gmt = new Date();
     var time = gmt.toLocaleTimeString();
-    //console.log('Time: ' + gmt);
-    $('<li><strong>Current time:</strong> ' + time + '</li>').appendTo($('#weather ul'));
-  }
+    // return time as a string
+    return time;
+  },
 
-  function airTemp(data) {
-    //temperature
-    var temp = data.data.current_condition[0].temp_F;
-    //console.log('Degrees f: '+ temp);
-    $('<li><strong>Temperature:</strong> '+ temp + '</li>').appendTo($('#weather ul'));
-  }
-
-  function windConditions(data) {
+  winddirection: function(data) {
     //wind direction
-    var w_dir = data.data.current_condition[0].winddirDegree;
-    var w_speed = data.data.current_condition[0].windspeedMiles;
+    var w_dir = data.data.current_condition[0].winddirDegree,
+        windDir;
 
     if (w_dir < 0) {
-    var windDir = "North";
+      windDir = "North";
       } else if (w_dir < 45) {
-    var windDir = "North East";
-        } else if (w_dir < 90) {
-    var windDir = "East";
-        } else if (w_dir < 135) {
-    var windDir = "South East";
-          } else if (w_dir < 180) {
-    var windDir = "South";
-            } else if (w_dir < 225) {
-    var windDir = "South West";
-              } else if (w_dir < 270) {
-    var windDir = "West";
-                } else if (w_dir < 315) {
-    var windDir = "North West";
-                  }
-    //console.log('Wind: From the ' + windDir + ' at ' + w_speed + ' mph');
-    $('<li><strong>Wind:</strong> From the ' + windDir + ' at ' + w_speed + ' mph.</li>').appendTo($('#weather ul'));
-    return windDir;
-  }
+        windDir = "North East";
+      } else if (w_dir < 90) {
+        windDir = "East";
+      } else if (w_dir < 135) {
+        windDir = "South East";
+      } else if (w_dir < 180) {
+        windDir = "South";
+      } else if (w_dir < 225) {
+        windDir = "South West";
+      } else if (w_dir < 270) {
+        windDir = "West";
+      } else if (w_dir < 315) {
+        windDir = "North West";
+      }
+    // return wind direction as a string
+    return console.log(windDir);
+  },
 
-  function generalConditions(data) {
-    // weather Description
-    var w_desc = data.data.current_condition[0].weatherDesc[0].value;
-    //console.log('Skies: ' + w_desc);
-    $('<li><strong>Skies:</strong> ' + w_desc + '</li>').appendTo($('#weather ul'));
-  }
+  windspeed: function(data) {
+    // return windspeed as a string
+    return console.log(data.data.current_condition[0].windspeedMiles);
+  },
 
-  function swellSize(data) {                                          // declare receive function taking data as the argument
-    var wSizeM = data.data.weather[0].hourly[0].swellHeight_m;      // gets swell height in meters
-    var wSizeF = (wSizeM * 3.28).toPrecision(3);                    // meters to feet
-    if ( wSizeF < 1 ) {
-      var wSize = "Flat";
-    } else if ( wSizeF < 3 ) {
-      var wSize = "Knee to waist high";
-    } else if ( wSizeF < 4 ) {
-      var wSize = "Waist to chest high";
-    } else if ( wSizeF < 5 ) {
-      var wSize = "Chest to head high";
-    } else if ( wSizeF < 6 ) {
-      var wSize = "Head high";
-    } else if ( wSizeF < 8 ) {
-      var wSize = "Overhead";
-    } else if ( wSizeF < 12 ) {
-      var wSize = "Overhead to double overhead";
-    } else if ( wSizeF < 18 ) {
-      var wSize = "Double to triple overhead";
-    } else if (wSizeF > 18.1 ) {
-      var wSize = "Triple overhead plus";
-    }
-    console.log(parseInt(wSizeF));                     // prints wave size converted to feet
-    //console.log('wave size: ' + wSize);                     // prints wave size converted to feet
-    $('<li><strong>Wave height:</strong> ' + wSizeF + 'ft.</li>').appendTo('#waveDetails ul');
-    return parseInt(wSizeF);
-  }
-
-  function swDir(data) {
-      var swellDir = data.data.weather[0].hourly[0].swellDir;         // gets swell direction
-      var sDir;                                                       // initializing sDir variable
+  skies: function(data) {
+    // weather Description returned as string
+    return console.log(data.data.current_condition[0].weatherDesc[0].value);
+  },
+  waveSize: function(data) {
+    // get swell height - returned as a number
+    var wSizeM = data.data.weather[0].hourly[0].swellHeight_m,
+        // translates into feet
+        wSizeF = (wSizeM * 3.28).toPrecision(3);
+    return console.log(wSizeF + " feet. Wave size.");
+  },
+  swellDirection: function(data) {
+      // get swell direction as a number
+      var swellDir = data.data.weather[0].hourly[0].swellDir,
+          sDir;
       if ( swellDir < 23 ) {
          sDir = "NNE";
       } else if ( swellDir < 45 ) {
@@ -278,17 +95,46 @@ function footerNav() {
       } else if ( swellDir < 340 ) {
          sDir = "NNW";
       } else if ( swellDir > 341 ) {
-         sDir = "N"
+         sDir = "N";
       }
-      //console.log('Primary swell direction: ' + sDir + ' at ' + swellDir + ' degrees.')
-      $('<li><strong>Primary swell direction:</strong> ' + sDir + ' at ' + swellDir + ' degrees.</li>').appendTo('#waveDetails ul');
-  }
-
-  // Wetsuit Recommendation
-  function wetsuit(data) {
+      // return sDir as a string
+      return console.log(sDir + " swell direction");
+  },
+  waterTemp: function(data) {
+    // gets water temp as a number
     var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
+    return console.log(waterTemp + " degrees water.");
+  },
+  swellPeriod: function(data) {
+    // gets swell period in seconds
+    var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
+    return console.log(sPeriod + " swell period");
+  }
+};
+
+// toScale object is for processing data into relative information, applications
+// include wetsuit recommendations, optional wave scale system for your
+// reports (4feet, waist-chest high etc.), optional conditions report
+var conditionsToScale = {
+  waveQuality: function(data) {
+    var period = data.data.weather[0].hourly[0].swellPeriod_secs,
+        swellSig;
+    if ( period < 7 ) {
+      swellSig = "Junky, short-period windswell";
+    } else if ( period < 10 ) {
+       swellSig = "Windswell";
+    } else if ( period < 12 ) {
+       swellSig = "Short period ground swell";
+    } else if ( period > 12 ) {
+       swellSig = "Long period ground swell";
+    }
+    return console.log(swellSig);
+  },
+  wetsuit: function(data) {
+    var waterTemp = data.data.weather[0].hourly[0].waterTemp_F,
+        wSuit;
     if ( waterTemp < 55 ) {
-      var wSuit = "5/4 Hooded Fullsuit";
+       wSuit = "5/4 Hooded Fullsuit";
     } else if ( waterTemp < 60 ) {
        wSuit = "4/3 Fullsuit";
     } else if ( waterTemp < 67 ) {
@@ -300,204 +146,183 @@ function footerNav() {
     } else if ( waterTemp > 75 ) {
        wSuit = "Trunks";
     }
-    //console.log('wetsuit: ' + wSuit);
-    //console.log('water temp today: ' + waterTemp);                  // prints water temp string
-    $('<li><strong>Water temp today:</strong> ' + waterTemp + ' degrees</li>').appendTo('#waveDetails ul');
-    $('<li><strong>Recommended wetsuit:</strong> ' + wSuit + '</li>').appendTo('#waveDetails ul');
-  }
-
-  // Swell Period
-  function swellPeriod(data) {
-    var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
-    if ( sPeriod < 7 ) {
-      var swellSig = "Junky, short-period windswell";
-    } else if ( sPeriod < 10 ) {
-       swellSig = "Windswell";
-    } else if ( sPeriod < 12 ) {
-       swellSig = "Short period ground swell";
-    } else if ( sPeriod > 12 ) {
-       swellSig = "Long period ground swell";
+    return console.log(wSuit);
+  },
+  relativeWaveSize: function(data) {
+    // get local.waveSize() function
+    var wSizeM = data.data.weather[0].hourly[0].swellHeight_m,
+        wSizeF = (wSizeM * 3.28).toPrecision(3),
+        wSize;
+    // conditional to determine relative wave size
+    if ( wSizeF < 1 ) {
+        wSize = "Flat";
+    } else if ( wSizeF < 3 ) {
+      wSize = "Knee to waist high";
+    } else if ( wSizeF < 4 ) {
+      wSize = "Waist to chest high";
+    } else if ( wSizeF < 5 ) {
+      wSize = "Chest to head high";
+    } else if ( wSizeF < 6 ) {
+      wSize = "Head high";
+    } else if ( wSizeF < 8 ) {
+      wSize = "Overhead";
+    } else if ( wSizeF < 12 ) {
+      wSize = "Overhead to double overhead";
+    } else if ( wSizeF < 18 ) {
+      wSize = "Double to triple overhead";
+    } else if (wSizeF > 18.1 ) {
+      wSize = "Triple overhead plus";
     }
-    //console.log("Today's swell conditions: " + swellSig);
-    $("<li><strong>Today's swell conditions:</strong> " + swellSig + '</li>').appendTo('#waveDetails ul');
+    return console.log(wSizeF);
   }
+};
 
-  function santaCruzCalls() {
-    // calls steamers weather data call
-    $('#steamers').on('click', function(e) {
-      $body.removeAttr('id');
-      $body.attr('id', 'steamersPage');
-    });
+// store the land-based weather calls
+var weatherCall = function(data) {
+  local.winddirection(data);
+  local.airTemp(data);
+  local.windspeed(data);
+  local.skies(data);
+};
 
-    $('#steamersPage #weatherLink').on('click', function(e) {
-      santaCruzWeather();
-    });
+// store the ocean data here
+var marineCall = function(data) {
+  local.waveSize(data);
+  local.swellDirection(data);
+  local.waterTemp(data);
+  local.swellDirection(data);
+};
 
-    $('#steamersPage #wavesLink').on('click', function(e) {
-      santaCruzMarineCall();
-    });
-    $('#steamersPage #bestConditionsLink').on('click', function(e) {
-      //compareData();
-    });
-  }
+var relative = function(data) {
+	conditionsToScale.relativeWaveSize(data);
+  conditionsToScale.waveQuality(data);
+  conditionsToScale.wetsuit(data);
+};
 
-  function rinconCalls() {
-    // calls rincon weather data call
-    $('#rincon').on('click', function(e) {
-      $body.removeAttr('id');
-      $body.attr('id', 'rinconPage');
-    });
+// data objects that are compartmentalized and passed individual arguments
+// from the wave data object. Allowing for customized and individual
+// ajax calls to the worldweatheronline server
+var ajaxCall = {
+  url: [
+    // santa cruz
+      //weather [0]
+    "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+      //waves [1]
+    "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+    // carpenteria
+      // weather [2]
+    "http://api.worldweatheronline.com/free/v1/weather.ashx?q=93014&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+      // waves [3]
+    "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+    // san clemente
+      // weather [4]
+    "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+      // waves [5]
+      "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"
+  ],
+  // take the info passed back from the server and prepare it
+  data: $(this).serialize(),
+  // set this function to shoot back a message if there are any issues with
+  // the external ajax call
+  error: function(){ console.log('better luck next time, bud!');}
+};
 
-    $('#rinconPage #weatherLink').on('click', function(e) {
-      carpenteriaWeather();
-    });
-
-    $('#rinconPage #wavesLink').on('click', function(e) {
-      carpenteriaMarineCall();
-    });
-    $('#rinconPage #bestConditionsLink').on('click', function(e) {
-      //compareData();
-    });
-  }
-
-  function trestlesCall() {
-    // calls tretles
-    $('#trestles').on('click', function(e) {
-      $body.removeAttr('id');
-      $body.attr('id', 'trestlesPage');
-    });
-
-    $('#trestlesPage #weatherLink').on('click', function(e) {
-      sanClementeWeather();
-    });
-
-    $('#trestlesPage #wavesLink').on('click', function(e) {
-      sanClementeMarineCall();
-    });
-    $('#trestlesPage #bestConditionsLink').on('click', function(e) {
-      //compareData();
-    });
-  }
-
-  function bestBetCall() {
-    $('#bestChance').on('click', function(e) {
-      $body.removeAttr('id');
-      $body.attr('id', 'bestBetPage');
-    });
-  }
-
-  function compareData() {
-    ($.getJSON('../waves/data/data.json', function(data) {
-      var range = {
-        min: data.locations[0].waveMin,
-        max: data.locations[0].waveMax
-      }
-      console.log(parseInt(range.min));
-      return parseInt(range.min);
-    })());
-  }
-
-
-function mobileNav() {
-  $('#mobileNav a').on('click', function(e) {             // function to toggle the mobile navigation tab
-    $('#nav ul').slideToggle();
-    e.stopImmediatePropagation();
-  });
-
-  $('.nav-wrap a').on('click', function(e) {            // function to hide nav ul when child is clicked
-    $('.nav-wrap ul').hide();
-  })
-}
-
-function copywrite() {                                        // set current year for copyright in footer
-  var today = new Date();
-  var year = today.getFullYear();
-
-  $('footer').append('<p>&copy; ' + year + ' Brian Wynn</p>');
-}
-
-function hires() {                                                          // function determines devicePixelRatio
-  if (window.devicePixelRatio == 2) {                                       // if ratio is 2
-
-    var images = $("img.hires");                                            // get hires
-
-    // loop through the images and make them hi-res
-    for(var i = 0; i < images.length; i++) {                                // loop through imgs
-
-    // create new image name
-    var imageType = images[i].src.substr(-4);                               // file extension of src
-    var imageName = images[i].src.substr(0, images[i].src.length - 4);      // file name
-    imageName += "@2x" + imageType;                                         // the two have been split, @2x is added to call retina images
-
-    //rename image
-    images[i].src = imageName;
-    }
-  }
-}
-
-function pageTitle() {                                    // get body id
-  var pageHead = $('#locationHeader');                                    // get location header
+// this function evaluates the current body id and alters the
+// content of the page using json data containing location information.
+var jsonData = function() {
   $.getJSON('../waves/data/data.json', function(data) {
+    var content = $('#conditionsInfo ul');
+
+    // get rid of list items inside content area using jquery empty() method.
+    content.empty();
+
+    // append new data
     switch($('body').attr('id'))    {
-      case 'steamersPage' :
+      case 'santaCruz' :
         var i = 0;
-        pageHead.text(data.locations[i].title);
+        content.append($('<li><strong>Wave:</strong> ' + data.locations[i].title + '</li>'));
+        content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
         break;
-      case 'rinconPage' :
-        var i = 1;
-        pageHead.text(data.locations[i].title);
+      case 'carpenteria' :
+				i = 1;
+        content.append($('<li><strong>City:</strong> ' + data.locations[i].title + '</li>'));
+        content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
         break;
-      case 'trestlesPage' :
-        var i = 2;
-        pageHead.text(data.locations[i].title);
+      case 'sanClemente' :
+        i = 2;
+        content.append($('<li><strong>City:</strong> ' + data.locations[i].title + '</li>'));
+        content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
         break;
     }
   });
 }
 
-function bestBetSection() {                                             // Gets content and removes content from page
-  var subNav = $('#subNav ul')                                          // get subNav ul
-  if ($('body').attr('id') === 'bestBetPage') {                         // if page id is bestBetPage
-    subNav.remove();                                                    // remove subNav menu
-    $('#locationHeader').text('Waves Today');
-    };
-}
+// self executing function to change content.
+$(function() {
+  // create a basic event to start switching out the page data being pulled
+  // from json file
+  var trigger = $("button");
 
-function jsonData() {
-  $.getJSON('../waves/data/data.json', function(data) {
-    var statsWrap = $('#statsWrap');
-    switch($('body').attr('id'))    {
-      case 'steamersPage' :
-        var i = 0;
-        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
-        break;
-      case 'rinconPage' :
-        var i = 1;
-        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
-        break;
-      case 'trestlesPage' :
-        var i = 2;
-        statsWrap.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        statsWrap.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        statsWrap.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
-        break;
-    }
+  trigger.on('click', function() {
+    var $body = $('body');
+    $body.removeAttr('id');
+    $body.attr('id', 'carpenteria');
+    jsonData();
   });
-}
+}());
 
+// create a new constructor function calling the location information
+var Location = function() {};
 
-topNav();
-footerNav();
-mobileNav();
-copywrite();
-hires();
-jsonData();
-pageTitle();
-santaCruzCalls();
-rinconCalls();
-trestlesCall();
-bestBetCall();
+// create the weather method that pulls the location's weather information.
+Location.prototype.weather = function(arg) {
+  $.ajax({
+          type: "POST",
+          url: ajaxCall.url[arg],
+          dataType: 'jsonp',
+          success: function(data) {
+            weatherCall(data);
+          }
+  });
+};
+
+// create new objects from the constructor, include index in comments to reference
+
+// index 0 -- SANTA CRUZ
+var santaCruz = new Location();
+
+// index 2 -- CARPENTERIA
+var carpenteria = new Location();
+
+// index 4 -- SAN CLEMENTE
+var sanClemente = new Location();
+
+// create a Wave constructor function
+var Wave = function() {};
+
+// build method pulling location's weather url string.
+Wave.prototype.conditions = function(arg) {
+  $.ajax({
+          type: "POST",
+          url: ajaxCall.url[arg],
+          dataType: 'jsonp',
+          success: function(data) {
+            marineCall(data);
+          }
+  });
+};
+
+// index 1 -- STEAMERS -- SANTA CRUZ
+var steamers = new Wave();
+
+// index 3 -- RINCON -- CARPENTERIA
+var rincon = new Wave();
+
+// index 5 -- TRESTLES -- SAN CLEMENTE
+var trestles = new Wave();

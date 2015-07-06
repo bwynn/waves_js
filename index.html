@@ -1,45 +1,38 @@
-<!DOCTYPE html>
+<!Doctype html>
 <html>
   <head>
-    <meta charset='utf-8'>
+    <title>Json test</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>California Waves</title>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="stylesheet" href="css/flex.css"/>
   </head>
-  <body id='bestBetPage'>
-    <div id='pageWrap'>
-      <header>
-        <!-- <div id='logo'> -->
-          <a href='/index.html' class='home'>
-          <img src='images/icon.svg' alt='California Waves' class="logo-icon">
-          </a>
-        <!-- </div> -->
-        <nav id='nav'>
-          <div id='mobileNav'>
-            <a href='mobile.html'><span></span></a>
-          </div>
-          <div class='nav-wrap'>
-          <ul>
-            <a href='assets/best-conditions.html' id='steamers' class='wave'><figure class='thumb'></figure><li>Steamer Lane</li></a>
-            <a href='assets/best-conditions.html' id='rincon' class='wave'><figure class='thumb'></figure><li>Rincon</li></a>
-            <a href='assets/best-conditions.html' id='trestles' class='wave'><figure class='thumb'></figure><li>Trestles</li></a>
-            <a href='assets/best-conditions.html' id='bestChance' class='active'><figure class='thumb'></figure><li>Best Bet</li></a>
-          </ul>
-          </div>
+  <body id="santaCruz">
+    <div id="pageWrap">
+      <header id="header">
+        <nav id="mainNav">
+          <h1>Waves</h1>
         </nav>
       </header>
-      <div id='bodyWrap'>
-        <h1>Waves Today</h1>
-      </div>
-      <footer>
-        <nav>
+      <section id="content">
+        <nav ="localNav">
           <ul>
-            <li><a href='assets/about.html' id='about'>About</a></li>
-            <li><a href='assets/contact.html' id='contact'>Contact</a></li>
+            <li>Overview</li>
+            <li>Wave Conditions</li>
+            <li>Weather Conditions</li>
           </ul>
         </nav>
+        <section id="mainDisplay">
+          <figure class="backgd"></figure>
+          <div id="conditionsInfo">
+            <ul>
+
+            </ul>
+          </div>
+        </section><!-- end conditions info section -->
+      </section><!-- end content section -->
+      <button>Rincon</button>
+      <footer>
+        <p><small>By bwynn</small></p>
       </footer>
     </div><!-- end pageWrap -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
