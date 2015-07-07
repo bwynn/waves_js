@@ -281,14 +281,12 @@ var trestles = new Wave();
 // this function evaluates the current body id and alters the
 // content of the page using json data containing location information.
 var jsonData = function() {
+  var $content = $('#conditionsInfo ul');
+  // get rid of list items inside content area using jquery empty() method.
+  $content.empty();
   $.getJSON('../waves/data/data.json', function(data) {
-    var $content = $('#conditionsInfo ul');
-
-    // get rid of list items inside content area using jquery empty() method.
-    $content.empty();
-
     // append new data
-    switch($('body').attr('id'))    {
+    switch($("body").attr('id'))    {
       case 'santaCruz' :
         var i = 0;
         $content.append($('<li><strong>Wave:</strong> ' + data.locations[i].title + '</li>'));
@@ -312,15 +310,19 @@ var jsonData = function() {
         break;
     }
   });
-}
+};
 
 // anonymous function to change the class of the global navigation anchor tags
 var navClassSwitch = function() {
   // get the anchor tag
-  var $anchor = $("#globalNav ul li a");
+  var $anchor = $("#globalNav ul li a"),
+      $bodyId = $("body").attr("id");
   //
   $anchor.on("click", function() {
     $anchor.removeClass("active");
     $(this).addClass("active");
   });
-};
+}();
+
+// anon function to retrieve the pertinent json info for each location's
+// info.
