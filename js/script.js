@@ -227,56 +227,6 @@ var ajaxCall = {
   error: function(){ console.log('better luck next time, bud!');}
 };
 
-// this function evaluates the current body id and alters the
-// content of the page using json data containing location information.
-var jsonData = function() {
-  $.getJSON('../waves/data/data.json', function(data) {
-    var content = $('#conditionsInfo ul');
-
-    // get rid of list items inside content area using jquery empty() method.
-    content.empty();
-
-    // append new data
-    switch($('body').attr('id'))    {
-      case 'santaCruz' :
-        var i = 0;
-        content.append($('<li><strong>Wave:</strong> ' + data.locations[i].title + '</li>'));
-        content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
-        break;
-      case 'carpenteria' :
-				i = 1;
-        content.append($('<li><strong>City:</strong> ' + data.locations[i].title + '</li>'));
-        content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
-        break;
-      case 'sanClemente' :
-        i = 2;
-        content.append($('<li><strong>City:</strong> ' + data.locations[i].title + '</li>'));
-        content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
-        break;
-    }
-  });
-}
-
-// self executing function to change content.
-$(function() {
-  // create a basic event to start switching out the page data being pulled
-  // from json file
-  var trigger = $("button");
-
-  trigger.on('click', function() {
-    var $body = $('body');
-    $body.removeAttr('id');
-    $body.attr('id', 'carpenteria');
-    jsonData();
-  });
-}());
-
 // create a new constructor function calling the location information
 var Location = function() {};
 
@@ -326,3 +276,51 @@ var rincon = new Wave();
 
 // index 5 -- TRESTLES -- SAN CLEMENTE
 var trestles = new Wave();
+
+///////////////////////////////////////////////////////////////////////////////
+// this function evaluates the current body id and alters the
+// content of the page using json data containing location information.
+var jsonData = function() {
+  $.getJSON('../waves/data/data.json', function(data) {
+    var $content = $('#conditionsInfo ul');
+
+    // get rid of list items inside content area using jquery empty() method.
+    $content.empty();
+
+    // append new data
+    switch($('body').attr('id'))    {
+      case 'santaCruz' :
+        var i = 0;
+        $content.append($('<li><strong>Wave:</strong> ' + data.locations[i].title + '</li>'));
+        $content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        $content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        $content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        break;
+      case 'carpenteria' :
+				i = 1;
+        $content.append($('<li><strong>City:</strong> ' + data.locations[i].title + '</li>'));
+        $content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        $content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        $content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        break;
+      case 'sanClemente' :
+        i = 2;
+        $content.append($('<li><strong>City:</strong> ' + data.locations[i].title + '</li>'));
+        $content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        $content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        $content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        break;
+    }
+  });
+}
+
+// anonymous function to change the class of the global navigation anchor tags
+var navClassSwitch = function() {
+  // get the anchor tag
+  var $anchor = $("#globalNav ul li a");
+  //
+  $anchor.on("click", function() {
+    $anchor.removeClass("active");
+    $(this).addClass("active");
+  });
+};
