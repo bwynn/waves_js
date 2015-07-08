@@ -1,11 +1,11 @@
 // auto initialized content. this needs to be placed into objects and then
 // instantiated from within the document ready function
-$(document).ready(function() {
+//$(document).ready(function() {
   // create locations object, this will serve as object information for all
   // things pertaining to
   var locations = {
     name: ["Steamer Lane", "Rincon", "Trestles", "Ocean Beach"],
-    id: ["steamers", "rincon", "trestles", "oceanBeach"]
+    id: ["santaCruz", "carpenteria", "sanClemente", "sanFrancisco"]
   };
 
 // loop through length using each jquery method
@@ -37,10 +37,11 @@ $(document).ready(function() {
 
     // for each anchor tag selected, match the string from the name object
     a.each(function(i) {
+      $(this).attr("id", locations.id[i]);
       $(this).text(locations.name[i]);
     });
   }();
-});
+//});
 
 
 // WEATHER AND MARINE INFO CALLS
@@ -342,19 +343,19 @@ var jsonData = function(arg) {
 };
 
 $(document).ready(function() {
-  var $anchor = $("ul#globalNavContent li a");
+  var $anchor = $(".globalNavList a");
   $anchor.on("click", function() {
     // set class values
     $anchor.removeClass("active");
     $(this).addClass("active");
 
     // add conditional to determine index
-    /*if ($(this).attr("id") == "santaCruz") {
+    if ($(this).attr("id") == "santaCruz") {
       jsonData(0);
     } else if ($(this).attr("id") == "carpenteria") {
       jsonData(1);
     } else {
       jsonData(2);
-    }*/
+    }
   });
 });
