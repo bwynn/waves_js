@@ -252,23 +252,22 @@ var relative = function(data) {
 // from the wave data object. Allowing for customized and individual
 // ajax calls to the worldweatheronline server
 var ajaxCall = {
-  url: [
-    // santa cruz
-      //weather [0]
+  cityUrl: [
+    // santa cruz(0)
     "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-      //waves [1]
-    "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-    // carpenteria
-      // weather [2]
+    // carpenteria(1)
     "http://api.worldweatheronline.com/free/v1/weather.ashx?q=93014&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-      // waves [3]
-    "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-    // san clemente
-      // weather [4]
+    // san clemente(2)
     "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-      // waves [5]
-      "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"
   ],
+    waveUrl: [
+      // steamers(0)
+      "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+      // rincon(1)
+      "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+      // trestles(2)
+      "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"
+    ],
   // take the info passed back from the server and prepare it
   data: $(this).serialize(),
   // set this function to shoot back a message if there are any issues with
@@ -283,7 +282,7 @@ var Location = function() {};
 Location.prototype.weather = function(arg) {
   $.ajax({
           type: "POST",
-          url: ajaxCall.url[arg],
+          url: ajaxCall.cityUrl[arg],
           dataType: 'jsonp',
           success: function(data) {
             weatherCall(data);
@@ -293,14 +292,10 @@ Location.prototype.weather = function(arg) {
 
 // create new objects from the constructor, include index in comments to reference
 
+var city = new Location(); // city.weather(arg);
 // index 0 -- SANTA CRUZ
-var santaCruz = new Location();
-
-// index 2 -- CARPENTERIA
-var carpenteria = new Location();
-
-// index 4 -- SAN CLEMENTE
-var sanClemente = new Location();
+// index 1 -- CARPENTERIA
+// index 2 -- SAN CLEMENTE
 
 // create a Wave constructor function
 var Wave = function() {};
@@ -309,7 +304,7 @@ var Wave = function() {};
 Wave.prototype.conditions = function(arg) {
   $.ajax({
           type: "POST",
-          url: ajaxCall.url[arg],
+          url: ajaxCall.waveUrl[arg],
           dataType: 'jsonp',
           success: function(data) {
             marineCall(data);
@@ -318,13 +313,9 @@ Wave.prototype.conditions = function(arg) {
 };
 
 // index 1 -- STEAMERS -- SANTA CRUZ
-var steamers = new Wave();
-
 // index 3 -- RINCON -- CARPENTERIA
-var rincon = new Wave();
-
 // index 5 -- TRESTLES -- SAN CLEMENTE
-var trestles = new Wave();
+var wave = new Wave(); // wave.conditions(arg);
 
 ///////////////////////////////////////////////////////////////////////////////
 // this function evaluates the current body id and alters the
