@@ -1,11 +1,11 @@
 // auto initialized content. this needs to be placed into objects and then
 // instantiated from within the document ready function
-//$(document).ready(function() {
+$(document).ready(function() {
   // create locations object, this will serve as object information for all
   // things pertaining to
   var locations = {
-    name: ["Steamer Lane", "Rincon", "Trestles", "Ocean Beach"],
-    id: ["santaCruz", "carpenteria", "sanClemente", "sanFrancisco"]
+    name: ["Steamer Lane", "Rincon", "Trestles"],
+    id: ["santaCruz", "carpenteria", "sanClemente"]
   };
 
 // loop through length using each jquery method
@@ -41,7 +41,7 @@
       $(this).text(locations.name[i]);
     });
   }();
-//});
+});
 
 
 // WEATHER AND MARINE INFO CALLS
@@ -64,7 +64,7 @@ var local = {
     var gmt = new Date();
     var time = gmt.toLocaleTimeString();
     // return time as a string
-    return time;
+    return console.log(time);
   },
 
   winddirection: function(data) {
@@ -285,6 +285,7 @@ Location.prototype.weather = function(arg) {
           url: ajaxCall.cityUrl[arg],
           dataType: 'jsonp',
           success: function(data) {
+            local.time();
             weatherCall(data);
           }
   });
@@ -343,10 +344,17 @@ $(document).ready(function() {
     // add conditional to determine index
     if ($(this).attr("id") == "santaCruz") {
       jsonData(0);
+      wave.conditions(0);
+      city.weather(0);
     } else if ($(this).attr("id") == "carpenteria") {
       jsonData(1);
+      wave.conditions(1);
+      city.weather(1);
     } else {
       jsonData(2);
+      wave.conditions(2);
+      city.weather(2);
     }
+
   });
 });
