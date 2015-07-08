@@ -54,7 +54,12 @@ var local = {
   // get air temp for location
   airTemp: function(data) {
     // return air temp information as a string
-    return console.log(data.data.current_condition[0].temp_F);
+    var temp = data.data.current_condition[0].temp_F;
+    var cont = $("#remoteData");
+    var li = $("<li></li>");
+
+    cont.append(li);
+    li.text(temp);
   },
 
   // local time -- this needs to be called independent of the ajax calls, as the
@@ -64,7 +69,12 @@ var local = {
     var gmt = new Date();
     var time = gmt.toLocaleTimeString();
     // return time as a string
-    return console.log(time);
+    //return console.log(time);
+    var cont = $("#remoteData");
+    var li = $("<li></li>");
+
+    cont.append(li);
+    li.text(time);
   },
 
   winddirection: function(data) {
@@ -90,24 +100,47 @@ var local = {
         windDir = "North West";
       }
     // return wind direction as a string
-    return console.log(windDir);
+    //return console.log(windDir);
+    var cont = $("#remoteData");
+    var li = $("<li></li>");
+
+    cont.append(li);
+    li.text(windDir);
   },
 
   windspeed: function(data) {
     // return windspeed as a string
-    return console.log(data.data.current_condition[0].windspeedMiles);
+    //return console.log(data.data.current_condition[0].windspeedMiles);
+    var windSpeed = data.data.current_condition[0].windspeedMiles;
+    var cont = $("#remoteData");
+    var li = $("<li></li>");
+
+    cont.append(li);
+    li.text(windSpeed);
   },
 
   skies: function(data) {
     // weather Description returned as string
-    return console.log(data.data.current_condition[0].weatherDesc[0].value);
+    //return console.log(data.data.current_condition[0].weatherDesc[0].value);
+    var currently = data.data.current_condition[0].weatherDesc[0].value;
+
+    var cont = $("#remoteData");
+    var li = $("<li></li>");
+
+    cont.append(li);
+    li.text(currently);
   },
   waveSize: function(data) {
     // get swell height - returned as a number
     var wSizeM = data.data.weather[0].hourly[0].swellHeight_m,
         // translates into feet
         wSizeF = (wSizeM * 3.28).toPrecision(3);
-    return console.log(wSizeF + " feet. Wave size.");
+    //return console.log(wSizeF + " feet. Wave size.");
+    var cont = $("#remoteData");
+    var li = $("<li></li>");
+
+    cont.append(li);
+    li.text(wSizeF);
   },
   swellDirection: function(data) {
       // get swell direction as a number
@@ -147,17 +180,34 @@ var local = {
          sDir = "N";
       }
       // return sDir as a string
-      return console.log(sDir + " swell direction");
+      //return console.log(sDir + " swell direction");
+      var cont = $("#remoteData");
+      var li = $("<li></li>");
+
+      cont.append(li);
+      li.text(sDir);
   },
   waterTemp: function(data) {
     // gets water temp as a number
     var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
-    return console.log(waterTemp + " degrees water.");
+    //return console.log(waterTemp + " degrees water.");
+
+    var cont = $("#remoteData");
+    var li = $("<li></li>");
+
+    cont.append(li);
+    li.text(waterTemp);
   },
   swellPeriod: function(data) {
     // gets swell period in seconds
     var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
-    return console.log(sPeriod + " swell period");
+    //return console.log(sPeriod + " swell period");
+
+    var cont = $("#remoteData");
+    var li = $("<li></li>");
+
+    cont.append(li);
+    li.text(waterTemp);
   }
 };
 
@@ -322,7 +372,7 @@ var wave = new Wave(); // wave.conditions(arg);
 // this function evaluates the current body id and alters the
 // content of the page using json data containing location information.
 var jsonData = function(arg) {
-  var $content = $('#conditionsInfo ul');
+  var $content = $('#localData');
   var i = arg;
   // get rid of list items inside content area using jquery empty() method.
   $content.empty();
@@ -340,6 +390,9 @@ $(document).ready(function() {
     // set class values
     $anchor.removeClass("active");
     $(this).addClass("active");
+
+    // empty out remote data contents
+    $("#remoteData li").empty();
 
     // add conditional to determine index
     if ($(this).attr("id") == "santaCruz") {
