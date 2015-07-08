@@ -1,3 +1,51 @@
+// auto initialized content. this needs to be placed into objects and then
+// instantiated from within the document ready function
+$(document).ready(function() {
+  // create locations object, this will serve as object information for all
+  // things pertaining to
+  var locations = {
+    name: ["Steamer Lane", "Rincon", "Trestles", "Ocean Beach"],
+    id: ["steamers", "rincon", "trestles", "oceanBeach"]
+  };
+
+// loop through length using each jquery method
+  var buildList = function() {
+    // get length of locations options
+    var location = locations.name;
+
+    $(location).each(function(index) {
+      // get unordered list element
+      var ul = $("#globalNavContent");
+      // add list items to global nav ul
+      ul.append("<li>");
+      // get list item
+      var li = $("#globalNavContent li");
+      // apply classes
+      li.addClass("globalNavList");
+    });
+  }();
+
+// build the nav links function
+  var buildNavLinks = function() {
+    // get list items
+    var li = $("li.globalNavList");
+    // append anchor tag
+    li.append("<a href='#'></a>");
+
+    // get newly defined anchor tag
+    var a = $(".globalNavList a");
+
+    // for each anchor tag selected, match the string from the name object
+    a.each(function(i) {
+      $(this).text(locations.name[i]);
+    });
+  }();
+});
+
+
+// WEATHER AND MARINE INFO CALLS
+
+
 // store the ajax object, wave object, weather object all into the same
 // immediately instantiated call
 var local = {
@@ -294,19 +342,19 @@ var jsonData = function(arg) {
 };
 
 $(document).ready(function() {
-  var $anchor = $("#globalNav ul li a");
+  var $anchor = $("ul#globalNavContent li a");
   $anchor.on("click", function() {
     // set class values
     $anchor.removeClass("active");
     $(this).addClass("active");
 
     // add conditional to determine index
-    if ($(this).attr("id") == "santaCruz") {
+    /*if ($(this).attr("id") == "santaCruz") {
       jsonData(0);
     } else if ($(this).attr("id") == "carpenteria") {
       jsonData(1);
     } else {
       jsonData(2);
-    }
+    }*/
   });
 });
