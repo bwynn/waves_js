@@ -1,3 +1,5 @@
+// Navigation builder module
+
 // auto initialized content. this needs to be placed into objects and then
 // instantiated from within the document ready function
 $(document).ready(function() {
@@ -43,6 +45,20 @@ $(document).ready(function() {
   }();
 });
 
+// CONTENT SECTION BUILDER
+// create content object
+var content = {
+    localNavLength: 2,
+    display: function() {
+      var $content = $("#localNav ul li a")[0],
+          $remoteData = $("#remoteData"),
+          $localData = $("#localData");
+
+      // add conditional to get determine which index has
+      // active class, then either show or hide content based on the conditional.
+    }
+};
+
 
 // WEATHER AND MARINE INFO CALLS
 
@@ -50,16 +66,23 @@ $(document).ready(function() {
 // store the ajax object, wave object, weather object all into the same
 // immediately instantiated call
 var local = {
+  builder: function(arg) {
+    var cont = $("#remoteData");
+    var li = $("<li></li>");
+    var span = $("<span></span>");
 
+    // append list element to container
+    cont.append(li);
+    // append span to list element
+    li.append(span);
+    // insert the argument's return content into the span element
+    span.text(arg);
+  },
   // get air temp for location
   airTemp: function(data) {
     // return air temp information as a string
     var temp = data.data.current_condition[0].temp_F;
-    var cont = $("#remoteData");
-    var li = $("<li></li>");
-
-    cont.append(li);
-    li.text(temp);
+    return local.builder(temp);
   },
 
   // local time -- this needs to be called independent of the ajax calls, as the
@@ -70,11 +93,7 @@ var local = {
     var time = gmt.toLocaleTimeString();
     // return time as a string
     //return console.log(time);
-    var cont = $("#remoteData");
-    var li = $("<li></li>");
-
-    cont.append(li);
-    li.text(time);
+    return local.builder(time);
   },
 
   winddirection: function(data) {
@@ -99,24 +118,14 @@ var local = {
       } else if (w_dir < 315) {
         windDir = "North West";
       }
-    // return wind direction as a string
-    //return console.log(windDir);
-    var cont = $("#remoteData");
-    var li = $("<li></li>");
-
-    cont.append(li);
-    li.text(windDir);
+    return local.builder(windDir);
   },
 
   windspeed: function(data) {
     // return windspeed as a string
     //return console.log(data.data.current_condition[0].windspeedMiles);
     var windSpeed = data.data.current_condition[0].windspeedMiles;
-    var cont = $("#remoteData");
-    var li = $("<li></li>");
-
-    cont.append(li);
-    li.text(windSpeed);
+    return local.builder(windSpeed);
   },
 
   skies: function(data) {
@@ -124,11 +133,7 @@ var local = {
     //return console.log(data.data.current_condition[0].weatherDesc[0].value);
     var currently = data.data.current_condition[0].weatherDesc[0].value;
 
-    var cont = $("#remoteData");
-    var li = $("<li></li>");
-
-    cont.append(li);
-    li.text(currently);
+    return local.builder(currently);
   },
   waveSize: function(data) {
     // get swell height - returned as a number
@@ -136,11 +141,7 @@ var local = {
         // translates into feet
         wSizeF = (wSizeM * 3.28).toPrecision(3);
     //return console.log(wSizeF + " feet. Wave size.");
-    var cont = $("#remoteData");
-    var li = $("<li></li>");
-
-    cont.append(li);
-    li.text(wSizeF);
+    return local.builder(wSizeF);
   },
   swellDirection: function(data) {
       // get swell direction as a number
@@ -181,33 +182,19 @@ var local = {
       }
       // return sDir as a string
       //return console.log(sDir + " swell direction");
-      var cont = $("#remoteData");
-      var li = $("<li></li>");
-
-      cont.append(li);
-      li.text(sDir);
+      return local.builder(sDir);
   },
   waterTemp: function(data) {
     // gets water temp as a number
     var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
     //return console.log(waterTemp + " degrees water.");
-
-    var cont = $("#remoteData");
-    var li = $("<li></li>");
-
-    cont.append(li);
-    li.text(waterTemp);
+    return local.builder(waterTemp);
   },
   swellPeriod: function(data) {
     // gets swell period in seconds
     var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
     //return console.log(sPeriod + " swell period");
-
-    var cont = $("#remoteData");
-    var li = $("<li></li>");
-
-    cont.append(li);
-    li.text(waterTemp);
+    return local.builder(sPeriod);
   }
 };
 
@@ -384,12 +371,28 @@ var jsonData = function(arg) {
   });
 };
 
+// globalNavigation event trigger
 $(document).ready(function() {
   var $anchor = $(".globalNavList a");
+
+  // event trigger
   $anchor.on("click", function() {
-    // set class values
+    // get content section, local nav anchor and the first local nav anchor element
+    var $content = $("#content"),
+        $localNav = $("#localNav ul li a"),
+        $localNavFirst = $("#localNav ul li a:first");
+
+    // set class values for the global navigation links
     $anchor.removeClass("active");
     $(this).addClass("active");
+
+    // ensure that the local nav links are set to the correct value, which will
+    // determine what content to display within the content section.
+    $localNav.removeClass("active");
+    $localNavFirst.addClass("active");
+
+    // show content area
+    $content.show().fadeIn();
 
     // empty out remote data contents
     $("#remoteData li").empty();
@@ -408,6 +411,12 @@ $(document).ready(function() {
       wave.conditions(2);
       city.weather(2);
     }
-
   });
+});
+
+// localNavigation event trigger
+var $anchor = $("#localNav ul li a");
+$anchor.on("click", function() {
+  $anchor.removeClass("active");
+  $(this).addClass("active");
 });

@@ -36,6 +36,11 @@ ul#globalNavContent {
   padding: 0;
 }
 
+#content,
+#remoteData {
+  display: none;
+}
+
 /* Set the placement container as a flexible container, allowing its children
 elements to flex depending on viewport.*/
 #globalNavContent {
