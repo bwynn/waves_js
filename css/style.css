@@ -36,8 +36,7 @@ ul#globalNavContent {
   padding: 0;
 }
 
-#content,
-#remoteData {
+#content {
   display: none;
 }
 
