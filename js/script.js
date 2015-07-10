@@ -391,6 +391,9 @@ $(document).ready(function() {
     $localNav.removeClass("active");
     $localNavFirst.addClass("active");
 
+    var remoteData = $("#remoteData");
+    remoteData.empty();
+
     // show content area
     $content.show().fadeIn();
 
