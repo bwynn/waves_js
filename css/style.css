@@ -36,9 +36,10 @@ ul#globalNavContent {
   padding: 0;
 }
 
-#content {
+/* Disabled while building the module for the list item returns -------------- READ THIS ------------ */
+/*#content {
   display: none;
-}
+}*/
 
 /* Set the placement container as a flexible container, allowing its children
 elements to flex depending on viewport.*/
@@ -70,4 +71,53 @@ for nav */
 .globalNavList a {
   display: block;
   height: inherit;
+}
+
+#content {
+  width: 100%;
+}
+
+article#mainDisplay,
+#conditionsInfo {
+  width: inherit;
+}
+
+#remoteData {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-content: stretch;
+}
+
+#conditionsInfo > #remoteData > li {
+  display: inline-block;
+  width: 33%;
+  text-align: center;
+  min-height: 100px;
+  font-size: .8em;
+  color: #666;
+  padding: .3em;
+  background-color: #9f9f9f;
+  box-sizing: border-box;
+  margin: .1em;
+}
+
+#conditionsInfo > #remoteData > li > span {
+  display: block;
+  margin-top: .6em;
+  font-size: 2.2rem;
+  color: #555;
+}
+
+@media only screen and (max-width: 768px) {
+  #conditionsInfo > #remoteData > li {
+    width: 49%;
+  }
+
+  #conditionsInfo > #remoteData > li > span {
+    font-size: 1.8rem;
+  }
 }

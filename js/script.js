@@ -276,7 +276,7 @@ var marineCall = function(data) {
   local.waveSize(data);
   local.swellDirection(data);
   local.waterTemp(data);
-  local.swellDirection(data);
+  local.swellPeriod(data);
 };
 
 var relative = function(data) {
