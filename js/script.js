@@ -393,6 +393,23 @@ var wave = new Wave(); // wave.conditions(arg);
           }
     }
 
+    function buildLocation(arg) {
+      // add conditional to determine index for ajaxCalls
+      if (arg.attr("id") == "santaCruz") {
+        jsonData(0);
+        wave.conditions(0);
+        city.weather(0);
+      } else if (arg.attr("id") == "carpenteria") {
+        jsonData(1);
+        wave.conditions(1);
+        city.weather(1);
+      } else {
+        jsonData(2);
+        wave.conditions(2);
+        city.weather(2);
+      }
+    }
+
 
 
 // --------------------- CONTROLLER ------------------------------------
@@ -417,6 +434,7 @@ var wave = new Wave(); // wave.conditions(arg);
     $localNav.removeClass("active");
     $localNavFirst.addClass("active");
 
+    // clear out the contents of the remote data container
     $remoteData.empty();
 
     // show content area
@@ -427,20 +445,8 @@ var wave = new Wave(); // wave.conditions(arg);
     // empty out remote data contents
     $("#remoteData li").empty();
 
-    // add conditional to determine index for ajaxCalls
-    if ($(this).attr("id") == "santaCruz") {
-      jsonData(0);
-      wave.conditions(0);
-      city.weather(0);
-    } else if ($(this).attr("id") == "carpenteria") {
-      jsonData(1);
-      wave.conditions(1);
-      city.weather(1);
-    } else {
-      jsonData(2);
-      wave.conditions(2);
-      city.weather(2);
-    }
+    // build location conditional
+    buildLocation($(this));
 
   });
 
