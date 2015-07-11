@@ -376,17 +376,17 @@ var wave = new Wave(); // wave.conditions(arg);
           $localData.show();
     }
 
-    function evalContent() {
-      var $waves = $("#localNav ul li a")[0],
-          $about = $("#localNav ul li a")[1];
+    function evalBtnsContent() {
+      var $waves = $("#wavesContentBtn"),
+          $about = $("#aboutContentBtn");
 
-      if ($waves.hasAttribute("class", "active")) {
-        waveDisplay();
-      } else if ($about.hasAttribute("class", "active")){
-        aboutDisplay();
-      } else {
-        console.log("something's wrong");
-      }
+          if ($waves.attr("class") == "active") {
+            return waveDisplay();
+          } else if ($about.attr("class") == "active") {
+            return aboutDisplay();
+          } else {
+            return console.log("there was an issue");
+          }
     }
 
 
@@ -417,6 +417,8 @@ var wave = new Wave(); // wave.conditions(arg);
 
     // show content area
     $content.show();
+    // set the content area
+    evalBtnsContent();
 
     // empty out remote data contents
     $("#remoteData li").empty();
@@ -446,6 +448,6 @@ var wave = new Wave(); // wave.conditions(arg);
     $(this).addClass("active");
 
     // place content
-    evalContent();
+    evalBtnsContent();
   });
 //});
