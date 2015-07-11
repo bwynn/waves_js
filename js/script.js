@@ -356,25 +356,44 @@ var wave = new Wave(); // wave.conditions(arg);
       });
     }();
 
-    // Navigation builder module
+    // display function to show wave template, triggered by the local nav
+    // element
+    function waveDisplay() {
+      var $localData = $("#localData"),
+          $remoteData = $("#remoteData");
 
-    // CONTENT SECTION BUILDER
-    // create content object
-    /*var content = {
-        localNavLength: 2,
-        display: function() {
-          var $content = $("#localNav ul li a")[0],
-              $remoteData = $("#remoteData"),
-              $localData = $("#localData");
+          $localData.hide();
+          $remoteData.css("display", "flex");
+    }
 
-          // add conditional to get determine which index has
-          // active class, then either show or hide content based on the conditional.
-        }
-      };*/
+    // display function to be triggered on the local nav elements to display
+    // the json data
+    function aboutDisplay() {
+      var $localData = $("#localData"),
+          $remoteData = $("#remoteData");
+
+          $remoteData.hide();
+          $localData.show();
+    }
+
+    function evalContent() {
+      var $waves = $("#localNav ul li a")[0],
+          $about = $("#localNav ul li a")[1];
+
+      if ($waves.hasAttribute("class", "active")) {
+        waveDisplay();
+      } else if ($about.hasAttribute("class", "active")){
+        aboutDisplay();
+      } else {
+        console.log("something's wrong");
+      }
+    }
+
+
 
 // --------------------- CONTROLLER ------------------------------------
 // globalNavigation event trigger
-$(document).ready(function() {
+//$(document).ready(function() {
   var $anchor = $(".globalNavList a");
 
   // event trigger
@@ -382,7 +401,8 @@ $(document).ready(function() {
     // get content section, local nav anchor and the first local nav anchor element
     var $content = $("#content"),
         $localNav = $("#localNav ul li a"),
-        $localNavFirst = $("#localNav ul li a:first");
+        $localNavFirst = $("#localNav ul li a:first"),
+        $remoteData = $("#remoteData");;
 
     // set class values for the global navigation links
     $anchor.removeClass("active");
@@ -393,8 +413,7 @@ $(document).ready(function() {
     $localNav.removeClass("active");
     $localNavFirst.addClass("active");
 
-    var remoteData = $("#remoteData");
-    remoteData.empty();
+    $remoteData.empty();
 
     // show content area
     $content.show();
@@ -416,12 +435,17 @@ $(document).ready(function() {
       wave.conditions(2);
       city.weather(2);
     }
+
   });
 
   // localNavigation event trigger
   var $localNavAnchor = $("#localNav ul li a");
   $localNavAnchor.on("click", function() {
+
     $localNavAnchor.removeClass("active");
     $(this).addClass("active");
+
+    // place content
+    evalContent();
   });
-});
+//});
