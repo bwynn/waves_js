@@ -363,7 +363,7 @@ var wave = new Wave(); // wave.conditions(arg);
           $remoteData = $("#remoteData");
 
           $localData.hide();
-          $remoteData.css("display", "flex");
+          $remoteData.css("display", "-webkit-box").css("display", "-ms-flexbox").css("display", "-webkit-flex").css("display", "flex");
     }
 
     // display function to be triggered on the local nav elements to display
@@ -402,7 +402,7 @@ var wave = new Wave(); // wave.conditions(arg);
     var $content = $("#content"),
         $localNav = $("#localNav ul li a"),
         $localNavFirst = $("#localNav ul li a:first"),
-        $remoteData = $("#remoteData");;
+        $remoteData = $("#remoteData");
 
     // set class values for the global navigation links
     $anchor.removeClass("active");
