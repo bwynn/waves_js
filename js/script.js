@@ -1,68 +1,5 @@
-// Navigation builder module
-
-// auto initialized content. this needs to be placed into objects and then
-// instantiated from within the document ready function
-$(document).ready(function() {
-  // create locations object, this will serve as object information for all
-  // things pertaining to
-  var locations = {
-    name: ["Steamer Lane", "Rincon", "Trestles"],
-    id: ["santaCruz", "carpenteria", "sanClemente"]
-  };
-
-// loop through length using each jquery method
-  var buildList = function() {
-    // get length of locations options
-    var location = locations.name;
-
-    $(location).each(function(index) {
-      // get unordered list element
-      var ul = $("#globalNavContent");
-      // add list items to global nav ul
-      ul.append("<li>");
-      // get list item
-      var li = $("#globalNavContent li");
-      // apply classes
-      li.addClass("globalNavList");
-    });
-  }();
-
-// build the nav links function
-  var buildNavLinks = function() {
-    // get list items
-    var li = $("li.globalNavList");
-    // append anchor tag
-    li.append("<a href='#'></a>");
-
-    // get newly defined anchor tag
-    var a = $(".globalNavList a");
-
-    // for each anchor tag selected, match the string from the name object
-    a.each(function(i) {
-      $(this).attr("id", locations.id[i]);
-      $(this).text(locations.name[i]);
-    });
-  }();
-});
-
-// CONTENT SECTION BUILDER
-// create content object
-var content = {
-    localNavLength: 2,
-    display: function() {
-      var $content = $("#localNav ul li a")[0],
-          $remoteData = $("#remoteData"),
-          $localData = $("#localData");
-
-      // add conditional to get determine which index has
-      // active class, then either show or hide content based on the conditional.
-    }
-};
-
-
+/* --------------------- MODEL -----------------------------------------*/
 // WEATHER AND MARINE INFO CALLS
-
-
 // store the ajax object, wave object, weather object all into the same
 // immediately instantiated call
 var local = {
@@ -78,6 +15,12 @@ var local = {
     // insert the argument's return content into the span element
     span.text(arg);
   },
+
+  // add an object that lists off content to load into the template
+  // this can be string-based
+  // and then add a function that assigns out the information into the
+  // array of list elements
+
   // get air temp for location
   airTemp: function(data) {
     // return air temp information as a string
@@ -312,6 +255,22 @@ var ajaxCall = {
   error: function(){ console.log('better luck next time, bud!');}
 };
 
+//////////////////////////////////////////////////////////////////////////////
+// this function evaluates the current body id and alters the
+// content of the page using json data containing location information.
+var jsonData = function(arg) {
+  var $content = $('#localData');
+  var i = arg;
+  // get rid of list items inside content area using jquery empty() method.
+  $content.empty();
+  $.getJSON('../waves/data/data.json', function(data) {
+    $content.append($('<li><strong>Wave:</strong> ' + data.locations[i].title + '</li>'));
+    $content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+    $content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+    $content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+  });
+};
+
 // create a new constructor function calling the location information
 var Location = function() {};
 
@@ -355,22 +314,65 @@ Wave.prototype.conditions = function(arg) {
 // index 5 -- TRESTLES -- SAN CLEMENTE
 var wave = new Wave(); // wave.conditions(arg);
 
-///////////////////////////////////////////////////////////////////////////////
-// this function evaluates the current body id and alters the
-// content of the page using json data containing location information.
-var jsonData = function(arg) {
-  var $content = $('#localData');
-  var i = arg;
-  // get rid of list items inside content area using jquery empty() method.
-  $content.empty();
-  $.getJSON('../waves/data/data.json', function(data) {
-    $content.append($('<li><strong>Wave:</strong> ' + data.locations[i].title + '</li>'));
-    $content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-    $content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-    $content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
-  });
-};
+// --------------------- VIEW ------------------------------------------
+  // create locations object, this will serve as object information for all
+  // things pertaining to
+    var locations = {
+      name: ["Steamer Lane", "Rincon", "Trestles"],
+      id: ["santaCruz", "carpenteria", "sanClemente"]
+    };
 
+    // loop through length using each jquery method
+    var buildList = function() {
+      // get length of locations options
+      var location = locations.name;
+
+      $(location).each(function() {
+        // get unordered list element
+        var ul = $("#globalNavContent");
+        // add list items to global nav ul
+        ul.append("<li>");
+        // get list item
+        var li = $("#globalNavContent li");
+        // apply classes
+        li.addClass("globalNavList");
+      });
+    }();
+
+    // build the nav links function
+    var buildNavLinks = function() {
+      // get list items
+      var li = $("li.globalNavList");
+      // append anchor tag
+      li.append("<a href='#'></a>");
+
+      // get newly defined anchor tag
+      var a = $(".globalNavList a");
+
+      // for each anchor tag selected, match the string from the name object
+      a.each(function(i) {
+        $(this).attr("id", locations.id[i]);
+        $(this).text(locations.name[i]);
+      });
+    }();
+
+    // Navigation builder module
+
+    // CONTENT SECTION BUILDER
+    // create content object
+    /*var content = {
+        localNavLength: 2,
+        display: function() {
+          var $content = $("#localNav ul li a")[0],
+              $remoteData = $("#remoteData"),
+              $localData = $("#localData");
+
+          // add conditional to get determine which index has
+          // active class, then either show or hide content based on the conditional.
+        }
+      };*/
+
+// --------------------- CONTROLLER ------------------------------------
 // globalNavigation event trigger
 $(document).ready(function() {
   var $anchor = $(".globalNavList a");
@@ -395,12 +397,12 @@ $(document).ready(function() {
     remoteData.empty();
 
     // show content area
-    $content.show().fadeIn();
+    $content.show();
 
     // empty out remote data contents
     $("#remoteData li").empty();
 
-    // add conditional to determine index
+    // add conditional to determine index for ajaxCalls
     if ($(this).attr("id") == "santaCruz") {
       jsonData(0);
       wave.conditions(0);
@@ -415,11 +417,11 @@ $(document).ready(function() {
       city.weather(2);
     }
   });
-});
 
-// localNavigation event trigger
-var $anchor = $("#localNav ul li a");
-$anchor.on("click", function() {
-  $anchor.removeClass("active");
-  $(this).addClass("active");
+  // localNavigation event trigger
+  var $localNavAnchor = $("#localNav ul li a");
+  $localNavAnchor.on("click", function() {
+    $localNavAnchor.removeClass("active");
+    $(this).addClass("active");
+  });
 });
