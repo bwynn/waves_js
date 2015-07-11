@@ -376,10 +376,14 @@ var wave = new Wave(); // wave.conditions(arg);
           $localData.show();
     }
 
+    // evaluate current conditions of the two local nav buttons to
+    // determine which content to display
     function evalBtnsContent() {
       var $waves = $("#wavesContentBtn"),
           $about = $("#aboutContentBtn");
 
+          // conditional evaluates class attributes on variables
+          // to determine which content to display
           if ($waves.attr("class") == "active") {
             return waveDisplay();
           } else if ($about.attr("class") == "active") {
