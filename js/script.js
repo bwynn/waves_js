@@ -314,18 +314,20 @@ Wave.prototype.conditions = function(arg) {
 // index 5 -- TRESTLES -- SAN CLEMENTE
 var wave = new Wave(); // wave.conditions(arg);
 
+
+
 // --------------------- VIEW ------------------------------------------
   // create locations object, this will serve as object information for all
   // things pertaining to
-    var locations = {
+  var view = {
+    locations: {
       name: ["Steamer Lane", "Rincon", "Trestles"],
       id: ["santaCruz", "carpenteria", "sanClemente"]
-    };
-
+    },
     // loop through length using each jquery method
-    var buildList = function() {
+    buildList: function() {
       // get length of locations options
-      var location = locations.name;
+      var location = view.locations.name;
 
       $(location).each(function() {
         // get unordered list element
@@ -337,10 +339,9 @@ var wave = new Wave(); // wave.conditions(arg);
         // apply classes
         li.addClass("globalNavList");
       });
-    }();
-
+    },  // auto intialize this function
     // build the nav links function
-    var buildNavLinks = function() {
+    buildNavLinks: function() {
       // get list items
       var li = $("li.globalNavList");
       // append anchor tag
@@ -351,49 +352,45 @@ var wave = new Wave(); // wave.conditions(arg);
 
       // for each anchor tag selected, match the string from the name object
       a.each(function(i) {
-        $(this).attr("id", locations.id[i]);
-        $(this).text(locations.name[i]);
+        $(this).attr("id", view.locations.id[i]);
+        $(this).text(view.locations.name[i]);
       });
-    }();
-
+    }, // auto initialize this function
     // display function to show wave template, triggered by the local nav
     // element
-    function waveDisplay() {
+    waveDisplay: function() {
       var $localData = $("#localData"),
           $remoteData = $("#remoteData");
 
           $localData.hide();
           $remoteData.css("display", "-webkit-box").css("display", "-ms-flexbox").css("display", "-webkit-flex").css("display", "flex");
-    }
-
+    },
     // display function to be triggered on the local nav elements to display
     // the json data
-    function aboutDisplay() {
+    aboutDisplay: function() {
       var $localData = $("#localData"),
           $remoteData = $("#remoteData");
 
           $remoteData.hide();
           $localData.show();
-    }
-
+    },
     // evaluate current conditions of the two local nav buttons to
     // determine which content to display
-    function evalBtnsContent() {
+    evalBtnsContent: function() {
       var $waves = $("#wavesContentBtn"),
           $about = $("#aboutContentBtn");
 
           // conditional evaluates class attributes on variables
           // to determine which content to display
           if ($waves.attr("class") == "active") {
-            return waveDisplay();
+            return view.waveDisplay();
           } else if ($about.attr("class") == "active") {
-            return aboutDisplay();
+            return view.aboutDisplay();
           } else {
             return console.log("there was an issue");
           }
-    }
-
-    function buildLocation(arg) {
+    },
+    buildLocation: function(arg) {
       // add conditional to determine index for ajaxCalls
       if (arg.attr("id") == "santaCruz") {
         jsonData(0);
@@ -409,55 +406,69 @@ var wave = new Wave(); // wave.conditions(arg);
         city.weather(2);
       }
     }
+  };
 
 
 
 // --------------------- CONTROLLER ------------------------------------
 // globalNavigation event trigger
-//$(document).ready(function() {
-  var $anchor = $(".globalNavList a");
+var controller = {
+  globalNavController: function() {
+    var $anchor = $(".globalNavList a");
 
-  // event trigger
-  $anchor.on("click", function() {
-    // get content section, local nav anchor and the first local nav anchor element
-    var $content = $("#content"),
-        $localNav = $("#localNav ul li a"),
-        $localNavFirst = $("#localNav ul li a:first"),
-        $remoteData = $("#remoteData");
+    // event trigger
+    $anchor.on("click", function() {
+      // get content section, local nav anchor and the first local nav anchor element
+      var $content = $("#content"),
+          $localNav = $("#localNav ul li a"),
+          $localNavFirst = $("#localNav ul li a:first"),
+          $remoteData = $("#remoteData");
 
-    // set class values for the global navigation links
-    $anchor.removeClass("active");
-    $(this).addClass("active");
+      // set class values for the global navigation links
+      $anchor.removeClass("active");
+      $(this).addClass("active");
 
-    // ensure that the local nav links are set to the correct value, which will
-    // determine what content to display within the content section.
-    $localNav.removeClass("active");
-    $localNavFirst.addClass("active");
+      // ensure that the local nav links are set to the correct value, which will
+      // determine what content to display within the content section.
+      $localNav.removeClass("active");
+      $localNavFirst.addClass("active");
 
-    // clear out the contents of the remote data container
-    $remoteData.empty();
+      // clear out the contents of the remote data container
+      $remoteData.empty();
 
-    // show content area
-    $content.show();
-    // set the content area
-    evalBtnsContent();
+      // show content area
+      $content.show();
+      // set the content area
+      view.evalBtnsContent();
 
-    // empty out remote data contents
-    $("#remoteData li").empty();
+      // empty out remote data contents
+      $("#remoteData li").empty();
 
-    // build location conditional
-    buildLocation($(this));
+      // build location conditional
+      view.buildLocation($(this));
 
-  });
+      });
+    },
+    localNavController: function() {
+      // localNavigation event trigger
+      var $localNavAnchor = $("#localNav ul li a");
+      $localNavAnchor.on("click", function() {
 
-  // localNavigation event trigger
-  var $localNavAnchor = $("#localNav ul li a");
-  $localNavAnchor.on("click", function() {
+        $localNavAnchor.removeClass("active");
+        $(this).addClass("active");
 
-    $localNavAnchor.removeClass("active");
-    $(this).addClass("active");
+        // place content
+        view.evalBtnsContent();
+      });
+    }
+};
 
-    // place content
-    evalBtnsContent();
-  });
-//});
+// init function
+(function() {
+  // view init
+  view.buildList();
+  view.buildNavLinks();
+  // controller init
+  controller.globalNavController();  // initialize global controller
+  controller.localNavController();  // initialize local nav controller
+}());
