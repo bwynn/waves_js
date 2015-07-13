@@ -4,18 +4,6 @@
 // immediately instantiated call
 var model = {
   local: {
-    builder: function(arg) {
-      var cont = $("#remoteData");
-      var li = $("<li></li>");
-      var span = $("<span></span>");
-
-      // append list element to container
-      cont.append(li);
-      // append span to list element
-      li.append(span);
-      // insert the argument's return content into the span element
-      span.text(arg);
-    },
     // add an object that lists off content to load into the template
     // this can be string-based
     // and then add a function that assigns out the information into the
@@ -25,7 +13,7 @@ var model = {
     airTemp: function(data) {
       // return air temp information as a string
       var temp = data.data.current_condition[0].temp_F;
-      return model.local.builder(temp);
+      return view.contentItemBuilder(temp);
     },
 
     // local time -- this needs to be called independent of the ajax calls, as the
@@ -36,7 +24,7 @@ var model = {
       var time = gmt.toLocaleTimeString();
       // return time as a string
       //return console.log(time);
-      return model.local.builder(time);
+      return view.contentItemBuilder(time);
     },
 
     winddirection: function(data) {
@@ -61,14 +49,14 @@ var model = {
         } else if (w_dir < 315) {
           windDir = "North West";
         }
-      return model.local.builder(windDir);
+      return view.contentItemBuilder(windDir);
     },
 
     windspeed: function(data) {
       // return windspeed as a string
       //return console.log(data.data.current_condition[0].windspeedMiles);
       var windSpeed = data.data.current_condition[0].windspeedMiles;
-      return model.local.builder(windSpeed);
+      return view.contentItemBuilder(windSpeed);
     },
 
     skies: function(data) {
@@ -76,7 +64,7 @@ var model = {
       //return console.log(data.data.current_condition[0].weatherDesc[0].value);
       var currently = data.data.current_condition[0].weatherDesc[0].value;
 
-      return model.local.builder(currently);
+      return view.contentItemBuilder(currently);
     },
     waveSize: function(data) {
       // get swell height - returned as a number
@@ -84,7 +72,7 @@ var model = {
           // translates into feet
           wSizeF = (wSizeM * 3.28).toPrecision(3);
       //return console.log(wSizeF + " feet. Wave size.");
-      return model.local.builder(wSizeF);
+      return view.contentItemBuilder(wSizeF);
     },
     swellDirection: function(data) {
         // get swell direction as a number
@@ -125,152 +113,133 @@ var model = {
         }
         // return sDir as a string
         //return console.log(sDir + " swell direction");
-        return model.local.builder(sDir);
+        return view.contentItemBuilder(sDir);
     },
     waterTemp: function(data) {
       // gets water temp as a number
       var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
       //return console.log(waterTemp + " degrees water.");
-      return model.local.builder(waterTemp);
+      return view.contentItemBuilder(waterTemp);
     },
     swellPeriod: function(data) {
       // gets swell period in seconds
       var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
       //return console.log(sPeriod + " swell period");
-      return model.local.builder(sPeriod);
+      return view.contentItemBuilder(sPeriod);
     }
-  } // end local object
-};
-// toScale object is for processing data into relative information, applications
-// include wetsuit recommendations, optional wave scale system for your
-// reports (4feet, waist-chest high etc.), optional conditions report
-var conditionsToScale = {
-  waveQuality: function(data) {
-    var period = data.data.weather[0].hourly[0].swellPeriod_secs,
-        swellSig;
-    if ( period < 7 ) {
-      swellSig = "Junky, short-period windswell";
-    } else if ( period < 10 ) {
-       swellSig = "Windswell";
-    } else if ( period < 12 ) {
-       swellSig = "Short period ground swell";
-    } else if ( period > 12 ) {
-       swellSig = "Long period ground swell";
+  }, // end local object
+  // toScale object is for processing data into relative information, applications
+  // include wetsuit recommendations, optional wave scale system for your
+  // reports (4feet, waist-chest high etc.), optional conditions report
+  conditionsToScale: {
+    waveQuality: function(data) {
+      var period = data.data.weather[0].hourly[0].swellPeriod_secs,
+          swellSig;
+      if ( period < 7 ) {
+        swellSig = "Junky, short-period windswell";
+      } else if ( period < 10 ) {
+         swellSig = "Windswell";
+      } else if ( period < 12 ) {
+         swellSig = "Short period ground swell";
+      } else if ( period > 12 ) {
+         swellSig = "Long period ground swell";
+      }
+      return console.log(view.contentItemBuilder(swellSig));
+    },
+    wetsuit: function(data) {
+      var waterTemp = data.data.weather[0].hourly[0].waterTemp_F,
+          wSuit;
+      if ( waterTemp < 55 ) {
+         wSuit = "5/4 Hooded Fullsuit";
+      } else if ( waterTemp < 60 ) {
+         wSuit = "4/3 Fullsuit";
+      } else if ( waterTemp < 67 ) {
+         wSuit = "3/2 Fullsuit";
+      } else if ( waterTemp < 72 ) {
+         wSuit = "Springsuit";
+      } else if ( waterTemp < 75 ) {
+         wSuit = "Vest & Trunks";
+      } else if ( waterTemp > 75 ) {
+         wSuit = "Trunks";
+      }
+      return console.log(view.contentItemBuilder(wSuit));
+    },
+    relativeWaveSize: function(data) {
+      // get local.waveSize() function
+      var wSizeM = data.data.weather[0].hourly[0].swellHeight_m,
+          wSizeF = (wSizeM * 3.28).toPrecision(3),
+          wSize;
+      // conditional to determine relative wave size
+      if ( wSizeF < 1 ) {
+          wSize = "Flat";
+      } else if ( wSizeF < 3 ) {
+        wSize = "Knee to waist high";
+      } else if ( wSizeF < 4 ) {
+        wSize = "Waist to chest high";
+      } else if ( wSizeF < 5 ) {
+        wSize = "Chest to head high";
+      } else if ( wSizeF < 6 ) {
+        wSize = "Head high";
+      } else if ( wSizeF < 8 ) {
+        wSize = "Overhead";
+      } else if ( wSizeF < 12 ) {
+        wSize = "Overhead to double overhead";
+      } else if ( wSizeF < 18 ) {
+        wSize = "Double to triple overhead";
+      } else if (wSizeF > 18.1 ) {
+        wSize = "Triple overhead plus";
+      }
+      return console.log(view.contentItemBuilder(wSizeF));
     }
-    return console.log(swellSig);
   },
-  wetsuit: function(data) {
-    var waterTemp = data.data.weather[0].hourly[0].waterTemp_F,
-        wSuit;
-    if ( waterTemp < 55 ) {
-       wSuit = "5/4 Hooded Fullsuit";
-    } else if ( waterTemp < 60 ) {
-       wSuit = "4/3 Fullsuit";
-    } else if ( waterTemp < 67 ) {
-       wSuit = "3/2 Fullsuit";
-    } else if ( waterTemp < 72 ) {
-       wSuit = "Springsuit";
-    } else if ( waterTemp < 75 ) {
-       wSuit = "Vest & Trunks";
-    } else if ( waterTemp > 75 ) {
-       wSuit = "Trunks";
-    }
-    return console.log(wSuit);
-  },
-  relativeWaveSize: function(data) {
-    // get local.waveSize() function
-    var wSizeM = data.data.weather[0].hourly[0].swellHeight_m,
-        wSizeF = (wSizeM * 3.28).toPrecision(3),
-        wSize;
-    // conditional to determine relative wave size
-    if ( wSizeF < 1 ) {
-        wSize = "Flat";
-    } else if ( wSizeF < 3 ) {
-      wSize = "Knee to waist high";
-    } else if ( wSizeF < 4 ) {
-      wSize = "Waist to chest high";
-    } else if ( wSizeF < 5 ) {
-      wSize = "Chest to head high";
-    } else if ( wSizeF < 6 ) {
-      wSize = "Head high";
-    } else if ( wSizeF < 8 ) {
-      wSize = "Overhead";
-    } else if ( wSizeF < 12 ) {
-      wSize = "Overhead to double overhead";
-    } else if ( wSizeF < 18 ) {
-      wSize = "Double to triple overhead";
-    } else if (wSizeF > 18.1 ) {
-      wSize = "Triple overhead plus";
-    }
-    return console.log(wSizeF);
-  }
-};
-
-// store the land-based weather calls
-var weatherCall = function(data) {
-  model.local.winddirection(data);
-  model.local.airTemp(data);
-  model.local.windspeed(data);
-  model.local.skies(data);
-};
-
-// store the ocean data here
-var marineCall = function(data) {
-  model.local.waveSize(data);
-  model.local.swellDirection(data);
-  model.local.waterTemp(data);
-  model.local.swellPeriod(data);
-};
-
-var relative = function(data) {
-	model.conditionsToScale.relativeWaveSize(data);
-  model.conditionsToScale.waveQuality(data);
-  model.conditionsToScale.wetsuit(data);
-};
-
-// data objects that are compartmentalized and passed individual arguments
-// from the wave data object. Allowing for customized and individual
-// ajax calls to the worldweatheronline server
-var ajaxCall = {
-  cityUrl: [
-    // santa cruz(0)
-    "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-    // carpenteria(1)
-    "http://api.worldweatheronline.com/free/v1/weather.ashx?q=93014&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-    // san clemente(2)
-    "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-  ],
-    waveUrl: [
-      // steamers(0)
-      "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-      // rincon(1)
-      "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-      // trestles(2)
-      "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"
+  // data objects that are compartmentalized and passed individual arguments
+  // from the wave data object. Allowing for customized and individual
+  // ajax calls to the worldweatheronline server
+  ajaxCall: {
+    cityUrl: [
+      // santa cruz(0)
+      "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+      // carpenteria(1)
+      "http://api.worldweatheronline.com/free/v1/weather.ashx?q=93014&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+      // san clemente(2)
+      "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
     ],
-  // take the info passed back from the server and prepare it
-  data: $(this).serialize(),
-  // set this function to shoot back a message if there are any issues with
-  // the external ajax call
-  error: function(){ console.log('better luck next time, bud!');}
-};
+      waveUrl: [
+        // steamers(0)
+        "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+        // rincon(1)
+        "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+        // trestles(2)
+        "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"
+      ],
+    // take the info passed back from the server and prepare it
+    data: $(this).serialize(),
+    // set this function to shoot back a message if there are any issues with
+    // the external ajax call
+    error: function(){ console.log('better luck next time, bud!');}
+  },
+  // store the land-based weather calls
+  weatherCall: function(data) {
+    model.local.winddirection(data);
+    model.local.airTemp(data);
+    model.local.windspeed(data);
+    model.local.skies(data);
+  },
+  // store the ocean data here
+  marineCall: function(data) {
+    model.local.waveSize(data);
+    model.local.swellDirection(data);
+    model.local.waterTemp(data);
+    model.local.swellPeriod(data);
+  },
+  relative: function(data) {
+  	model.conditionsToScale.relativeWaveSize(data);
+    model.conditionsToScale.waveQuality(data);
+    model.conditionsToScale.wetsuit(data);
+  }
+};  // END MODEL
 
-//////////////////////////////////////////////////////////////////////////////
-// this function evaluates the current body id and alters the
-// content of the page using json data containing location information.
-var jsonData = function(arg) {
-  var $content = $('#localData');
-  var i = arg;
-  // get rid of list items inside content area using jquery empty() method.
-  $content.empty();
-  $.getJSON('../waves/data/data.json', function(data) {
-    $content.append($('<li><strong>Wave:</strong> ' + data.locations[i].title + '</li>'));
-    $content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-    $content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-    $content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
-  });
-};
-
+// CONSTRUCTOR FUNCTIONS
 // create a new constructor function calling the location information
 var Location = function() {};
 
@@ -278,11 +247,11 @@ var Location = function() {};
 Location.prototype.weather = function(arg) {
   $.ajax({
           type: "POST",
-          url: ajaxCall.cityUrl[arg],
+          url: model.ajaxCall.cityUrl[arg],
           dataType: 'jsonp',
           success: function(data) {
             model.local.time();
-            weatherCall(data);
+            model.weatherCall(data);
           }
   });
 };
@@ -301,10 +270,10 @@ var Wave = function() {};
 Wave.prototype.conditions = function(arg) {
   $.ajax({
           type: "POST",
-          url: ajaxCall.waveUrl[arg],
+          url: model.ajaxCall.waveUrl[arg],
           dataType: 'jsonp',
           success: function(data) {
-            marineCall(data);
+            model.marineCall(data);
           }
   });
 };
@@ -356,6 +325,18 @@ var wave = new Wave(); // wave.conditions(arg);
         $(this).text(view.locations.name[i]);
       });
     }, // auto initialize this function
+    contentItemBuilder: function(arg) {
+      var cont = $("#remoteData");
+      var li = $("<li></li>");
+      var span = $("<span></span>");
+
+      // append list element to container
+      cont.append(li);
+      // append span to list element
+      li.append(span);
+      // insert the argument's return content into the span element
+      span.text(arg);
+    },
     // display function to show wave template, triggered by the local nav
     // element
     waveDisplay: function() {
@@ -390,22 +371,36 @@ var wave = new Wave(); // wave.conditions(arg);
             return console.log("there was an issue");
           }
     },
+    // this function evaluates the current body id and alters the
+    // content of the page using json data containing location information.
+    jsonData: function(arg) {
+      var $content = $('#localData');
+      var i = arg;
+      // get rid of list items inside content area using jquery empty() method.
+      $content.empty();
+      $.getJSON('../waves/data/data.json', function(data) {
+        $content.append($('<li><strong>Wave:</strong> ' + data.locations[i].title + '</li>'));
+        $content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+        $content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+        $content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+      });
+    },
     buildLocation: function(arg) {
       // add conditional to determine index for ajaxCalls
       if (arg.attr("id") == "santaCruz") {
-        jsonData(0);
+        view.jsonData(0);
         wave.conditions(0);
         city.weather(0);
       } else if (arg.attr("id") == "carpenteria") {
-        jsonData(1);
+        view.jsonData(1);
         wave.conditions(1);
         city.weather(1);
       } else {
-        jsonData(2);
+        view.jsonData(2);
         wave.conditions(2);
         city.weather(2);
       }
-    }
+    },
   };
 
 
@@ -462,6 +457,8 @@ var controller = {
       });
     }
 };
+// eventually, the init function below should be the return value of the auto
+// invoked code above
 
 // init function
 (function() {
