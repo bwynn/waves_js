@@ -2,145 +2,145 @@
 // WEATHER AND MARINE INFO CALLS
 // store the ajax object, wave object, weather object all into the same
 // immediately instantiated call
-var local = {
-  builder: function(arg) {
-    var cont = $("#remoteData");
-    var li = $("<li></li>");
-    var span = $("<span></span>");
+var model = {
+  local: {
+    builder: function(arg) {
+      var cont = $("#remoteData");
+      var li = $("<li></li>");
+      var span = $("<span></span>");
 
-    // append list element to container
-    cont.append(li);
-    // append span to list element
-    li.append(span);
-    // insert the argument's return content into the span element
-    span.text(arg);
-  },
+      // append list element to container
+      cont.append(li);
+      // append span to list element
+      li.append(span);
+      // insert the argument's return content into the span element
+      span.text(arg);
+    },
+    // add an object that lists off content to load into the template
+    // this can be string-based
+    // and then add a function that assigns out the information into the
+    // array of list elements
 
-  // add an object that lists off content to load into the template
-  // this can be string-based
-  // and then add a function that assigns out the information into the
-  // array of list elements
+    // get air temp for location
+    airTemp: function(data) {
+      // return air temp information as a string
+      var temp = data.data.current_condition[0].temp_F;
+      return model.local.builder(temp);
+    },
 
-  // get air temp for location
-  airTemp: function(data) {
-    // return air temp information as a string
-    var temp = data.data.current_condition[0].temp_F;
-    return local.builder(temp);
-  },
+    // local time -- this needs to be called independent of the ajax calls, as the
+    // functions calling the ajaxCalls are handling data as arguments. Call this
+    // independently.
+    time: function() {
+      var gmt = new Date();
+      var time = gmt.toLocaleTimeString();
+      // return time as a string
+      //return console.log(time);
+      return model.local.builder(time);
+    },
 
-  // local time -- this needs to be called independent of the ajax calls, as the
-  // functions calling the ajaxCalls are handling data as arguments. Call this
-  // independently.
-  time: function() {
-    var gmt = new Date();
-    var time = gmt.toLocaleTimeString();
-    // return time as a string
-    //return console.log(time);
-    return local.builder(time);
-  },
+    winddirection: function(data) {
+      //wind direction
+      var w_dir = data.data.current_condition[0].winddirDegree,
+          windDir;
 
-  winddirection: function(data) {
-    //wind direction
-    var w_dir = data.data.current_condition[0].winddirDegree,
-        windDir;
+      if (w_dir < 0) {
+        windDir = "North";
+        } else if (w_dir < 45) {
+          windDir = "North East";
+        } else if (w_dir < 90) {
+          windDir = "East";
+        } else if (w_dir < 135) {
+          windDir = "South East";
+        } else if (w_dir < 180) {
+          windDir = "South";
+        } else if (w_dir < 225) {
+          windDir = "South West";
+        } else if (w_dir < 270) {
+          windDir = "West";
+        } else if (w_dir < 315) {
+          windDir = "North West";
+        }
+      return model.local.builder(windDir);
+    },
 
-    if (w_dir < 0) {
-      windDir = "North";
-      } else if (w_dir < 45) {
-        windDir = "North East";
-      } else if (w_dir < 90) {
-        windDir = "East";
-      } else if (w_dir < 135) {
-        windDir = "South East";
-      } else if (w_dir < 180) {
-        windDir = "South";
-      } else if (w_dir < 225) {
-        windDir = "South West";
-      } else if (w_dir < 270) {
-        windDir = "West";
-      } else if (w_dir < 315) {
-        windDir = "North West";
-      }
-    return local.builder(windDir);
-  },
+    windspeed: function(data) {
+      // return windspeed as a string
+      //return console.log(data.data.current_condition[0].windspeedMiles);
+      var windSpeed = data.data.current_condition[0].windspeedMiles;
+      return model.local.builder(windSpeed);
+    },
 
-  windspeed: function(data) {
-    // return windspeed as a string
-    //return console.log(data.data.current_condition[0].windspeedMiles);
-    var windSpeed = data.data.current_condition[0].windspeedMiles;
-    return local.builder(windSpeed);
-  },
+    skies: function(data) {
+      // weather Description returned as string
+      //return console.log(data.data.current_condition[0].weatherDesc[0].value);
+      var currently = data.data.current_condition[0].weatherDesc[0].value;
 
-  skies: function(data) {
-    // weather Description returned as string
-    //return console.log(data.data.current_condition[0].weatherDesc[0].value);
-    var currently = data.data.current_condition[0].weatherDesc[0].value;
-
-    return local.builder(currently);
-  },
-  waveSize: function(data) {
-    // get swell height - returned as a number
-    var wSizeM = data.data.weather[0].hourly[0].swellHeight_m,
-        // translates into feet
-        wSizeF = (wSizeM * 3.28).toPrecision(3);
-    //return console.log(wSizeF + " feet. Wave size.");
-    return local.builder(wSizeF);
-  },
-  swellDirection: function(data) {
-      // get swell direction as a number
-      var swellDir = data.data.weather[0].hourly[0].swellDir,
-          sDir;
-      if ( swellDir < 23 ) {
-         sDir = "NNE";
-      } else if ( swellDir < 45 ) {
-         sDir = "NE";
-      } else if ( swellDir < 69 ) {
-         sDir = "ENE";
-      } else if ( swellDir < 90 ) {
-         sDir = "E";
-      } else if ( swellDir < 116 ) {
-         sDir = "ESE";
-      } else if ( swellDir < 140 ) {
-         sDir = "SE";
-      } else if ( swellDir < 170 ) {
-         sDir = "SSE";
-      } else if ( swellDir < 190 ) {
-         sDir = "S";
-      } else if ( swellDir < 215 ) {
-         sDir = "SSW";
-      } else if ( swellDir < 235 ) {
-         sDir = "SW";
-      } else if ( swellDir < 255 ) {
-         sDir = "WSW";
-      } else if ( swellDir < 280 ) {
-         sDir = "W";
-      } else if ( swellDir < 305 ) {
-         sDir = "WNW";
-      } else if ( swellDir < 320 ) {
-         sDir = "NW";
-      } else if ( swellDir < 340 ) {
-         sDir = "NNW";
-      } else if ( swellDir > 341 ) {
-         sDir = "N";
-      }
-      // return sDir as a string
-      //return console.log(sDir + " swell direction");
-      return local.builder(sDir);
-  },
-  waterTemp: function(data) {
-    // gets water temp as a number
-    var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
-    //return console.log(waterTemp + " degrees water.");
-    return local.builder(waterTemp);
-  },
-  swellPeriod: function(data) {
-    // gets swell period in seconds
-    var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
-    //return console.log(sPeriod + " swell period");
-    return local.builder(sPeriod);
-  }
+      return model.local.builder(currently);
+    },
+    waveSize: function(data) {
+      // get swell height - returned as a number
+      var wSizeM = data.data.weather[0].hourly[0].swellHeight_m,
+          // translates into feet
+          wSizeF = (wSizeM * 3.28).toPrecision(3);
+      //return console.log(wSizeF + " feet. Wave size.");
+      return model.local.builder(wSizeF);
+    },
+    swellDirection: function(data) {
+        // get swell direction as a number
+        var swellDir = data.data.weather[0].hourly[0].swellDir,
+            sDir;
+        if ( swellDir < 23 ) {
+           sDir = "NNE";
+        } else if ( swellDir < 45 ) {
+           sDir = "NE";
+        } else if ( swellDir < 69 ) {
+           sDir = "ENE";
+        } else if ( swellDir < 90 ) {
+           sDir = "E";
+        } else if ( swellDir < 116 ) {
+           sDir = "ESE";
+        } else if ( swellDir < 140 ) {
+           sDir = "SE";
+        } else if ( swellDir < 170 ) {
+           sDir = "SSE";
+        } else if ( swellDir < 190 ) {
+           sDir = "S";
+        } else if ( swellDir < 215 ) {
+           sDir = "SSW";
+        } else if ( swellDir < 235 ) {
+           sDir = "SW";
+        } else if ( swellDir < 255 ) {
+           sDir = "WSW";
+        } else if ( swellDir < 280 ) {
+           sDir = "W";
+        } else if ( swellDir < 305 ) {
+           sDir = "WNW";
+        } else if ( swellDir < 320 ) {
+           sDir = "NW";
+        } else if ( swellDir < 340 ) {
+           sDir = "NNW";
+        } else if ( swellDir > 341 ) {
+           sDir = "N";
+        }
+        // return sDir as a string
+        //return console.log(sDir + " swell direction");
+        return model.local.builder(sDir);
+    },
+    waterTemp: function(data) {
+      // gets water temp as a number
+      var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
+      //return console.log(waterTemp + " degrees water.");
+      return model.local.builder(waterTemp);
+    },
+    swellPeriod: function(data) {
+      // gets swell period in seconds
+      var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
+      //return console.log(sPeriod + " swell period");
+      return model.local.builder(sPeriod);
+    }
+  } // end local object
 };
-
 // toScale object is for processing data into relative information, applications
 // include wetsuit recommendations, optional wave scale system for your
 // reports (4feet, waist-chest high etc.), optional conditions report
@@ -208,24 +208,24 @@ var conditionsToScale = {
 
 // store the land-based weather calls
 var weatherCall = function(data) {
-  local.winddirection(data);
-  local.airTemp(data);
-  local.windspeed(data);
-  local.skies(data);
+  model.local.winddirection(data);
+  model.local.airTemp(data);
+  model.local.windspeed(data);
+  model.local.skies(data);
 };
 
 // store the ocean data here
 var marineCall = function(data) {
-  local.waveSize(data);
-  local.swellDirection(data);
-  local.waterTemp(data);
-  local.swellPeriod(data);
+  model.local.waveSize(data);
+  model.local.swellDirection(data);
+  model.local.waterTemp(data);
+  model.local.swellPeriod(data);
 };
 
 var relative = function(data) {
-	conditionsToScale.relativeWaveSize(data);
-  conditionsToScale.waveQuality(data);
-  conditionsToScale.wetsuit(data);
+	model.conditionsToScale.relativeWaveSize(data);
+  model.conditionsToScale.waveQuality(data);
+  model.conditionsToScale.wetsuit(data);
 };
 
 // data objects that are compartmentalized and passed individual arguments
@@ -281,7 +281,7 @@ Location.prototype.weather = function(arg) {
           url: ajaxCall.cityUrl[arg],
           dataType: 'jsonp',
           success: function(data) {
-            local.time();
+            model.local.time();
             weatherCall(data);
           }
   });
