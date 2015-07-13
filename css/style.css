@@ -37,14 +37,14 @@ ul#globalNavContent {
 }
 
 /* Disabled while building the module for the list item returns -------------- READ THIS ------------ */
-/*#content {
+#content {
   display: none;
-}*/
+}
 
 /* Set the placement container as a flexible container, allowing its children
 elements to flex depending on viewport.*/
 #globalNavContent {
-  margin: .5em;
+  margin: .1em;
   box-sizing: border-box;
   display: -webkit-flex;
   display: -ms-flex;
@@ -59,8 +59,8 @@ li.globalNavList {
   display: inline-block;
   background-color: #999;
   height: 50px;
-  min-width: 300px;
-  margin: .5em auto;
+  width: 33%;
+  margin: .1em;
   box-sizing: border-box;
   -webkit-flex-grow: 1;
   -ms-flex-grow: 1;
@@ -95,6 +95,7 @@ article#mainDisplay,
   flex-flow: row wrap;
   -webkit-justify-content: space-around;
   justify-content: space-around;
+  -webkit-align-content: stretch;
   align-content: stretch;
 }
 
