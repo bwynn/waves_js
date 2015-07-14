@@ -293,9 +293,9 @@ Wave.prototype.conditions = function(arg) {
   });
 };
 
-// index 1 -- STEAMERS -- SANTA CRUZ
-// index 3 -- RINCON -- CARPENTERIA
-// index 5 -- TRESTLES -- SAN CLEMENTE
+// index 0 -- STEAMERS -- SANTA CRUZ
+// index 1 -- RINCON -- CARPENTERIA
+// index 2 -- TRESTLES -- SAN CLEMENTE
 var wave = new Wave(); // wave.conditions(arg);
 
 
@@ -399,14 +399,17 @@ var wave = new Wave(); // wave.conditions(arg);
     buildLocation: function(arg) {
       // add conditional to determine index for ajaxCalls
       if (arg.attr("id") == "santaCruz") {
+        view.pageTitle(model.locations.name[0]);
         view.jsonData(0);
         wave.conditions(0);
         city.weather(0);
       } else if (arg.attr("id") == "carpenteria") {
+        view.pageTitle(model.locations.name[1]);
         view.jsonData(1);
         wave.conditions(1);
         city.weather(1);
       } else {
+        view.pageTitle(model.locations.name[2]);
         view.jsonData(2);
         wave.conditions(2);
         city.weather(2);
@@ -424,7 +427,20 @@ var wave = new Wave(); // wave.conditions(arg);
       // append span element to list
       li.append(span);
       // insert text into builder;
-      span.text(conditions).append("<br/>" + label);
+      span.text(conditions).append("<br/><small>" + label + "</small>");
+    },
+    pageTitle: function(arg) {
+      // create header tag
+      var $header = $("<h1>"),
+      // get container
+          $pageTitle = $("#pageTitle"),
+          $wipeHeader = $("#pageTitle h1");
+      // remove existing header
+      $wipeHeader.remove();
+      // attach tag into container
+      $pageTitle.append($header);
+      // return appended header
+      $header.text(arg);
     }
   }; // END VIEW
 
