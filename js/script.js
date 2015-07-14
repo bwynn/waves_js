@@ -3,6 +3,37 @@
 // store the ajax object, wave object, weather object all into the same
 // immediately instantiated call
 var model = {
+  locations: {
+    name: ["Steamer Lane", "Rincon", "Trestles"],
+    id: ["santaCruz", "carpenteria", "sanClemente"],
+    conditionsLabel: ["Time", "Wind Direction", "Temp F", "Wind Speed", "Skies", "Wave Size", "Swell Direction", "Water Temp", "Swell Period (sec)"]
+  },
+  // data objects that are compartmentalized and passed individual arguments
+  // from the wave data object. Allowing for customized and individual
+  // ajax calls to the worldweatheronline server
+  ajaxCall: {
+    cityUrl: [
+      // santa cruz(0)
+      "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+      // carpenteria(1)
+      "http://api.worldweatheronline.com/free/v1/weather.ashx?q=93014&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+      // san clemente(2)
+      "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+    ],
+      waveUrl: [
+        // steamers(0)
+        "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+        // rincon(1)
+        "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
+        // trestles(2)
+        "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"
+      ],
+    // take the info passed back from the server and prepare it
+    data: $(this).serialize(),
+    // set this function to shoot back a message if there are any issues with
+    // the external ajax call
+    error: function(){ console.log('better luck next time, bud!');}
+  },
   local: {
     // add an object that lists off content to load into the template
     // this can be string-based
@@ -13,7 +44,9 @@ var model = {
     airTemp: function(data) {
       // return air temp information as a string
       var temp = data.data.current_condition[0].temp_F;
-      return view.contentItemBuilder(temp);
+      // build return and match to locations object
+      //return view.contentItemBuilder(temp);
+      return view.listBuilder(temp, model.locations.conditionsLabel[2]);
     },
 
     // local time -- this needs to be called independent of the ajax calls, as the
@@ -24,7 +57,8 @@ var model = {
       var time = gmt.toLocaleTimeString();
       // return time as a string
       //return console.log(time);
-      return view.contentItemBuilder(time);
+      //return view.contentItemBuilder(time);
+      return view.listBuilder(time, model.locations.conditionsLabel[0]);
     },
 
     winddirection: function(data) {
@@ -49,14 +83,16 @@ var model = {
         } else if (w_dir < 315) {
           windDir = "North West";
         }
-      return view.contentItemBuilder(windDir);
+      //return view.contentItemBuilder(windDir);
+      return view.listBuilder(windDir, model.locations.conditionsLabel[1]);
     },
 
     windspeed: function(data) {
       // return windspeed as a string
       //return console.log(data.data.current_condition[0].windspeedMiles);
       var windSpeed = data.data.current_condition[0].windspeedMiles;
-      return view.contentItemBuilder(windSpeed);
+      //return view.contentItemBuilder(windSpeed);
+      return view.listBuilder(windSpeed, model.locations.conditionsLabel[3]);
     },
 
     skies: function(data) {
@@ -64,7 +100,8 @@ var model = {
       //return console.log(data.data.current_condition[0].weatherDesc[0].value);
       var currently = data.data.current_condition[0].weatherDesc[0].value;
 
-      return view.contentItemBuilder(currently);
+      //return view.contentItemBuilder(currently);
+      return view.listBuilder(currently, model.locations.conditionsLabel[4]);
     },
     waveSize: function(data) {
       // get swell height - returned as a number
@@ -72,7 +109,8 @@ var model = {
           // translates into feet
           wSizeF = (wSizeM * 3.28).toPrecision(3);
       //return console.log(wSizeF + " feet. Wave size.");
-      return view.contentItemBuilder(wSizeF);
+      //return view.contentItemBuilder(wSizeF);
+      return view.listBuilder(wSizeF, model.locations.conditionsLabel[5]);
     },
     swellDirection: function(data) {
         // get swell direction as a number
@@ -113,19 +151,22 @@ var model = {
         }
         // return sDir as a string
         //return console.log(sDir + " swell direction");
-        return view.contentItemBuilder(sDir);
+        //return view.contentItemBuilder(sDir);
+        return view.listBuilder(sDir, model.locations.conditionsLabel[6]);
     },
     waterTemp: function(data) {
       // gets water temp as a number
       var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
       //return console.log(waterTemp + " degrees water.");
-      return view.contentItemBuilder(waterTemp);
+      //return view.contentItemBuilder(waterTemp);
+      return view.listBuilder(waterTemp, model.locations.conditionsLabel[7]);
     },
     swellPeriod: function(data) {
       // gets swell period in seconds
       var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
       //return console.log(sPeriod + " swell period");
-      return view.contentItemBuilder(sPeriod);
+      //return view.contentItemBuilder(sPeriod);
+      return view.listBuilder(sPeriod, model.locations.conditionsLabel[8]);
     }
   }, // end local object
   // toScale object is for processing data into relative information, applications
@@ -191,32 +232,6 @@ var model = {
       }
       return console.log(view.contentItemBuilder(wSizeF));
     }
-  },
-  // data objects that are compartmentalized and passed individual arguments
-  // from the wave data object. Allowing for customized and individual
-  // ajax calls to the worldweatheronline server
-  ajaxCall: {
-    cityUrl: [
-      // santa cruz(0)
-      "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-      // carpenteria(1)
-      "http://api.worldweatheronline.com/free/v1/weather.ashx?q=93014&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-      // san clemente(2)
-      "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-    ],
-      waveUrl: [
-        // steamers(0)
-        "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-        // rincon(1)
-        "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
-        // trestles(2)
-        "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"
-      ],
-    // take the info passed back from the server and prepare it
-    data: $(this).serialize(),
-    // set this function to shoot back a message if there are any issues with
-    // the external ajax call
-    error: function(){ console.log('better luck next time, bud!');}
   },
   // store the land-based weather calls
   weatherCall: function(data) {
@@ -289,14 +304,10 @@ var wave = new Wave(); // wave.conditions(arg);
   // create locations object, this will serve as object information for all
   // things pertaining to
   var view = {
-    locations: {
-      name: ["Steamer Lane", "Rincon", "Trestles"],
-      id: ["santaCruz", "carpenteria", "sanClemente"]
-    },
     // loop through length using each jquery method
     buildList: function() {
       // get length of locations options
-      var location = view.locations.name;
+      var location = model.locations.name;
 
       $(location).each(function() {
         // get unordered list element
@@ -321,14 +332,14 @@ var wave = new Wave(); // wave.conditions(arg);
 
       // for each anchor tag selected, match the string from the name object
       a.each(function(i) {
-        $(this).attr("id", view.locations.id[i]);
-        $(this).text(view.locations.name[i]);
+        $(this).attr("id", model.locations.id[i]);
+        $(this).text(model.locations.name[i]);
       });
     }, // auto initialize this function
     contentItemBuilder: function(arg) {
-      var cont = $("#remoteData");
-      var li = $("<li></li>");
-      var span = $("<span></span>");
+      var cont = $("#remoteData"),
+          li = $("<li></li>"),
+          span = $("<span></span>");
 
       // append list element to container
       cont.append(li);
@@ -401,7 +412,21 @@ var wave = new Wave(); // wave.conditions(arg);
         city.weather(2);
       }
     },
-  };
+    listBuilder: function(arg1, arg2) {
+      var conditions = arg1,
+          label = arg2,
+          cont = $("#remoteData"),
+          li = $("<li></li>"),
+          span = $("<span></span>");
+
+      // append list element to container
+      cont.append(li);
+      // append span element to list
+      li.append(span);
+      // insert text into builder;
+      span.text(conditions).append("<br/>" + label);
+    }
+  }; // END VIEW
 
 
 
