@@ -87,12 +87,8 @@ li.globalNavList {
   background-color: #999;
   height: 50px;
   width: 33%;
-  min-width: 200px;
   margin: .1em;
   box-sizing: border-box;
-  -webkit-flex-grow: 1;
-  -ms-flex-grow: 1;
-  flex-grow: 1;
 }
 
 /* style declaration to allow anchor tags to inherit parent containers
@@ -161,6 +157,9 @@ article#mainDisplay,
 }
 
 @media only screen and (max-width: 768px) {
+  li.globalNavList {
+    width: 100%;
+  }
   #conditionsInfo > #remoteData > li {
     width: 49%;
   }
