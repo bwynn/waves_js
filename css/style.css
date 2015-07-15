@@ -7,6 +7,7 @@ body {
 
 body {
   font-family: 'Open Sans', helvetica, sans-serif;
+  font-size: 18px;
 }
 
 h1 {
@@ -87,8 +88,10 @@ li.globalNavList {
   background-color: #999;
   height: 50px;
   width: 33%;
-  margin: .1em;
+  margin: 1px;
   box-sizing: border-box;
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
 }
 
 /* style declaration to allow anchor tags to inherit parent containers
@@ -123,14 +126,15 @@ article#mainDisplay,
   width: inherit;
 }
 
-/*#remoteData {
-  -webkit-flex-flow: row wrap;
-  flex-flow: row wrap;
-  -webkit-justify-content: space-around;
-  justify-content: space-around;
-  -webkit-align-content: stretch;
-  align-content: stretch;
-}*/
+#conditionsInfo > #localData {
+  padding: 1.2em;
+  box-sizing: border-box;
+}
+
+#conditionsInfo > #localData > li {
+  line-height: 1.4em;
+  font-size: 1.2em;
+}
 
 #conditionsInfo > #remoteData > li {
   display: inline-block;
@@ -160,11 +164,22 @@ article#mainDisplay,
   li.globalNavList {
     width: 100%;
   }
+
+  #conditionsInfo > #localData > li {
+    font-size: .9em;
+  }
+
   #conditionsInfo > #remoteData > li {
-    width: 49%;
+    width: 32%;
+    margin: 2px;
+    box-sizing: border-box;
   }
 
   #conditionsInfo > #remoteData > li > span {
-    font-size: 1.8rem;
+    margin-top: 1.3em;
+    font-size: 1.3rem;
+  }
+  #conditionsInfo > #remoteData > li > span small {
+    font-size: .7rem;
   }
 }
