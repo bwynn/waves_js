@@ -320,6 +320,15 @@ var wave = new Wave(); // wave.conditions(arg);
         li.addClass("globalNavList");
       });
     },  // auto intialize this function
+    // show and hide the navigation for the nav display event
+    showNav: function() {
+      // get shownav anchor element
+      var $nav = $("nav#globalNav");
+
+      // toggle show/hide
+      $nav.slideToggle("slow");
+    },
+    // auto initialize this funciton
     // build the nav links function
     buildNavLinks: function() {
       // get list items
@@ -464,6 +473,9 @@ var controller = {
       $anchor.removeClass("active");
       $(this).addClass("active");
 
+      // hide the global navigation
+      view.showNav();
+
       // ensure that the local nav links are set to the correct value, which will
       // determine what content to display within the content section.
       $localNav.removeClass("active");
@@ -485,6 +497,14 @@ var controller = {
 
       });
     },
+    showNavController: function() {
+      // get anchor element
+      var $anchor = $("a#showNav");
+      // create event
+      $anchor.on("click", function() {
+        view.showNav();
+      });
+    },
     localNavController: function() {
       // localNavigation event trigger
       var $localNavAnchor = $("#localNav ul li a");
@@ -500,6 +520,7 @@ var controller = {
 };
 // eventually, the init function below should be the return value of the auto
 // invoked code above
+controller.showNavController(); // initialize shownav function
 
 // init function
 (function() {

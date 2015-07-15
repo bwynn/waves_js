@@ -1,6 +1,7 @@
 /* ================= Global Styles ================= */
 html,
-body {
+body,
+#pageWrap {
   height: 100%;
   width: 100%;
 }
@@ -10,7 +11,8 @@ body {
   font-size: 18px;
 }
 
-h1 {
+h1,
+figure {
   margin: 0;
 }
 
@@ -55,6 +57,31 @@ a {
   align-content: stretch;
 }
 
+#pageWrap header {
+  height: 50px;
+  position: relative;
+  top: 0;
+  background-color: #333;
+}
+
+header > a#showNav {
+  display: inline-block;
+  float: right;
+  height: 40px;
+  width: 40px;
+  background-color: white;
+  position: relative;
+  top: 5px;
+  right: 5px;
+}
+
+nav#globalNav {
+  display: none;
+  position: relative;
+  top: 12px;
+  overflow: hidden;
+  width: 100%;
+}
 
 ul#globalNavContent {
   padding: 0;
@@ -65,6 +92,12 @@ ul#globalNavContent {
   display: none;
 }
 
+#content > figure.backgd {
+  width: 100%;
+  height: 500px;
+  background-color: #999;
+}
+
 li.globalNavList,
 #localNav > ul > li {
   display: inline-block;
@@ -73,7 +106,8 @@ li.globalNavList,
 /* Set the placement container as a flexible container, allowing its children
 elements to flex depending on viewport.*/
 #globalNavContent {
-  margin: .1em;
+  margin: 0;
+  width: 100%;
   box-sizing: border-box;
   display: -webkit-flex;
   display: -ms-flex;
@@ -85,7 +119,7 @@ elements to flex depending on viewport.*/
 
 /* style declarations for the global navigation container boxes */
 li.globalNavList {
-  background-color: #999;
+  background-color: goldenrod;
   height: 50px;
   width: 33%;
   margin: 1px;
@@ -138,7 +172,7 @@ article#mainDisplay,
 
 #conditionsInfo > #remoteData > li {
   display: inline-block;
-  width: 33%;
+  width: 32.9%;
   text-align: center;
   min-height: 100px;
   font-size: .8em;
@@ -161,6 +195,9 @@ article#mainDisplay,
 }
 
 @media only screen and (max-width: 768px) {
+  #content > figure.backgd {
+    height: 300px;
+  }
   li.globalNavList {
     width: 100%;
   }
@@ -176,8 +213,9 @@ article#mainDisplay,
   }
 
   #conditionsInfo > #remoteData > li > span {
-    margin-top: 1.3em;
+    margin-top: 1em;
     font-size: 1.3rem;
+    line-height: 1;
   }
   #conditionsInfo > #remoteData > li > span small {
     font-size: .7rem;
