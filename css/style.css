@@ -65,19 +65,16 @@ a {
 }
 
 #homePageIcon {
+  display: block;
+  margin: 0 auto;
   height: 45px;
   width: 45px;
   background-image: url("../images/icon.svg");
   background-size: contain;
   background-repeat: no-repeat;
   position: relative;
-  left: 50%:
-}
-
-#homePageIcon,
-header > a#showNav {
-    display: inline-block;
-    top: 5px;
+  z-index: 0;
+  top: 5px;
 }
 
 header > a#showNav {
@@ -87,13 +84,15 @@ header > a#showNav {
   width: 40px;
   background-color: white;
   position: relative;
+  z-index: 1;
+  top: -40px;
   right: 5px;
 }
 
 nav#globalNav {
   display: none;
   position: relative;
-  top: 12px;
+  top: -34px;
   overflow: hidden;
   width: 100%;
 }
@@ -107,7 +106,7 @@ ul#globalNavContent {
   display: none;
 }
 
-#content > figure.backgd {
+#content > figure#backgd {
   width: 100%;
   height: 500px;
   background-color: #999;
@@ -210,9 +209,128 @@ article#mainDisplay,
   font-size: 1rem;
 }
 
+/* =============== BACKGROUNDS ======================== */
+
+.santaCruz,
+.carpenteria,
+.sanClemente {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media
+only screen and (max-width: 499px) and (-webkit-min-device-pixel-ratio: 2),
+only screen and (max-width: 499px) and (min--moz-device-pixel-ratio: 2),
+only screen and (max-width: 499px) and (min-device-pixel-ratio: 2),
+only screen and (max-width: 499px) and (min-resolution: 192dpi),
+only screen and (max-width: 499px) and (min-resolution: 2dppx) {
+  .santaCruz {
+    background-image: url("../images/steamers_sm_2x.jpg");
+  }
+
+  .carpenteria {
+    background-image: url("../images/rincon_sm_2x.jpg");
+  }
+
+  .sanClemente {
+    background-image: url("../images/trestles_sm_2x.jpg");
+  }
+}
+
+@media
+only screen and (min-width: 500px) and (-webkit-min-device-pixel-ratio: 1),
+only screen and (min-width: 500px) and (min--moz-device-pixel-ratio: 1),
+only screen and (min-width: 500px) and (min-device-pixel-ratio: 1) {
+  .santaCruz {
+    background-image: url("../images/steamers_sm.jpg");
+  }
+
+  .carpenteria {
+    background-image: url("../images/rincon_sm.jpg");
+  }
+
+  .sanClemente {
+    background-image: url("../images/trestles_sm.jpg");
+  }
+}
+
+@media
+only screen and (min-width: 500px) and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-width: 500px) and (min--moz-device-pixel-ratio: 2),
+only screen and (min-width: 500px) and (min-device-pixel-ratio: 2),
+only screen and (min-width: 500px) and (min-resolution: 192dpi),
+only screen and (min-width: 500px) and (min-resolution: 2dppx) {
+  .santaCruz {
+    background-image: url("../images/steamers_md_2x.jpg");
+  }
+
+  .carpenteria {
+    background-image: url("../images/rincon_md_2x.jpg");
+  }
+
+  .sanClemente {
+    background-image: url("../images/trestles_md_2x.jpg");
+  }
+}
+
+@media
+only screen and (min-width: 500px) and (-webkit-min-device-pixel-ratio: 1),
+only screen and (min-width: 500px) and (min--moz-device-pixel-ratio: 1),
+only screen and (min-width: 500px) and (min-device-pixel-ratio: 1) {
+  .santaCruz {
+    background-image: url("../images/steamers_md.jpg");
+  }
+
+  .carpenteria {
+    background-image: url("../images/rincon_md.jpg");
+  }
+
+  .sanClemente {
+    background-image: url("../images/trestles_md.jpg");
+  }
+}
+
+@media
+only screen and (min-width: 769px) and (-webkit-min-device-pixel-ratio: 1),
+only screen and (min-width: 769px) and (min--moz-device-pixel-ratio: 1),
+only screen and (min-width: 769px) and (min-device-pixel-ratio: 1) {
+  .santaCruz {
+    background-image: url("../images/steamers_lg.jpg");
+  }
+
+  .carpenteria {
+    background-image: url("../images/rincon_lg.jpg");
+  }
+
+  .sanClemente {
+    background-image: url("../images/trestles_lg.jpg");
+  }
+}
+
+@media
+only screen and (min-width: 769px) and (-webkit-min-device-pixel-ratio: 2),
+only screen and (min-width: 769px) and (min--moz-device-pixel-ratio: 2),
+only screen and (min-width: 769px) and (min-device-pixel-ratio: 2),
+only screen and (min-width: 769px) and (min-resolution: 192dpi),
+only screen and (min-width: 769px) and (min-resolution: 2dppx) {
+  .santaCruz {
+    background-image: url("../images/steamers_lg_2x.jpg");
+  }
+
+  .carpenteria {
+    background-image: url("../images/rincon_lg_2x.jpg");
+  }
+
+  .sanClemente {
+    background-image: url("../images/trestles_lg_2x.jpg");
+  }
+}
+
+
 @media only screen and (max-width: 768px) {
-  #content > figure.backgd {
-    height: 300px;
+  #content > figure#backgd {
+    height: 250px;
   }
   li.globalNavList {
     width: 100%;

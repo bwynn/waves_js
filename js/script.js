@@ -6,6 +6,7 @@ var model = {
   locations: {
     name: ["Steamer Lane", "Rincon", "Trestles"],
     id: ["santaCruz", "carpenteria", "sanClemente"],
+    className: ["santaCruz", "carpenteria", "sanClemente"],
     conditionsLabel: ["Time", "Wind Direction", "Temp F", "Wind Speed", "Skies", "Wave Size", "Swell Direction", "Water Temp", "Swell Period (sec)"]
   },
   // data objects that are compartmentalized and passed individual arguments
@@ -393,25 +394,6 @@ var wave = new Wave(); // wave.conditions(arg);
         $content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
       });
     },
-    buildLocation: function(arg) {
-      // add conditional to determine index for ajaxCalls
-      if (arg.attr("id") == "santaCruz") {
-        view.pageTitle(model.locations.name[0]);
-        view.jsonData(0);
-        wave.conditions(0);
-        city.weather(0);
-      } else if (arg.attr("id") == "carpenteria") {
-        view.pageTitle(model.locations.name[1]);
-        view.jsonData(1);
-        wave.conditions(1);
-        city.weather(1);
-      } else {
-        view.pageTitle(model.locations.name[2]);
-        view.jsonData(2);
-        wave.conditions(2);
-        city.weather(2);
-      }
-    },
     listBuilder: function(arg1, arg2) {
       var conditions = arg1,
           label = arg2,
@@ -438,7 +420,38 @@ var wave = new Wave(); // wave.conditions(arg);
       $pageTitle.append($header);
       // return appended header
       $header.text(arg);
-    }
+    },
+    backgroundSwitch: function(arg) {
+      // get background figure tag
+      var backgd = $("#content figure#backgd");
+
+      // remove old id value
+      backgd.attr("class", "");
+      // add new id value based on arg
+      backgd.attr("class", arg);
+    },
+    buildLocation: function(arg) {
+      // add conditional to determine index for ajaxCalls
+      if (arg.attr("id") == "santaCruz") {
+        view.backgroundSwitch(model.locations.className[0]);
+        view.pageTitle(model.locations.name[0]);
+        view.jsonData(0);
+        wave.conditions(0);
+        city.weather(0);
+      } else if (arg.attr("id") == "carpenteria") {
+        view.backgroundSwitch(model.locations.className[1]);
+        view.pageTitle(model.locations.name[1]);
+        view.jsonData(1);
+        wave.conditions(1);
+        city.weather(1);
+      } else {
+        view.backgroundSwitch(model.locations.className[2])
+        view.pageTitle(model.locations.name[2]);
+        view.jsonData(2);
+        wave.conditions(2);
+        city.weather(2);
+      }
+    },
   }; // END VIEW
 
 
