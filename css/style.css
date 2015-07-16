@@ -64,6 +64,22 @@ a {
   background-color: #333;
 }
 
+#homePageIcon {
+  height: 45px;
+  width: 45px;
+  background-image: url("../images/icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  left: 50%:
+}
+
+#homePageIcon,
+header > a#showNav {
+    display: inline-block;
+    top: 5px;
+}
+
 header > a#showNav {
   display: inline-block;
   float: right;
@@ -71,7 +87,6 @@ header > a#showNav {
   width: 40px;
   background-color: white;
   position: relative;
-  top: 5px;
   right: 5px;
 }
 
@@ -188,6 +203,7 @@ article#mainDisplay,
   margin-top: .6em;
   font-size: 2.2rem;
   color: #555;
+  line-height: 1;
 }
 
 #conditionsInfo > #remoteData > li > span small {
@@ -215,7 +231,6 @@ article#mainDisplay,
   #conditionsInfo > #remoteData > li > span {
     margin-top: 1em;
     font-size: 1.3rem;
-    line-height: 1;
   }
   #conditionsInfo > #remoteData > li > span small {
     font-size: .7rem;

@@ -326,7 +326,7 @@ var wave = new Wave(); // wave.conditions(arg);
       var $nav = $("nav#globalNav");
 
       // toggle show/hide
-      $nav.slideToggle("slow");
+      $nav.slideToggle("fast");
     },
     // auto initialize this funciton
     // build the nav links function
@@ -345,18 +345,6 @@ var wave = new Wave(); // wave.conditions(arg);
         $(this).text(model.locations.name[i]);
       });
     }, // auto initialize this function
-    contentItemBuilder: function(arg) {
-      var cont = $("#remoteData"),
-          li = $("<li></li>"),
-          span = $("<span></span>");
-
-      // append list element to container
-      cont.append(li);
-      // append span to list element
-      li.append(span);
-      // insert the argument's return content into the span element
-      span.text(arg);
-    },
     // display function to show wave template, triggered by the local nav
     // element
     waveDisplay: function() {
@@ -462,12 +450,15 @@ var controller = {
     var $anchor = $(".globalNavList a");
 
     // event trigger
-    $anchor.on("click", function() {
+    $anchor.on("click", function(e) {
       // get content section, local nav anchor and the first local nav anchor element
       var $content = $("#content"),
           $localNav = $("#localNav ul li a"),
           $localNavFirst = $("#localNav ul li a:first"),
           $remoteData = $("#remoteData");
+
+      // prevent default behavior
+      e.preventDefault();
 
       // set class values for the global navigation links
       $anchor.removeClass("active");
@@ -501,14 +492,19 @@ var controller = {
       // get anchor element
       var $anchor = $("a#showNav");
       // create event
-      $anchor.on("click", function() {
+      $anchor.on("click", function(e) {
+        // prevent default behavior
+        e.preventDefault();
+        // show navigation function
         view.showNav();
       });
     },
-    localNavController: function() {
+    localNavController: function(e) {
       // localNavigation event trigger
       var $localNavAnchor = $("#localNav ul li a");
-      $localNavAnchor.on("click", function() {
+      $localNavAnchor.on("click", function(e) {
+        // prevent default behavior
+        e.preventDefault();
 
         $localNavAnchor.removeClass("active");
         $(this).addClass("active");
