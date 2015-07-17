@@ -9,6 +9,8 @@ body,
 body {
   font-family: 'Open Sans', helvetica, sans-serif;
   font-size: 18px;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 h1,
@@ -27,12 +29,7 @@ li {
 
 a {
   text-decoration: none;
-  color: black;
   text-align: center;
-}
-
-.active {
-  color: red;
 }
 
 .flexDisplay {
@@ -57,9 +54,22 @@ a {
   align-content: stretch;
 }
 /* =======================  COLORS  =============================== */
-body {
+body,
+.globalNavList a,
+.globalNavList a.active,
+#localNav > ul > li > a  {
   color: #555;
 }
+
+body,
+#contentInnerWrap {
+  background-color: #EFF5F0;
+}
+
+.active {
+  color: #9f9f9f;
+}
+
 #localNav > ul > li > a,
 #content > figure#backgd {
   border-color: 2px solid #555;
@@ -118,14 +128,14 @@ ul#globalNavContent {
 
 #content > figure#backgd {
   width: 100%;
-  height: 475px;
+  height: 600px;
   background-color: #999;
   border-bottom: 2px solid;
 }
 
 #pageTitle h1 {
   text-align: center;
-  margin: 1em 0 .5em;
+  margin: .8em 0;
 }
 
 li.globalNavList,
@@ -215,6 +225,8 @@ article#mainDisplay,
 
 #conditionsInfo > #localData {
   padding: 1.2em;
+  width: 80%;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
@@ -372,6 +384,12 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
   }
 }
 
+@media only screen and (max-width: 1024px) {
+  #content > figure#backgd {
+    height: 475px;
+  }
+}
+
 
 @media only screen and (max-width: 768px) {
   #content > figure#backgd {
@@ -393,7 +411,12 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
     width: 90%;
   }
 
+  #conditionsInfo > #localData {
+    width: 100%;
+  }
+
   #conditionsInfo > #localData > li {
+    padding: 0 .2em;
     font-size: .9em;
   }
 
