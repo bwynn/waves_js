@@ -237,15 +237,15 @@ var model = {
   // store the land-based weather calls
   weatherCall: function(data) {
     model.local.winddirection(data);
-    model.local.airTemp(data);
     model.local.windspeed(data);
+    model.local.airTemp(data);
     model.local.skies(data);
   },
   // store the ocean data here
   marineCall: function(data) {
     model.local.waveSize(data);
-    model.local.swellDirection(data);
     model.local.waterTemp(data);
+    model.local.swellDirection(data);
     model.local.swellPeriod(data);
   },
   relative: function(data) {
@@ -328,6 +328,13 @@ var wave = new Wave(); // wave.conditions(arg);
 
       // toggle show/hide
       $nav.slideToggle("fast");
+    },
+    //hide pageLoad section
+    hidePageLoad: function() {
+      // get pageLoad section
+      var page = $("section#pageLoad");
+      // now hide it!
+      return page.hide();
     },
     // auto initialize this funciton
     // build the nav links function
@@ -484,6 +491,9 @@ var controller = {
       // determine what content to display within the content section.
       $localNav.removeClass("active");
       $localNavFirst.addClass("active");
+
+      // hide the pageLoad section
+      view.hidePageLoad();
 
       // clear out the contents of the remote data container
       $remoteData.empty();

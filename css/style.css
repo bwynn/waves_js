@@ -54,22 +54,31 @@ a {
   align-content: stretch;
 }
 /* =======================  COLORS  =============================== */
+/* sets a majority of the default color styles for the page */
 body,
 .globalNavList a,
-.globalNavList a.active,
 #localNav > ul > li > a  {
   color: #555;
 }
 
+/* set global nav color */
+.globalNavList a {
+  color: #EFF5F0;
+}
+
+/* set the global background-color */
 body,
 #contentInnerWrap {
   background-color: #EFF5F0;
 }
 
-.active {
-  color: #9f9f9f;
+/* color style for all elems with .active */
+.active, 
+.globalNavList a.active {
+  color: #999;
 }
 
+/* add border color styles for background image and local nav button border elements */
 #localNav > ul > li > a,
 #content > figure#backgd {
   border-color: 2px solid #555;
@@ -159,7 +168,7 @@ elements to flex depending on viewport.*/
 
 /* style declarations for the global navigation container boxes */
 li.globalNavList {
-  background-color: goldenrod;
+  background-color: rgba(45,45,45,.9);
   height: 50px;
   width: 33%;
   margin: 1px;
@@ -173,6 +182,7 @@ for nav */
 .globalNavList a {
   display: block;
   height: inherit;
+  padding-top: .6em;
 }
 
 #localNav > ul {
