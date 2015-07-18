@@ -347,6 +347,23 @@ only screen and (min-width: 500px) and (min-device-pixel-ratio: 1) {
 }
 
 @media
+only screen and (min-width: 500px) and (-webkit-min-device-pixel-ratio: 1),
+only screen and (min-width: 500px) and (min--moz-device-pixel-ratio: 1),
+only screen and (min-width: 500px) and (min-device-pixel-ratio: 1) {
+  .santaCruz {
+    background-image: url("../images/steamers_md.jpg");
+  }
+
+  .carpenteria {
+    background-image: url("../images/rincon_md.jpg");
+  }
+
+  .sanClemente {
+    background-image: url("../images/trestles_md.jpg");
+  }
+}
+
+@media
 only screen and (min-width: 500px) and (-webkit-min-device-pixel-ratio: 2),
 only screen and (min-width: 500px) and (min--moz-device-pixel-ratio: 2),
 only screen and (min-width: 500px) and (min-device-pixel-ratio: 2),
@@ -362,23 +379,6 @@ only screen and (min-width: 500px) and (min-resolution: 2dppx) {
 
   .sanClemente {
     background-image: url("../images/trestles_md_2x.jpg");
-  }
-}
-
-@media
-only screen and (min-width: 500px) and (-webkit-min-device-pixel-ratio: 1),
-only screen and (min-width: 500px) and (min--moz-device-pixel-ratio: 1),
-only screen and (min-width: 500px) and (min-device-pixel-ratio: 1) {
-  .santaCruz {
-    background-image: url("../images/steamers_md.jpg");
-  }
-
-  .carpenteria {
-    background-image: url("../images/rincon_md.jpg");
-  }
-
-  .sanClemente {
-    background-image: url("../images/trestles_md.jpg");
   }
 }
 
