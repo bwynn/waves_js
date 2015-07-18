@@ -32,6 +32,17 @@ a {
   text-align: center;
 }
 
+button[type="submit"].btn {
+  display: inline-block;
+  width: 40%;
+}
+
+input[type="text"] {
+  display: inline-block;
+  width: 49%;
+  height: 1.7em;
+}
+
 .flexDisplay {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -53,9 +64,31 @@ a {
   -webkit-align-content: stretch;
   align-content: stretch;
 }
+
+.btn {
+  display: block;
+  height: 2em;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid;
+  border-radius: 2px;
+  -webkit-transition: .2s background ease-in-out;
+  -moz-transition: .2s background ease-in-out;
+  transition: .2s background ease-in-out;
+}
+
+.btn:hover {
+  background-color: #999;
+}
+
+.btn.active {
+  background-color: rgba(0,0,0,0);
+  border: none;
+}
 /* =======================  COLORS  =============================== */
 /* sets a majority of the default color styles for the page */
 body,
+a,
 .globalNavList a,
 #localNav > ul > li > a  {
   color: #555;
@@ -99,10 +132,6 @@ section#pageLoad form {
   width: 18em;
 }
 
-section#pageLoad form input[type="text"] {
-  margin-left: 2em;
-}
-
 section#pageLoad form,
 section#pageLoad a {
   margin: 0 auto;
@@ -111,6 +140,10 @@ section#pageLoad a {
 section#pageLoad a {
   display: block;
   width: 10em;
+}
+
+section#pageLoad a:hover {
+  text-decoration: underline;
 }
 
 /* ======================= CONTENT ================================ */
@@ -228,17 +261,8 @@ for nav */
 }
 
 #localNav > ul > li > a {
-  display: block;
   width: 90%;
-  height: 2em;
-  display: block;
-  margin: 0 auto;
   padding-top: 0.5em;
-  border: 2px solid;
-  border-radius: 2px;
-  -webkit-transition: .2s background ease-in-out;
-  -moz-transition: .2s background ease-in-out;
-  transition: .2s background ease-in-out;
 }
 
 #localNav > ul > li > a:hover {
@@ -436,7 +460,7 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
 @media only screen and (max-width: 768px) {
 
   section#pageLoad form input[type="text"] {
-    margin-left: 1em;
+    margin-left: .1em;
   }
 
   #content > figure#backgd {

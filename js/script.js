@@ -388,9 +388,9 @@ var wave = new Wave(); // wave.conditions(arg);
 
           // conditional evaluates class attributes on variables
           // to determine which content to display
-          if ($waves.attr("class") == "active") {
+          if ($waves.hasClass("active")) {
             return view.waveDisplay();
-          } else if ($about.attr("class") == "active") {
+          } else if ($about.hasClass("active")) {
             return view.aboutDisplay();
           } else {
             return console.log("there was an issue");
