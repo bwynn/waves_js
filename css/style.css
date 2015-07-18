@@ -85,6 +85,34 @@ body,
   border-color: 2px solid #555;
 }
 
+/* ======================= SECTION PAGE LOAD ====================== */
+section#pageLoad h1 {
+  margin: 1em;
+}
+
+section#pageLoad h1,
+section#pageLoad p {
+  text-align: center;
+}
+
+section#pageLoad form {
+  width: 18em;
+}
+
+section#pageLoad form input[type="text"] {
+  margin-left: 2em;
+}
+
+section#pageLoad form,
+section#pageLoad a {
+  margin: 0 auto;
+}
+
+section#pageLoad a {
+  display: block;
+  width: 10em;
+}
+
 /* ======================= CONTENT ================================ */
 
 #pageWrap header {
@@ -268,6 +296,10 @@ article#mainDisplay,
   font-size: 1rem;
 }
 
+footer p {
+  text-align: center;
+}
+
 /* =============== BACKGROUNDS ======================== */
 
 .santaCruz,
@@ -392,6 +424,8 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
   }
 }
 
+/* ==================================== MEDIA QUERIES =========================*/
+
 @media only screen and (max-width: 1024px) {
   #content > figure#backgd {
     height: 475px;
@@ -400,9 +434,15 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
 
 
 @media only screen and (max-width: 768px) {
+
+  section#pageLoad form input[type="text"] {
+    margin-left: 1em;
+  }
+
   #content > figure#backgd {
     height: 300px;
   }
+
   li.globalNavList {
     width: 100%;
   }
@@ -427,7 +467,6 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
     padding: 0 .2em;
     font-size: .9em;
   }
-
   #conditionsInfo > #remoteData > li {
     width: 32%;
     margin: 2px;
@@ -438,7 +477,18 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
     margin-top: 1em;
     font-size: 1.3rem;
   }
+
   #conditionsInfo > #remoteData > li > span small {
     font-size: .7rem;
+  }
+
+  footer p {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 340px) {
+  section#pageLoad form {
+    width: 100%;
   }
 }

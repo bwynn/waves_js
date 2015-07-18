@@ -329,6 +329,15 @@ var wave = new Wave(); // wave.conditions(arg);
       // toggle show/hide
       $nav.slideToggle("fast");
     },
+    // auto invoke this function on page load
+    pageLoadHeight: function() {
+      // get pageLoad element
+      var pageLoad = $("section#pageLoad");
+      // get window height
+      var heightVal = window.outerHeight - 200 + "px";
+      // set height of pageLoad to be window height - 100px -- giving the header and footer sections each 50px
+      pageLoad.css("height", heightVal);
+    },
     //hide pageLoad section
     hidePageLoad: function() {
       // get pageLoad section
@@ -546,6 +555,7 @@ controller.showNavController(); // initialize shownav function
   // view init
   view.buildList();
   view.buildNavLinks();
+  view.pageLoadHeight();
   // controller init
   controller.globalNavController();  // initialize global controller
   controller.localNavController();  // initialize local nav controller
