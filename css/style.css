@@ -62,6 +62,7 @@ body,
 }
 
 /* set global nav color */
+header > a#showNav,
 .globalNavList a {
   color: #EFF5F0;
 }
@@ -73,7 +74,7 @@ body,
 }
 
 /* color style for all elems with .active */
-.active, 
+.active,
 .globalNavList a.active {
   color: #999;
 }
@@ -109,19 +110,16 @@ body,
 header > a#showNav {
   display: inline-block;
   float: right;
-  height: 40px;
-  width: 40px;
-  background-color: white;
   position: relative;
   z-index: 1;
-  top: -40px;
-  right: 5px;
+  top: -32px;
+  padding-right: 1em;
 }
 
 nav#globalNav {
   display: none;
   position: relative;
-  top: -34px;
+  top: -18px;
   overflow: hidden;
   width: 100%;
 }
