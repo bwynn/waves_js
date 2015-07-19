@@ -21,14 +21,18 @@ var model = {
       // san clemente(2)
       "http://api.worldweatheronline.com/free/v1/weather.ashx?q=92674&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
     ],
-      waveUrl: [
+    waveUrl: [
         // steamers(0)
         "http://api.worldweatheronline.com/free/v1/marine.ashx?q=36.5%2C-122&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
         // rincon(1)
         "http://api.worldweatheronline.com/free/v1/marine.ashx?q=34.22%2C-119.28&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
         // trestles(2)
         "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"
-      ],
+    ],
+    // user entered zip return full string
+    zipUrl: function(arg) {
+      return "http://api.worldweatheronline.com/free/v1/weather.ashx?q=" + arg + "&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";
+    },
     // take the info passed back from the server and prepare it
     data: $(this).serialize(),
     // set this function to shoot back a message if there are any issues with
@@ -260,10 +264,10 @@ var model = {
 var Location = function() {};
 
 // create the weather method that pulls the location's weather information.
-Location.prototype.weather = function(arg) {
+Location.prototype.weather = function(obj, arg) {
   $.ajax({
           type: "POST",
-          url: model.ajaxCall.cityUrl[arg],
+          url: obj[arg],
           dataType: 'jsonp',
           success: function(data) {
             model.local.time();
@@ -328,15 +332,6 @@ var wave = new Wave(); // wave.conditions(arg);
 
       // toggle show/hide
       $nav.slideToggle("fast");
-    },
-    // auto invoke this function on page load
-    pageLoadHeight: function() {
-      // get pageLoad element
-      var pageLoad = $("section#pageLoad");
-      // get window height
-      var heightVal = window.outerHeight - 200 + "px";
-      // set height of pageLoad to be window height - 100px -- giving the header and footer sections each 50px
-      pageLoad.css("height", heightVal);
     },
     //hide pageLoad section
     hidePageLoad: function() {
@@ -453,21 +448,41 @@ var wave = new Wave(); // wave.conditions(arg);
         view.pageTitle(model.locations.name[0]);
         view.jsonData(0);
         wave.conditions(0);
-        city.weather(0);
+        // call weather data, passing in obj and arg values
+        city.weather(model.ajaxCall.cityUrl, 0);
       } else if (arg.attr("id") == "carpenteria") {
         view.backgroundSwitch(model.locations.className[1]);
         view.pageTitle(model.locations.name[1]);
         view.jsonData(1);
         wave.conditions(1);
-        city.weather(1);
+        // call weather data, passing in obj and arg values
+        city.weather(model.ajaxCall.cityUrl, 1);
       } else {
-        view.backgroundSwitch(model.locations.className[2])
+        view.backgroundSwitch(model.locations.className[2]);
         view.pageTitle(model.locations.name[2]);
         view.jsonData(2);
         wave.conditions(2);
-        city.weather(2);
+        // call weather data, passing in obj and arg values
+        city.weather(model.ajaxCall.cityUrl, 2);
       }
     },
+    // get input value
+    getZipInput: function() {
+      // get user input
+      var userInput = $("#enterZip");
+      // set variable for value using jquery .val method
+      var zip = userInput.val();
+
+      return zip;
+    },
+    buildPageLoadContent: function() {
+      var content = $("#pageLoadDataContainer");
+      var ul = $("<ul></ul>");
+
+      // clear out any content already in there
+      content.empty();
+      content.append(ul);
+    }
   }; // END VIEW
 
 
@@ -531,7 +546,7 @@ var controller = {
         view.showNav();
       });
     },
-    localNavController: function(e) {
+    localNavController: function() {
       // localNavigation event trigger
       var $localNavAnchor = $("#localNav ul li a");
       $localNavAnchor.on("click", function(e) {
@@ -544,6 +559,17 @@ var controller = {
         // place content
         view.evalBtnsContent();
       });
+    },
+    // create new controller for form submission
+    zipCodeController: function() {
+      // get submit element
+      var submit = $("#zipBtn");
+      // submit on click event function
+      submit.on("click", function(e) {
+        // get view function
+        e.preventDefault();
+        view.buildPageLoadContent();
+      });
     }
 };
 // eventually, the init function below should be the return value of the auto
@@ -555,8 +581,8 @@ controller.showNavController(); // initialize shownav function
   // view init
   view.buildList();
   view.buildNavLinks();
-  view.pageLoadHeight();
   // controller init
   controller.globalNavController();  // initialize global controller
   controller.localNavController();  // initialize local nav controller
+  controller.zipCodeController();  // initialize zip code controller;
 }());
