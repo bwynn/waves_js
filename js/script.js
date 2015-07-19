@@ -309,30 +309,49 @@ var wave = new Wave(); // wave.conditions(arg);
   // create locations object, this will serve as object information for all
   // things pertaining to
   var view = {
-    // loop through length using each jquery method
-    buildList: function() {
-      // get length of locations options
-      var location = model.locations.name;
+    navigation: {
+        // loop through length using each jquery method
+        buildList: function() {
+          // get length of locations options
+          var location = model.locations.name;
 
-      $(location).each(function() {
-        // get unordered list element
-        var ul = $("#globalNavContent");
-        // add list items to global nav ul
-        ul.append("<li>");
-        // get list item
-        var li = $("#globalNavContent li");
-        // apply classes
-        li.addClass("globalNavList");
-      });
-    },  // auto intialize this function
-    // show and hide the navigation for the nav display event
-    showNav: function() {
-      // get shownav anchor element
-      var $nav = $("nav#globalNav");
+          $(location).each(function() {
+            // get unordered list element
+            var ul = $("#globalNavContent");
+            // add list items to global nav ul
+            ul.append("<li>");
+            // get list item
+            var li = $("#globalNavContent li");
+            // apply classes
+            li.addClass("globalNavList");
+          });
+        },  // auto intialize this function
+        // show and hide the navigation for the nav display event
+        showNav: function() {
+          // get shownav anchor element
+          var $nav = $("nav#globalNav");
 
-      // toggle show/hide
-      $nav.slideToggle("fast");
+          // toggle show/hide
+          $nav.slideToggle("fast");
+        },
+        // build the nav links function
+        buildNavLinks: function() {
+          // get list items
+          var li = $("li.globalNavList");
+          // append anchor tag
+          li.append("<a href='#'></a>");
+
+          // get newly defined anchor tag
+          var a = $(".globalNavList a");
+
+          // for each anchor tag selected, match the string from the name object
+          a.each(function(i) {
+            $(this).attr("id", model.locations.id[i]);
+            $(this).text(model.locations.name[i]);
+          });
+        } // auto initialize this function
     },
+
     //hide pageLoad section
     hidePageLoad: function() {
       // get pageLoad section
@@ -341,22 +360,7 @@ var wave = new Wave(); // wave.conditions(arg);
       return page.hide();
     },
     // auto initialize this funciton
-    // build the nav links function
-    buildNavLinks: function() {
-      // get list items
-      var li = $("li.globalNavList");
-      // append anchor tag
-      li.append("<a href='#'></a>");
 
-      // get newly defined anchor tag
-      var a = $(".globalNavList a");
-
-      // for each anchor tag selected, match the string from the name object
-      a.each(function(i) {
-        $(this).attr("id", model.locations.id[i]);
-        $(this).text(model.locations.name[i]);
-      });
-    }, // auto initialize this function
     // display function to show wave template, triggered by the local nav
     // element
     waveDisplay: function() {
@@ -509,7 +513,7 @@ var controller = {
       $(this).addClass("active");
 
       // hide the global navigation
-      view.showNav();
+      view.navigation.showNav();
 
       // ensure that the local nav links are set to the correct value, which will
       // determine what content to display within the content section.
@@ -543,7 +547,7 @@ var controller = {
         // prevent default behavior
         e.preventDefault();
         // show navigation function
-        view.showNav();
+        view.navigation.showNav();
       });
     },
     localNavController: function() {
@@ -579,8 +583,8 @@ controller.showNavController(); // initialize shownav function
 // init function
 (function() {
   // view init
-  view.buildList();
-  view.buildNavLinks();
+  view.navigation.buildList();
+  view.navigation.buildNavLinks();
   // controller init
   controller.globalNavController();  // initialize global controller
   controller.localNavController();  // initialize local nav controller
