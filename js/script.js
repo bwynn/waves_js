@@ -51,7 +51,7 @@ var model = {
       var temp = data.data.current_condition[0].temp_F;
       // build return and match to locations object
       //return view.contentItemBuilder(temp);
-      return view.listBuilder(temp, model.locations.conditionsLabel[2]);
+      return view.pageStructure.listBuilder(temp, model.locations.conditionsLabel[2]);
     },
 
     // local time -- this needs to be called independent of the ajax calls, as the
@@ -63,7 +63,7 @@ var model = {
       // return time as a string
       //return console.log(time);
       //return view.contentItemBuilder(time);
-      return view.listBuilder(time, model.locations.conditionsLabel[0]);
+      return view.pageStructure.listBuilder(time, model.locations.conditionsLabel[0]);
     },
 
     winddirection: function(data) {
@@ -89,7 +89,7 @@ var model = {
           windDir = "North West";
         }
       //return view.contentItemBuilder(windDir);
-      return view.listBuilder(windDir, model.locations.conditionsLabel[1]);
+      return view.pageStructure.listBuilder(windDir, model.locations.conditionsLabel[1]);
     },
 
     windspeed: function(data) {
@@ -97,7 +97,7 @@ var model = {
       //return console.log(data.data.current_condition[0].windspeedMiles);
       var windSpeed = data.data.current_condition[0].windspeedMiles;
       //return view.contentItemBuilder(windSpeed);
-      return view.listBuilder(windSpeed, model.locations.conditionsLabel[3]);
+      return view.pageStructure.listBuilder(windSpeed, model.locations.conditionsLabel[3]);
     },
 
     skies: function(data) {
@@ -106,7 +106,7 @@ var model = {
       var currently = data.data.current_condition[0].weatherDesc[0].value;
 
       //return view.contentItemBuilder(currently);
-      return view.listBuilder(currently, model.locations.conditionsLabel[4]);
+      return view.pageStructure.listBuilder(currently, model.locations.conditionsLabel[4]);
     },
     waveSize: function(data) {
       // get swell height - returned as a number
@@ -115,7 +115,7 @@ var model = {
           wSizeF = (wSizeM * 3.28).toPrecision(3);
       //return console.log(wSizeF + " feet. Wave size.");
       //return view.contentItemBuilder(wSizeF);
-      return view.listBuilder(wSizeF, model.locations.conditionsLabel[5]);
+      return view.pageStructure.listBuilder(wSizeF, model.locations.conditionsLabel[5]);
     },
     swellDirection: function(data) {
         // get swell direction as a number
@@ -157,21 +157,21 @@ var model = {
         // return sDir as a string
         //return console.log(sDir + " swell direction");
         //return view.contentItemBuilder(sDir);
-        return view.listBuilder(sDir, model.locations.conditionsLabel[6]);
+        return view.pageStructure.listBuilder(sDir, model.locations.conditionsLabel[6]);
     },
     waterTemp: function(data) {
       // gets water temp as a number
       var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
       //return console.log(waterTemp + " degrees water.");
       //return view.contentItemBuilder(waterTemp);
-      return view.listBuilder(waterTemp, model.locations.conditionsLabel[7]);
+      return view.pageStructure.listBuilder(waterTemp, model.locations.conditionsLabel[7]);
     },
     swellPeriod: function(data) {
       // gets swell period in seconds
       var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
       //return console.log(sPeriod + " swell period");
       //return view.contentItemBuilder(sPeriod);
-      return view.listBuilder(sPeriod, model.locations.conditionsLabel[8]);
+      return view.pageStructure.listBuilder(sPeriod, model.locations.conditionsLabel[8]);
     }
   }, // end local object
   // toScale object is for processing data into relative information, applications
@@ -190,7 +190,7 @@ var model = {
       } else if ( period > 12 ) {
          swellSig = "Long period ground swell";
       }
-      return console.log(view.contentItemBuilder(swellSig));
+      return console.log(view.pageStructure.listBuilder(swellSig));
     },
     wetsuit: function(data) {
       var waterTemp = data.data.weather[0].hourly[0].waterTemp_F,
@@ -208,7 +208,7 @@ var model = {
       } else if ( waterTemp > 75 ) {
          wSuit = "Trunks";
       }
-      return console.log(view.contentItemBuilder(wSuit));
+      return console.log(view.pageStructure.listBuilder(wSuit));
     },
     relativeWaveSize: function(data) {
       // get local.waveSize() function
@@ -235,7 +235,7 @@ var model = {
       } else if (wSizeF > 18.1 ) {
         wSize = "Triple overhead plus";
       }
-      return console.log(view.contentItemBuilder(wSizeF));
+      return console.log(view.listBuilder(wSizeF));
     }
   },
   // store the land-based weather calls
@@ -309,179 +309,187 @@ var wave = new Wave(); // wave.conditions(arg);
   // create locations object, this will serve as object information for all
   // things pertaining to
   var view = {
-    // loop through length using each jquery method
-    buildList: function() {
-      // get length of locations options
-      var location = model.locations.name;
+    // methods to build the navigation items are stored here
+    navigation: {
+        // loop through length using each jquery method
+        buildList: function() {
+          // get length of locations options
+          var location = model.locations.name;
 
-      $(location).each(function() {
-        // get unordered list element
-        var ul = $("#globalNavContent");
-        // add list items to global nav ul
-        ul.append("<li>");
-        // get list item
-        var li = $("#globalNavContent li");
-        // apply classes
-        li.addClass("globalNavList");
-      });
-    },  // auto intialize this function
-    // show and hide the navigation for the nav display event
-    showNav: function() {
-      // get shownav anchor element
-      var $nav = $("nav#globalNav");
+          $(location).each(function() {
+            // get unordered list element
+            var ul = $("#globalNavContent");
+            // add list items to global nav ul
+            ul.append("<li>");
+            // get list item
+            var li = $("#globalNavContent li");
+            // apply classes
+            li.addClass("globalNavList");
+          });
+        },  // auto intialize this function
+        // show and hide the navigation for the nav display event
+        showNav: function() {
+          // get shownav anchor element
+          var $nav = $("nav#globalNav");
 
-      // toggle show/hide
-      $nav.slideToggle("fast");
-    },
-    //hide pageLoad section
-    hidePageLoad: function() {
-      // get pageLoad section
-      var page = $("section#pageLoad");
-      // now hide it!
-      return page.hide();
-    },
-    // auto initialize this funciton
-    // build the nav links function
-    buildNavLinks: function() {
-      // get list items
-      var li = $("li.globalNavList");
-      // append anchor tag
-      li.append("<a href='#'></a>");
+          // toggle show/hide
+          $nav.slideToggle("fast");
+        },
+        // build the nav links function
+        buildNavLinks: function() {
+          // get list items
+          var li = $("li.globalNavList");
+          // append anchor tag
+          li.append("<a href='#'></a>");
 
-      // get newly defined anchor tag
-      var a = $(".globalNavList a");
+          // get newly defined anchor tag
+          var a = $(".globalNavList a");
 
-      // for each anchor tag selected, match the string from the name object
-      a.each(function(i) {
-        $(this).attr("id", model.locations.id[i]);
-        $(this).text(model.locations.name[i]);
-      });
-    }, // auto initialize this function
-    // display function to show wave template, triggered by the local nav
-    // element
-    waveDisplay: function() {
-      var $localData = $("#localData"),
-          $remoteData = $("#remoteData");
+          // for each anchor tag selected, match the string from the name object
+          a.each(function(i) {
+            $(this).attr("id", model.locations.id[i]);
+            $(this).text(model.locations.name[i]);
+          });
+        } // auto initialize this function
+    },
+    // methods to build page elements go in here
+    pageStructure: {
+      //hide pageLoad section
+      hidePageLoad: function() {
+        // get pageLoad section
+        var page = $("section#pageLoad");
+        // now hide it!
+        return page.hide();
+      }, // auto initialize this funciton
+      // display function to show wave template, triggered by the local nav
+      // element
+      waveDisplay: function() {
+        var $localData = $("#localData"),
+            $remoteData = $("#remoteData");
 
-          $localData.hide();
-          $remoteData.css("display", "-webkit-box").css("display", "-ms-flexbox").css("display", "-webkit-flex").css("display", "flex");
-    },
-    // display function to be triggered on the local nav elements to display
-    // the json data
-    aboutDisplay: function() {
-      var $localData = $("#localData"),
-          $remoteData = $("#remoteData");
+            $localData.hide();
+            $remoteData.css("display", "-webkit-box").css("display", "-ms-flexbox").css("display", "-webkit-flex").css("display", "flex");
+      },
+      // display function to be triggered on the local nav elements to display
+      // the json data
+      aboutDisplay: function() {
+        var $localData = $("#localData"),
+            $remoteData = $("#remoteData");
 
-          $remoteData.hide();
-          $localData.show();
-    },
-    // evaluate current conditions of the two local nav buttons to
-    // determine which content to display
-    evalBtnsContent: function() {
-      var $waves = $("#wavesContentBtn"),
-          $about = $("#aboutContentBtn");
+            $remoteData.hide();
+            $localData.show();
+      },
+      listBuilder: function(arg1, arg2) {
+        var conditions = arg1,
+            label = arg2,
+            cont = $("#remoteData"),
+            li = $("<li></li>"),
+            span = $("<span></span>");
 
-          // conditional evaluates class attributes on variables
-          // to determine which content to display
-          if ($waves.hasClass("active")) {
-            return view.waveDisplay();
-          } else if ($about.hasClass("active")) {
-            return view.aboutDisplay();
-          } else {
-            return console.log("there was an issue");
-          }
-    },
-    // this function evaluates the current body id and alters the
-    // content of the page using json data containing location information.
-    jsonData: function(arg) {
-      var $content = $('#localData');
-      var i = arg;
-      // get rid of list items inside content area using jquery empty() method.
-      $content.empty();
-      $.getJSON('../waves/data/data.json', function(data) {
-        $content.append($('<li><strong>Wave:</strong> ' + data.locations[i].title + '</li>'));
-        $content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
-        $content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
-        $content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
-      });
-    },
-    listBuilder: function(arg1, arg2) {
-      var conditions = arg1,
-          label = arg2,
-          cont = $("#remoteData"),
-          li = $("<li></li>"),
-          span = $("<span></span>");
+        // append list element to container
+        cont.append(li);
+        // append span element to list
+        li.append(span);
+        // insert text into builder;
+        span.text(conditions).append("<br/><small>" + label + "</small>");
+      },
+      backgroundSwitch: function(arg) {
+        // get background figure tag
+        var backgd = $("#content figure#backgd");
 
-      // append list element to container
-      cont.append(li);
-      // append span element to list
-      li.append(span);
-      // insert text into builder;
-      span.text(conditions).append("<br/><small>" + label + "</small>");
+        // remove old id value
+        backgd.attr("class", "");
+        // add new id value based on arg
+        backgd.attr("class", arg);
+      },
     },
-    pageTitle: function(arg) {
-      // create header tag
-      var $header = $("<h1>"),
-      // get container
-          $pageTitle = $("#pageTitle"),
-          $wipeHeader = $("#pageTitle h1");
-      // remove existing header
-      $wipeHeader.remove();
-      // attach tag into container
-      $pageTitle.append($header);
-      // return appended header
-      $header.text(arg);
-    },
-    backgroundSwitch: function(arg) {
-      // get background figure tag
-      var backgd = $("#content figure#backgd");
+    // methods based around the displayed contents go in here
+    pageContent: {
+      // evaluate current conditions of the two local nav buttons to
+      // determine which content to display
+      evalBtnsContent: function() {
+        var $waves = $("#wavesContentBtn"),
+            $about = $("#aboutContentBtn");
 
-      // remove old id value
-      backgd.attr("class", "");
-      // add new id value based on arg
-      backgd.attr("class", arg);
-    },
-    buildLocation: function(arg) {
-      // add conditional to determine index for ajaxCalls
-      if (arg.attr("id") == "santaCruz") {
-        view.backgroundSwitch(model.locations.className[0]);
-        view.pageTitle(model.locations.name[0]);
-        view.jsonData(0);
-        wave.conditions(0);
-        // call weather data, passing in obj and arg values
-        city.weather(model.ajaxCall.cityUrl, 0);
-      } else if (arg.attr("id") == "carpenteria") {
-        view.backgroundSwitch(model.locations.className[1]);
-        view.pageTitle(model.locations.name[1]);
-        view.jsonData(1);
-        wave.conditions(1);
-        // call weather data, passing in obj and arg values
-        city.weather(model.ajaxCall.cityUrl, 1);
-      } else {
-        view.backgroundSwitch(model.locations.className[2]);
-        view.pageTitle(model.locations.name[2]);
-        view.jsonData(2);
-        wave.conditions(2);
-        // call weather data, passing in obj and arg values
-        city.weather(model.ajaxCall.cityUrl, 2);
+            // conditional evaluates class attributes on variables
+            // to determine which content to display
+            if ($waves.hasClass("active")) {
+              return view.pageStructure.waveDisplay();
+            } else if ($about.hasClass("active")) {
+              return view.pageStructure.aboutDisplay();
+            } else {
+              return console.log("there was an issue");
+            }
+      },
+      // this function evaluates the current body id and alters the
+      // content of the page using json data containing location information.
+      jsonData: function(arg) {
+        var $content = $('#localData');
+        var i = arg;
+        // get rid of list items inside content area using jquery empty() method.
+        $content.empty();
+        $.getJSON('../waves/data/data.json', function(data) {
+          $content.append($('<li><strong>Wave:</strong> ' + data.locations[i].title + '</li>'));
+          $content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
+          $content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
+          $content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
+        });
+      },
+      pageTitle: function(arg) {
+        // create header tag
+        var $header = $("<h1>"),
+        // get container
+            $pageTitle = $("#pageTitle"),
+            $wipeHeader = $("#pageTitle h1");
+        // remove existing header
+        $wipeHeader.remove();
+        // attach tag into container
+        $pageTitle.append($header);
+        // return appended header
+        $header.text(arg);
+      },
+      // get input value
+      getZipInput: function() {
+        // get user input
+        var userInput = $("#enterZip");
+        // set variable for value using jquery .val method
+        var zip = userInput.val();
+
+        return zip;
+      },
+      buildPageLoadContent: function() {
+        var content = $("#pageLoadDataContainer");
+        var ul = $("<ul></ul>");
+
+        // clear out any content already in there
+        content.empty();
+        content.append(ul);
+      },
+      buildLocation: function(arg) {
+        // add conditional to determine index for ajaxCalls
+        if (arg.attr("id") == "santaCruz") {
+          view.pageStructure.backgroundSwitch(model.locations.className[0]);
+          view.pageContent.pageTitle(model.locations.name[0]);
+          view.pageContent.jsonData(0);
+          wave.conditions(0);
+          // call weather data, passing in obj and arg values
+          city.weather(model.ajaxCall.cityUrl, 0);
+        } else if (arg.attr("id") == "carpenteria") {
+          view.pageStructure.backgroundSwitch(model.locations.className[1]);
+          view.pageContent.pageTitle(model.locations.name[1]);
+          view.pageContent.jsonData(1);
+          wave.conditions(1);
+          // call weather data, passing in obj and arg values
+          city.weather(model.ajaxCall.cityUrl, 1);
+        } else {
+          view.pageStructure.backgroundSwitch(model.locations.className[2]);
+          view.pageContent.pageTitle(model.locations.name[2]);
+          view.pageContent.jsonData(2);
+          wave.conditions(2);
+          // call weather data, passing in obj and arg values
+          city.weather(model.ajaxCall.cityUrl, 2);
+        }
       }
-    },
-    // get input value
-    getZipInput: function() {
-      // get user input
-      var userInput = $("#enterZip");
-      // set variable for value using jquery .val method
-      var zip = userInput.val();
-
-      return zip;
-    },
-    buildPageLoadContent: function() {
-      var content = $("#pageLoadDataContainer");
-      var ul = $("<ul></ul>");
-
-      // clear out any content already in there
-      content.empty();
-      content.append(ul);
     }
   }; // END VIEW
 
@@ -509,7 +517,7 @@ var controller = {
       $(this).addClass("active");
 
       // hide the global navigation
-      view.showNav();
+      view.navigation.showNav();
 
       // ensure that the local nav links are set to the correct value, which will
       // determine what content to display within the content section.
@@ -517,7 +525,7 @@ var controller = {
       $localNavFirst.addClass("active");
 
       // hide the pageLoad section
-      view.hidePageLoad();
+      view.pageStructure.hidePageLoad();
 
       // clear out the contents of the remote data container
       $remoteData.empty();
@@ -525,13 +533,13 @@ var controller = {
       // show content area
       $content.show();
       // set the content area
-      view.evalBtnsContent();
+      view.pageContent.evalBtnsContent();
 
       // empty out remote data contents
       $("#remoteData li").empty();
 
       // build location conditional
-      view.buildLocation($(this));
+      view.pageContent.buildLocation($(this));
 
       });
     },
@@ -543,7 +551,7 @@ var controller = {
         // prevent default behavior
         e.preventDefault();
         // show navigation function
-        view.showNav();
+        view.navigation.showNav();
       });
     },
     localNavController: function() {
@@ -557,7 +565,7 @@ var controller = {
         $(this).addClass("active");
 
         // place content
-        view.evalBtnsContent();
+        view.pageContent.evalBtnsContent();
       });
     },
     // create new controller for form submission
@@ -568,7 +576,7 @@ var controller = {
       submit.on("click", function(e) {
         // get view function
         e.preventDefault();
-        view.buildPageLoadContent();
+        view.pageContent.buildPageLoadContent();
       });
     }
 };
@@ -579,8 +587,8 @@ controller.showNavController(); // initialize shownav function
 // init function
 (function() {
   // view init
-  view.buildList();
-  view.buildNavLinks();
+  view.navigation.buildList();
+  view.navigation.buildNavLinks();
   // controller init
   controller.globalNavController();  // initialize global controller
   controller.localNavController();  // initialize local nav controller
