@@ -7,7 +7,7 @@ var model = {
     name: ["Steamer Lane", "Rincon", "Trestles"],
     id: ["santaCruz", "carpenteria", "sanClemente"],
     className: ["santaCruz", "carpenteria", "sanClemente"],
-    conditionsLabel: ["Time", "Wind Direction", "Temp F", "Wind Speed", "Skies", "Wave Size", "Swell Direction", "Water Temp", "Swell Period (sec)"]
+    conditionsLabel: ["Time", "Wind Direction", "Air Temp F<br/>(degrees f)", "Wind Speed<br/>(mph)", "Skies", "Wave Size<br/>(feet)", "Swell Direction", "Water Temp<br/>(degrees f)", "Swell Period<br/>(seconds)"]
   },
   // data objects that are compartmentalized and passed individual arguments
   // from the wave data object. Allowing for customized and individual
