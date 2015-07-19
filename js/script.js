@@ -309,6 +309,7 @@ var wave = new Wave(); // wave.conditions(arg);
   // create locations object, this will serve as object information for all
   // things pertaining to
   var view = {
+    // methods to build the navigation items are stored here
     navigation: {
         // loop through length using each jquery method
         buildList: function() {
@@ -351,6 +352,7 @@ var wave = new Wave(); // wave.conditions(arg);
           });
         } // auto initialize this function
     },
+    // methods to build page elements go in here
     pageStructure: {
       //hide pageLoad section
       hidePageLoad: function() {
@@ -390,8 +392,18 @@ var wave = new Wave(); // wave.conditions(arg);
         li.append(span);
         // insert text into builder;
         span.text(conditions).append("<br/><small>" + label + "</small>");
-      }
+      },
+      backgroundSwitch: function(arg) {
+        // get background figure tag
+        var backgd = $("#content figure#backgd");
+
+        // remove old id value
+        backgd.attr("class", "");
+        // add new id value based on arg
+        backgd.attr("class", arg);
+      },
     },
+    // methods based around the displayed contents go in here
     pageContent: {
       // evaluate current conditions of the two local nav buttons to
       // determine which content to display
@@ -422,72 +434,62 @@ var wave = new Wave(); // wave.conditions(arg);
           $content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));
           $content.append($('<li><strong>Optimal wave size:</strong> Between ' + data.locations[i].waveMin + ' and ' + data.locations[i].waveMax + ' feet</li>'));
         });
+      },
+      pageTitle: function(arg) {
+        // create header tag
+        var $header = $("<h1>"),
+        // get container
+            $pageTitle = $("#pageTitle"),
+            $wipeHeader = $("#pageTitle h1");
+        // remove existing header
+        $wipeHeader.remove();
+        // attach tag into container
+        $pageTitle.append($header);
+        // return appended header
+        $header.text(arg);
+      },
+      // get input value
+      getZipInput: function() {
+        // get user input
+        var userInput = $("#enterZip");
+        // set variable for value using jquery .val method
+        var zip = userInput.val();
+
+        return zip;
+      },
+      buildPageLoadContent: function() {
+        var content = $("#pageLoadDataContainer");
+        var ul = $("<ul></ul>");
+
+        // clear out any content already in there
+        content.empty();
+        content.append(ul);
+      },
+      buildLocation: function(arg) {
+        // add conditional to determine index for ajaxCalls
+        if (arg.attr("id") == "santaCruz") {
+          view.pageStructure.backgroundSwitch(model.locations.className[0]);
+          view.pageContent.pageTitle(model.locations.name[0]);
+          view.pageContent.jsonData(0);
+          wave.conditions(0);
+          // call weather data, passing in obj and arg values
+          city.weather(model.ajaxCall.cityUrl, 0);
+        } else if (arg.attr("id") == "carpenteria") {
+          view.pageStructure.backgroundSwitch(model.locations.className[1]);
+          view.pageContent.pageTitle(model.locations.name[1]);
+          view.pageContent.jsonData(1);
+          wave.conditions(1);
+          // call weather data, passing in obj and arg values
+          city.weather(model.ajaxCall.cityUrl, 1);
+        } else {
+          view.pageStructure.backgroundSwitch(model.locations.className[2]);
+          view.pageContent.pageTitle(model.locations.name[2]);
+          view.pageContent.jsonData(2);
+          wave.conditions(2);
+          // call weather data, passing in obj and arg values
+          city.weather(model.ajaxCall.cityUrl, 2);
+        }
       }
-    },
-
-    pageTitle: function(arg) {
-      // create header tag
-      var $header = $("<h1>"),
-      // get container
-          $pageTitle = $("#pageTitle"),
-          $wipeHeader = $("#pageTitle h1");
-      // remove existing header
-      $wipeHeader.remove();
-      // attach tag into container
-      $pageTitle.append($header);
-      // return appended header
-      $header.text(arg);
-    },
-    backgroundSwitch: function(arg) {
-      // get background figure tag
-      var backgd = $("#content figure#backgd");
-
-      // remove old id value
-      backgd.attr("class", "");
-      // add new id value based on arg
-      backgd.attr("class", arg);
-    },
-    buildLocation: function(arg) {
-      // add conditional to determine index for ajaxCalls
-      if (arg.attr("id") == "santaCruz") {
-        view.backgroundSwitch(model.locations.className[0]);
-        view.pageTitle(model.locations.name[0]);
-        view.pageContent.jsonData(0);
-        wave.conditions(0);
-        // call weather data, passing in obj and arg values
-        city.weather(model.ajaxCall.cityUrl, 0);
-      } else if (arg.attr("id") == "carpenteria") {
-        view.backgroundSwitch(model.locations.className[1]);
-        view.pageTitle(model.locations.name[1]);
-        view.pageContent.jsonData(1);
-        wave.conditions(1);
-        // call weather data, passing in obj and arg values
-        city.weather(model.ajaxCall.cityUrl, 1);
-      } else {
-        view.backgroundSwitch(model.locations.className[2]);
-        view.pageTitle(model.locations.name[2]);
-        view.pageContent.jsonData(2);
-        wave.conditions(2);
-        // call weather data, passing in obj and arg values
-        city.weather(model.ajaxCall.cityUrl, 2);
-      }
-    },
-    // get input value
-    getZipInput: function() {
-      // get user input
-      var userInput = $("#enterZip");
-      // set variable for value using jquery .val method
-      var zip = userInput.val();
-
-      return zip;
-    },
-    buildPageLoadContent: function() {
-      var content = $("#pageLoadDataContainer");
-      var ul = $("<ul></ul>");
-
-      // clear out any content already in there
-      content.empty();
-      content.append(ul);
     }
   }; // END VIEW
 
@@ -537,7 +539,7 @@ var controller = {
       $("#remoteData li").empty();
 
       // build location conditional
-      view.buildLocation($(this));
+      view.pageContent.buildLocation($(this));
 
       });
     },
@@ -574,7 +576,7 @@ var controller = {
       submit.on("click", function(e) {
         // get view function
         e.preventDefault();
-        view.buildPageLoadContent();
+        view.pageContent.buildPageLoadContent();
       });
     }
 };
