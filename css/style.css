@@ -41,6 +41,12 @@ input[type="text"] {
   display: inline-block;
   width: 49%;
   height: 1.7em;
+  border: none;
+}
+
+input[type="text"]:focus,
+button[type="submit"] {
+  outline: none;
 }
 
 .flexDisplay {
@@ -86,6 +92,9 @@ input[type="text"] {
   border: none;
 }
 /* =======================  COLORS  =============================== */
+html {
+  background-color: #fff;
+}
 /* sets a majority of the default color styles for the page */
 body,
 a,
@@ -102,6 +111,7 @@ header > a#showNav,
 
 /* set the global background-color */
 body,
+footer,
 #contentInnerWrap {
   background-color: #EFF5F0;
 }
@@ -144,6 +154,10 @@ section#pageLoad a {
 
 section#pageLoad a:hover {
   text-decoration: underline;
+}
+
+section#pageLoad form label {
+  line-height: 2.5;
 }
 
 /* ======================= CONTENT ================================ */
@@ -322,6 +336,7 @@ article#mainDisplay,
 
 footer p {
   text-align: center;
+  margin: 0;
 }
 
 /* =============== BACKGROUNDS ======================== */
