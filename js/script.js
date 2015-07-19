@@ -51,7 +51,7 @@ var model = {
       var temp = data.data.current_condition[0].temp_F;
       // build return and match to locations object
       //return view.contentItemBuilder(temp);
-      return view.pageStructure.listBuilder(temp, model.locations.conditionsLabel[2]);
+      return temp;
     },
 
     // local time -- this needs to be called independent of the ajax calls, as the
@@ -63,7 +63,7 @@ var model = {
       // return time as a string
       //return console.log(time);
       //return view.contentItemBuilder(time);
-      return view.pageStructure.listBuilder(time, model.locations.conditionsLabel[0]);
+      return time;
     },
 
     winddirection: function(data) {
@@ -89,7 +89,7 @@ var model = {
           windDir = "North West";
         }
       //return view.contentItemBuilder(windDir);
-      return view.pageStructure.listBuilder(windDir, model.locations.conditionsLabel[1]);
+      return windDir;
     },
 
     windspeed: function(data) {
@@ -97,7 +97,7 @@ var model = {
       //return console.log(data.data.current_condition[0].windspeedMiles);
       var windSpeed = data.data.current_condition[0].windspeedMiles;
       //return view.contentItemBuilder(windSpeed);
-      return view.pageStructure.listBuilder(windSpeed, model.locations.conditionsLabel[3]);
+      return windSpeed;
     },
 
     skies: function(data) {
@@ -106,7 +106,7 @@ var model = {
       var currently = data.data.current_condition[0].weatherDesc[0].value;
 
       //return view.contentItemBuilder(currently);
-      return view.pageStructure.listBuilder(currently, model.locations.conditionsLabel[4]);
+      return currently;
     },
     waveSize: function(data) {
       // get swell height - returned as a number
@@ -115,7 +115,7 @@ var model = {
           wSizeF = (wSizeM * 3.28).toPrecision(3);
       //return console.log(wSizeF + " feet. Wave size.");
       //return view.contentItemBuilder(wSizeF);
-      return view.pageStructure.listBuilder(wSizeF, model.locations.conditionsLabel[5]);
+      return wSizeF;
     },
     swellDirection: function(data) {
         // get swell direction as a number
@@ -157,21 +157,21 @@ var model = {
         // return sDir as a string
         //return console.log(sDir + " swell direction");
         //return view.contentItemBuilder(sDir);
-        return view.pageStructure.listBuilder(sDir, model.locations.conditionsLabel[6]);
+        return sDir;
     },
     waterTemp: function(data) {
       // gets water temp as a number
       var waterTemp = data.data.weather[0].hourly[0].waterTemp_F;     // gets water temp
       //return console.log(waterTemp + " degrees water.");
       //return view.contentItemBuilder(waterTemp);
-      return view.pageStructure.listBuilder(waterTemp, model.locations.conditionsLabel[7]);
+      return waterTemp;
     },
     swellPeriod: function(data) {
       // gets swell period in seconds
       var sPeriod = data.data.weather[0].hourly[0].swellPeriod_secs;  // Swell period
       //return console.log(sPeriod + " swell period");
       //return view.contentItemBuilder(sPeriod);
-      return view.pageStructure.listBuilder(sPeriod, model.locations.conditionsLabel[8]);
+      return sPeriod;
     }
   }, // end local object
   // toScale object is for processing data into relative information, applications
@@ -237,25 +237,6 @@ var model = {
       }
       return console.log(view.listBuilder(wSizeF));
     }
-  },
-  // store the land-based weather calls
-  weatherCall: function(data) {
-    model.local.winddirection(data);
-    model.local.windspeed(data);
-    model.local.airTemp(data);
-    model.local.skies(data);
-  },
-  // store the ocean data here
-  marineCall: function(data) {
-    model.local.waveSize(data);
-    model.local.waterTemp(data);
-    model.local.swellDirection(data);
-    model.local.swellPeriod(data);
-  },
-  relative: function(data) {
-  	model.conditionsToScale.relativeWaveSize(data);
-    model.conditionsToScale.waveQuality(data);
-    model.conditionsToScale.wetsuit(data);
   }
 };  // END MODEL
 
@@ -264,36 +245,52 @@ var model = {
 var Location = function() {};
 
 // create the weather method that pulls the location's weather information.
-Location.prototype.weather = function(obj, arg) {
+// takes an object
+Location.prototype.weather = function(urlString, index, cont) {
   $.ajax({
           type: "POST",
-          url: obj[arg],
+          url: urlString[index],
           dataType: 'jsonp',
           success: function(data) {
-            model.local.time();
-            model.weatherCall(data);
+            // local time
+            view.pageStructure.listBuilder(model.local.time(), model.locations.conditionsLabel[0], cont);
+            // air temp
+            view.pageStructure.listBuilder(model.local.airTemp(data), model.locations.conditionsLabel[2], cont);
+            // skies
+            view.pageStructure.listBuilder(model.local.skies(data), model.locations.conditionsLabel[4], cont);
+            // wind direction
+            view.pageStructure.listBuilder(model.local.winddirection(data), model.locations.conditionsLabel[1], cont);
+            // wind speed
+            view.pageStructure.listBuilder(model.local.windspeed(data), model.locations.conditionsLabel[3], cont);
           }
   });
 };
 
 // create new objects from the constructor, include index in comments to reference
 
-var city = new Location(); // city.weather(arg);
-// index 0 -- SANTA CRUZ
-// index 1 -- CARPENTERIA
-// index 2 -- SAN CLEMENTE
+var city = new Location(); // city.weather(obj,arg);
+// arg 0 -- SANTA CRUZ
+// arg 1 -- CARPENTERIA
+// arg 2 -- SAN CLEMENTE
 
 // create a Wave constructor function
 var Wave = function() {};
 
 // build method pulling location's weather url string.
-Wave.prototype.conditions = function(arg) {
+Wave.prototype.conditions = function(arg, cont) {
   $.ajax({
           type: "POST",
           url: model.ajaxCall.waveUrl[arg],
           dataType: 'jsonp',
           success: function(data) {
-            model.marineCall(data);
+            // wave size
+            view.pageStructure.listBuilder(model.local.waveSize(data), model.locations.conditionsLabel[5], cont);
+            // water temperature (fahrenheit)
+            view.pageStructure.listBuilder(model.local.waterTemp(data), model.locations.conditionsLabel[7], cont);
+            // swell direction
+            view.pageStructure.listBuilder(model.local.swellDirection(data), model.locations.conditionsLabel[6], cont);
+            // swell period
+            view.pageStructure.listBuilder(model.local.swellPeriod(data), model.locations.conditionsLabel[8], cont);
           }
   });
 };
@@ -309,6 +306,17 @@ var wave = new Wave(); // wave.conditions(arg);
   // create locations object, this will serve as object information for all
   // things pertaining to
   var view = {
+    // create element map for building list builder method
+    elemMap: {
+      // get #remoteContainer for weather pages
+      remoteContainer: function() {
+        return $("#remoteData");
+      },
+      // get #pageLoadDataContainer
+      pageLoadContainer: function() {
+        return $("#pageLoadDataContainer");
+      }
+    },
     // methods to build the navigation items are stored here
     navigation: {
         // loop through length using each jquery method
@@ -379,10 +387,10 @@ var wave = new Wave(); // wave.conditions(arg);
             $remoteData.hide();
             $localData.show();
       },
-      listBuilder: function(arg1, arg2) {
+      listBuilder: function(arg1, arg2, arg3) {
         var conditions = arg1,
             label = arg2,
-            cont = $("#remoteData"),
+            cont = arg3,
             li = $("<li></li>"),
             span = $("<span></span>");
 
@@ -471,23 +479,28 @@ var wave = new Wave(); // wave.conditions(arg);
           view.pageStructure.backgroundSwitch(model.locations.className[0]);
           view.pageContent.pageTitle(model.locations.name[0]);
           view.pageContent.jsonData(0);
-          wave.conditions(0);
+          // call wave conditions
+          wave.conditions(0, view.elemMap.remoteContainer());
           // call weather data, passing in obj and arg values
-          city.weather(model.ajaxCall.cityUrl, 0);
-        } else if (arg.attr("id") == "carpenteria") {
+          city.weather(model.ajaxCall.cityUrl, 0, view.elemMap.remoteContainer());
+        }
+        else if (arg.attr("id") == "carpenteria") {
           view.pageStructure.backgroundSwitch(model.locations.className[1]);
           view.pageContent.pageTitle(model.locations.name[1]);
           view.pageContent.jsonData(1);
-          wave.conditions(1);
+          // call wave conditions
+          wave.conditions(1, view.elemMap.remoteContainer());
           // call weather data, passing in obj and arg values
-          city.weather(model.ajaxCall.cityUrl, 1);
-        } else {
+          city.weather(model.ajaxCall.cityUrl, 1, view.elemMap.remoteContainer());
+        }
+        else {
           view.pageStructure.backgroundSwitch(model.locations.className[2]);
           view.pageContent.pageTitle(model.locations.name[2]);
           view.pageContent.jsonData(2);
-          wave.conditions(2);
+          // call wave conditions
+          wave.conditions(2, view.elemMap.remoteContainer());
           // call weather data, passing in obj and arg values
-          city.weather(model.ajaxCall.cityUrl, 2);
+          city.weather(model.ajaxCall.cityUrl, 2, view.elemMap.remoteContainer());
         }
       }
     }
