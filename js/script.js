@@ -354,7 +354,13 @@ var wave = new Wave(); // wave.conditions(arg);
             $(this).attr("id", model.locations.id[i]);
             $(this).text(model.locations.name[i]);
           });
-        } // auto initialize this function
+        }, // auto initialize this function
+        checkWeather: function() {
+          // get the form element
+          var $form = $("#pageLoad > form");
+          // set display using toggle event -- apply a transition for this event
+          $form.show();
+        }
     },
     // methods to build page elements go in here
     pageStructure: {
@@ -462,13 +468,10 @@ var wave = new Wave(); // wave.conditions(arg);
         return zip;
       },
       buildPageLoadContent: function() {
-        var optionalNav = $("#optionalNav"),
-            cont = view.elemMap.pageLoadContainer();
+        var cont = view.elemMap.pageLoadContainer();
             // user entered zip return full string
             zipUrl =  ["http://api.worldweatheronline.com/free/v1/weather.ashx?q=" + view.pageContent.getZipInput() + "&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"]
 
-        // clear out any content already in there
-        optionalNav.hide();
         // check values
         //console.log(zipUrl[0]);
         //console.log(cont);
@@ -597,6 +600,36 @@ var controller = {
         // load page content
         view.pageContent.buildPageLoadContent();
       });
+    },
+    // openWaveNav event
+    openWaveNavController: function() {
+      var $btn = $("#openWaveNav");
+
+      $btn.on("click", function(e) {
+        // get the form element
+        var $form = $("#pageLoad > form");
+
+        e.preventDefault();
+        // set display using toggle event -- apply a transition for this event
+        $form.hide();
+        // show navigation function
+        view.navigation.showNav();
+      });
+    },
+    // checkWeatherBtn event
+    userWeatherController: function() {
+      var $btn = $("#checkWeatherBtn");
+
+      $btn.on("click", function(e) {
+        e.preventDefault();
+        // close the global nav if open using the shownav function (which also closes it)
+        // show navigation function
+        //view.navigation.showNav();
+        // show the input form
+        // get the form element
+        var $form = $("#pageLoad > form");
+        $form.slideToggle();
+      });
     }
 };
 // eventually, the init function below should be the return value of the auto
@@ -612,4 +645,6 @@ controller.showNavController(); // initialize shownav function
   controller.globalNavController();  // initialize global controller
   controller.localNavController();  // initialize local nav controller
   controller.zipCodeController();  // initialize zip code controller;
+  controller.openWaveNavController(); // init open wave nav
+  controller.userWeatherController();
 }());

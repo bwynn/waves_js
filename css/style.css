@@ -40,8 +40,11 @@ button[type="submit"].btn {
 input[type="text"] {
   display: inline-block;
   width: 49%;
-  height: 1.7em;
+  height: 2em;
   border: none;
+  box-sizing: border-box;
+  padding: .2em;
+  border-radius: 2px;
 }
 
 input[type="text"]:focus,
@@ -113,7 +116,8 @@ header > a#showNav,
 body,
 footer,
 #contentInnerWrap,
-#pageLoadDataContainer {
+#pageLoadDataContainer,
+section#pageLoad {
   background-color: #EFF5F0;
 }
 
@@ -131,7 +135,7 @@ footer,
 
 /* ======================= SECTION PAGE LOAD ====================== */
 section#pageLoad h1 {
-  margin: 1em;
+  margin: 1em auto;
 }
 
 section#pageLoad h1,
@@ -140,6 +144,7 @@ section#pageLoad p {
 }
 
 section#pageLoad form {
+  display: none;
   width: 18em;
 }
 
@@ -150,7 +155,7 @@ section#pageLoad a {
 
 section#pageLoad a {
   display: block;
-  width: 10em;
+  width: 20em;
 }
 
 section#pageLoad a:hover {
@@ -477,9 +482,32 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
 
 
 @media only screen and (max-width: 768px) {
+  h1 {
+    font-size: 1.6em;
+  }
+
+  h2 {
+    font-size: 1.3em;
+  }
 
   section#pageLoad form input[type="text"] {
-    margin-left: .1em;
+    margin: 0 auto;
+    width: 90%;
+    display: block;
+  }
+
+  section#pageLoad form button[type="submit"].btn {
+    margin: 1em auto 0;
+    display: block;
+  }
+
+  section#pageLoad a {
+    display: block;
+    width: 100%;
+  }
+
+  #userWeatherContent > li {
+    width: 100%;
   }
 
   #content > figure#backgd {

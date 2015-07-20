@@ -17,17 +17,15 @@
         </nav>
       </header>
       <section id="pageLoad">
-        <h1>Waves Right Now</h1>
+        <a href="#" id="openWaveNav"><h1>Check the Waves</h1></a>
+        <p><small>or</small></p>
+        <a href="#" id="checkWeatherBtn"><h2>Check the Weather</h2></a>
         <form>
           <label for="enterZip">Check your local weather condtions:</label>
           <input type="text" id="enterZip" maxlength="6" placeholder="zip code"/>
           <button type="submit" id="zipBtn" class="btn">Submit</button><!-- it'd be cool to use a unicode graphic here perhaps -->
         </form>
         <div id="pageLoadDataContainer">
-          <div id="optionalNav">
-            <p><small>OR</small></p>
-            <a href="#">Check the waves</a>
-          </div>
           <ul id="userWeatherContent" class="flexDisplay rowWrap flexJustify stretch"></ul>
         </div>
       </section>
