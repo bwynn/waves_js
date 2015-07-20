@@ -112,7 +112,8 @@ header > a#showNav,
 /* set the global background-color */
 body,
 footer,
-#contentInnerWrap {
+#contentInnerWrap,
+#pageLoadDataContainer {
   background-color: #EFF5F0;
 }
 
@@ -217,7 +218,7 @@ ul#globalNavContent {
 
 #pageTitle h1 {
   text-align: center;
-  margin: .8em 0;
+  padding: .8em 0;
 }
 
 li.globalNavList,
