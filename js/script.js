@@ -470,8 +470,8 @@ var wave = new Wave(); // wave.conditions(arg);
         // clear out any content already in there
         optionalNav.hide();
         // check values
-        console.log(zipUrl[0]);
-        console.log(cont);
+        //console.log(zipUrl[0]);
+        //console.log(cont);
         // constructor function for building page content based on user input zip code
         city.weather(zipUrl, cont, 0);
       },
@@ -586,11 +586,15 @@ var controller = {
     // create new controller for form submission
     zipCodeController: function() {
       // get submit element
-      var submit = $("#zipBtn");
+      var submit = $("#zipBtn"),
+          content = view.elemMap.pageLoadContainer();
       // submit on click event function
       submit.on("click", function(e) {
         // get view function
         e.preventDefault();
+        // clear out existing content
+        content.empty();
+        // load page content
         view.pageContent.buildPageLoadContent();
       });
     }
