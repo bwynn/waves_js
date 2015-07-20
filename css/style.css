@@ -309,7 +309,8 @@ article#mainDisplay,
   font-size: 1.2em;
 }
 
-#conditionsInfo > #remoteData > li {
+#conditionsInfo > #remoteData > li,
+#userWeatherContent > li {
   display: inline-block;
   width: 32.9%;
   text-align: center;
@@ -322,7 +323,8 @@ article#mainDisplay,
   /*background-color: #9f9f9f; ======== see flex tiles =====*/
 }
 
-#conditionsInfo > #remoteData > li > span {
+#conditionsInfo > #remoteData > li > span,
+#userWeatherContent > li > span {
   display: block;
   margin-top: .6em;
   font-size: 2.2rem;
@@ -330,7 +332,8 @@ article#mainDisplay,
   line-height: 1;
 }
 
-#conditionsInfo > #remoteData > li > span small {
+#conditionsInfo > #remoteData > li > span small,
+#userWeatherContent > li > span small {
   font-size: 1rem;
 }
 

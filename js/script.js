@@ -29,10 +29,6 @@ var model = {
         // trestles(2)
         "http://api.worldweatheronline.com/free/v1/marine.ashx?q=33.22%2C-117.36&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"
     ],
-    // user entered zip return full string
-    zipUrl: function(arg) {
-      return "http://api.worldweatheronline.com/free/v1/weather.ashx?q=" + arg + "&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c";
-    },
     // take the info passed back from the server and prepare it
     data: $(this).serialize(),
     // set this function to shoot back a message if there are any issues with
@@ -246,7 +242,7 @@ var Location = function() {};
 
 // create the weather method that pulls the location's weather information.
 // takes an object
-Location.prototype.weather = function(urlString, index, cont) {
+Location.prototype.weather = function(urlString, cont, index) {
   $.ajax({
           type: "POST",
           url: urlString[index],
@@ -314,7 +310,7 @@ var wave = new Wave(); // wave.conditions(arg);
       },
       // get #pageLoadDataContainer
       pageLoadContainer: function() {
-        return $("#pageLoadDataContainer");
+        return $("ul#userWeatherContent");
       }
     },
     // methods to build the navigation items are stored here
@@ -466,12 +462,18 @@ var wave = new Wave(); // wave.conditions(arg);
         return zip;
       },
       buildPageLoadContent: function() {
-        var content = $("#pageLoadDataContainer");
-        var ul = $("<ul></ul>");
+        var optionalNav = $("#optionalNav"),
+            cont = view.elemMap.pageLoadContainer();
+            // user entered zip return full string
+            zipUrl =  ["http://api.worldweatheronline.com/free/v1/weather.ashx?q=" + view.pageContent.getZipInput() + "&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c"]
 
         // clear out any content already in there
-        content.empty();
-        content.append(ul);
+        optionalNav.hide();
+        // check values
+        console.log(zipUrl[0]);
+        console.log(cont);
+        // constructor function for building page content based on user input zip code
+        city.weather(zipUrl, cont, 0);
       },
       buildLocation: function(arg) {
         // add conditional to determine index for ajaxCalls
@@ -482,7 +484,7 @@ var wave = new Wave(); // wave.conditions(arg);
           // call wave conditions
           wave.conditions(0, view.elemMap.remoteContainer());
           // call weather data, passing in obj and arg values
-          city.weather(model.ajaxCall.cityUrl, 0, view.elemMap.remoteContainer());
+          city.weather(model.ajaxCall.cityUrl, view.elemMap.remoteContainer(), 0);
         }
         else if (arg.attr("id") == "carpenteria") {
           view.pageStructure.backgroundSwitch(model.locations.className[1]);
@@ -491,7 +493,7 @@ var wave = new Wave(); // wave.conditions(arg);
           // call wave conditions
           wave.conditions(1, view.elemMap.remoteContainer());
           // call weather data, passing in obj and arg values
-          city.weather(model.ajaxCall.cityUrl, 1, view.elemMap.remoteContainer());
+          city.weather(model.ajaxCall.cityUrl, view.elemMap.remoteContainer(), 1);
         }
         else {
           view.pageStructure.backgroundSwitch(model.locations.className[2]);
@@ -500,7 +502,7 @@ var wave = new Wave(); // wave.conditions(arg);
           // call wave conditions
           wave.conditions(2, view.elemMap.remoteContainer());
           // call weather data, passing in obj and arg values
-          city.weather(model.ajaxCall.cityUrl, 2, view.elemMap.remoteContainer());
+          city.weather(model.ajaxCall.cityUrl, view.elemMap.remoteContainer(), 2);
         }
       }
     }
