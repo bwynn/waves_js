@@ -11,7 +11,7 @@
     <div id="pageWrap">
       <header id="header">
         <a href="/waves" id="homePageIcon"></a>
-        <a href="#" id="showNav">Check Waves</a>
+        <a href="#" id="showNav"></a>
         <nav id="globalNav">
           <ul id="globalNavContent"></ul>
         </nav>
@@ -30,7 +30,7 @@
         </div>
         <form>
           <label for="enterZip">Check your local weather condtions:</label>
-          <input type="text" id="enterZip" maxlength="6" placeholder="zip code"/>
+          <input type="text" id="enterZip" maxlength="5" placeholder="zip code" title="Please enter a 5 digit zip code." required/>
           <button type="submit" id="zipBtn" class="btn">Submit</button><!-- it'd be cool to use a unicode graphic here perhaps -->
         </form>
         <div id="pageLoadDataContainer">
@@ -55,9 +55,6 @@
           </article><!-- end conditions info section -->
         </div>
       </section><!-- end content section -->
-      <footer>
-        <p><small>&copy; 2015 bwynn</small></p>
-      </footer>
     </div><!-- end pageWrap -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src='js/script.js'></script>

@@ -112,6 +112,11 @@ header > a#showNav,
   color: #EFF5F0;
 }
 
+header > a#showNav {
+  border-bottom: .75em double #EFF5F0;
+  border-top: .25em solid #EFF5F0;
+}
+
 /* set the global background-color */
 body,
 footer,
@@ -209,8 +214,11 @@ header > a#showNav {
   float: right;
   position: relative;
   z-index: 1;
-  top: -32px;
-  padding-right: 1em;
+  top: -1.7em;
+  margin-right: 1em;
+  content: "";
+  height: .3em;
+  width: 35px;
 }
 
 nav#globalNav {
