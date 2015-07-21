@@ -593,8 +593,11 @@ var controller = {
           content = view.elemMap.pageLoadContainer();
       // submit on click event function
       submit.on("click", function(e) {
+        var container = $("#mainBtns");
         // get view function
         e.preventDefault();
+
+        container.hide();
         // clear out existing content
         content.empty();
         // load page content
@@ -628,7 +631,8 @@ var controller = {
         // show the input form
         // get the form element
         var $form = $("#pageLoad > form");
-        $form.slideToggle();
+
+        $form.slideToggle("slow");
       });
     }
 };
