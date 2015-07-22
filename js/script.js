@@ -464,8 +464,20 @@ var wave = new Wave(); // wave.conditions(arg);
         var userInput = $("#enterZip");
         // set variable for value using jquery .val method
         var zip = userInput.val();
+        // get form
+        var form = $("section#pageLoad form");
+        var msg = "<p>Please add a valid 5 digit zip code</p>";
 
-        return zip;
+        // compare user input with regular expression evaluating quality of user input. 
+        if (zip.match(/^\d+$/)) {
+            // clear out the p element if found
+            form.find("p").remove();
+            return zip;
+        } else {
+          //console.log("please enter a valid zip");
+          form.append(msg);
+        }
+
       },
       buildPageLoadContent: function() {
         var cont = view.elemMap.pageLoadContainer();

@@ -102,19 +102,16 @@ html {
 body,
 a,
 .globalNavList a,
-#localNav > ul > li > a  {
-  color: #555;
-}
-
-/* set global nav color */
-header > a#showNav,
-.globalNavList a {
-  color: #EFF5F0;
+#localNav > ul > li > a,
+#conditionsInfo > #remoteData > li > span,
+#userWeatherContent > li > span,
+header > a#showNav  {
+  color: #CFCECE;
 }
 
 header > a#showNav {
-  border-bottom: .75em double #EFF5F0;
-  border-top: .25em solid #EFF5F0;
+  border-bottom: .75em double #CFCECE;
+  border-top: .25em solid #CFCECE;
 }
 
 /* set the global background-color */
@@ -123,19 +120,41 @@ footer,
 #contentInnerWrap,
 #pageLoadDataContainer,
 section#pageLoad {
-  background-color: #EFF5F0;
+  background-color: #282929;
+}
+
+input[type="text"],
+button[type="submit"] {
+  color: #282929;
+}
+
+button[type="submit"] {
+  border-color: #646E67;
 }
 
 /* color style for all elems with .active */
 .active,
 .globalNavList a.active {
-  color: #999;
+  color: #646E67;
 }
 
 /* add border color styles for background image and local nav button border elements */
 #localNav > ul > li > a,
 #content > figure#backgd {
-  border-color: 2px solid #555;
+  border: 2px solid #555;
+}
+
+section#pageLoad form p {
+  color: #C45C5A;
+}
+
+#remoteData > li > span,
+#userWeatherContent > li {
+  background-color: #646E67;
+}
+
+#remoteData > li > span > small {
+  background-color: #464746;
 }
 
 /* ======================= SECTION PAGE LOAD ====================== */
@@ -273,8 +292,7 @@ elements to flex depending on viewport.*/
 li.globalNavList {
   background-color: rgba(45,45,45,.9);
   height: 50px;
-  width: 33%;
-  margin: 1px;
+  margin: 4px 2px;
   box-sizing: border-box;
   -webkit-flex-grow: 1;
   flex-grow: 1;
@@ -339,10 +357,13 @@ article#mainDisplay,
   font-size: 1.2em;
 }
 
+#userWeatherContent {
+  margin-top: 2em;
+}
+
 #conditionsInfo > #remoteData > li,
 #userWeatherContent > li {
   display: inline-block;
-  width: 32.9%;
   text-align: center;
   min-height: 100px;
   font-size: .8em;
@@ -350,21 +371,22 @@ article#mainDisplay,
   padding: .3em;
   box-sizing: border-box;
   margin: .1em;
+  min-width: 33%;
   /*background-color: #9f9f9f; ======== see flex tiles =====*/
 }
 
 #conditionsInfo > #remoteData > li > span,
 #userWeatherContent > li > span {
   display: block;
-  margin-top: .6em;
+  padding-top: .3em;
   font-size: 2.2rem;
-  color: #555;
-  line-height: 1;
+  line-height: 2.5;
 }
 
 #conditionsInfo > #remoteData > li > span small,
 #userWeatherContent > li > span small {
   font-size: 1rem;
+  display: block;
 }
 
 footer p {
@@ -542,10 +564,6 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
     width: 100%;
   }
 
-  #userWeatherContent > li {
-    width: 100%;
-  }
-
   #content > figure#backgd {
     height: 300px;
   }
@@ -574,19 +592,24 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
     padding: 0 .2em;
     font-size: .9em;
   }
-  #conditionsInfo > #remoteData > li {
+  #conditionsInfo > #remoteData > li,
+  #userWeatherContent > li {
     width: 32%;
     margin: 2px;
     box-sizing: border-box;
+    -webkit-flex-grow: 1;
+    -ms-flex-grow: 1;
+    flex-grow: 1;
   }
 
-  #conditionsInfo > #remoteData > li > span {
-    margin-top: 1em;
-    font-size: 1.3rem;
+  #conditionsInfo > #remoteData > li > span,
+  #userWeatherContent > li > span {
+    font-size: .9rem;
   }
 
-  #conditionsInfo > #remoteData > li > span small {
-    font-size: .7rem;
+  #conditionsInfo > #remoteData > li > span small,
+  #userWeatherContent > li > span small {
+    font-size: .5rem;
   }
 
   footer p {
