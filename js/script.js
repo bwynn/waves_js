@@ -468,7 +468,7 @@ var wave = new Wave(); // wave.conditions(arg);
         var form = $("section#pageLoad form");
         var msg = "<p>Please add a valid 5 digit zip code</p>";
 
-        // compare user input with regular expression evaluating quality of user input. 
+        // compare user input with regular expression evaluating quality of user input.
         if (zip.match(/^\d+$/)) {
             // clear out the p element if found
             form.find("p").remove();
@@ -477,7 +477,6 @@ var wave = new Wave(); // wave.conditions(arg);
           //console.log("please enter a valid zip");
           form.append(msg);
         }
-
       },
       buildPageLoadContent: function() {
         var cont = view.elemMap.pageLoadContainer();

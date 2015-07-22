@@ -253,7 +253,7 @@ header > a#showNav {
 nav#globalNav {
   display: none;
   position: relative;
-  top: -11px;
+  top: -18px;
   overflow: hidden;
   width: 100%;
 }
@@ -541,6 +541,10 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
 
   h2 {
     font-size: 1.3em;
+  }
+
+  nav#globalNav {
+    top: -11px;
   }
 
   section#pageLoad figure.icon {
