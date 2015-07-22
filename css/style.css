@@ -98,20 +98,27 @@ button[type="submit"] {
 html {
   background-color: #fff;
 }
-/* sets a majority of the default color styles for the page */
+
 body,
 a,
-.globalNavList a,
+#mainBtns a,
 #localNav > ul > li > a,
+#conditionsInfo > #remoteData > li > span small,
+#userWeatherContent > li > span > small {
+  color: #183152;
+}
+
+/* sets a majority of the default color styles for the page */
+.globalNavList a,
 #conditionsInfo > #remoteData > li > span,
 #userWeatherContent > li > span,
 header > a#showNav  {
-  color: #CFCECE;
+  color: #E1E6FA;
 }
 
 header > a#showNav {
-  border-bottom: .75em double #CFCECE;
-  border-top: .25em solid #CFCECE;
+  border-bottom: .75em double #E1E6FA;
+  border-top: .25em solid #E1E6FA;
 }
 
 /* set the global background-color */
@@ -120,22 +127,22 @@ footer,
 #contentInnerWrap,
 #pageLoadDataContainer,
 section#pageLoad {
-  background-color: #282929;
+  background-color: #E1E6FA;
 }
 
 input[type="text"],
 button[type="submit"] {
-  color: #282929;
+  color: #183152;
 }
 
 button[type="submit"] {
-  border-color: #646E67;
+  border-color: #375D81;
 }
 
 /* color style for all elems with .active */
 .active,
 .globalNavList a.active {
-  color: #646E67;
+  color: #375D81;
 }
 
 /* add border color styles for background image and local nav button border elements */
@@ -150,11 +157,13 @@ section#pageLoad form p {
 
 #remoteData > li > span,
 #userWeatherContent > li {
-  background-color: #646E67;
+  background-color: #375D81;
 }
 
-#remoteData > li > span > small {
-  background-color: #464746;
+#remoteData > li > span > small,
+#localNav > ul > li > a:hover,
+#userWeatherContent > li > span > small {
+  background-color: #ABC8E2;
 }
 
 /* ======================= SECTION PAGE LOAD ====================== */
@@ -243,7 +252,7 @@ header > a#showNav {
 nav#globalNav {
   display: none;
   position: relative;
-  top: -18px;
+  top: -11px;
   overflow: hidden;
   width: 100%;
 }
@@ -261,7 +270,8 @@ ul#globalNavContent {
   width: 100%;
   height: 600px;
   background-color: #999;
-  border-bottom: 2px solid;
+  border-bottom: 2px solid #555;
+  box-sizing: border-box;
 }
 
 #pageTitle h1 {
@@ -327,10 +337,6 @@ for nav */
   padding-top: 0.5em;
 }
 
-#localNav > ul > li > a:hover {
-  background-color: #999;
-}
-
 #localNav > ul > li > a.active {
   background-color: rgba(0,0,0,0);
   border: none;
@@ -371,7 +377,7 @@ article#mainDisplay,
   padding: .3em;
   box-sizing: border-box;
   margin: .1em;
-  min-width: 33%;
+  width: 32%;
   /*background-color: #9f9f9f; ======== see flex tiles =====*/
 }
 
@@ -594,8 +600,8 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
   }
   #conditionsInfo > #remoteData > li,
   #userWeatherContent > li {
-    width: 32%;
     margin: 2px;
+    min-height: 2.5em;
     box-sizing: border-box;
     -webkit-flex-grow: 1;
     -ms-flex-grow: 1;
