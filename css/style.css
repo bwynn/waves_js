@@ -113,12 +113,12 @@ a,
 #conditionsInfo > #remoteData > li > span,
 #userWeatherContent > li > span,
 header > a#showNav  {
-  color: #E1E6FA;
+  color: #EAEEFA;
 }
 
 header > a#showNav {
-  border-bottom: .75em double #E1E6FA;
-  border-top: .25em solid #E1E6FA;
+  border-bottom: .75em double #EAEEFA;
+  border-top: .25em solid #EAEEFA;
 }
 
 /* set the global background-color */
@@ -127,7 +127,7 @@ footer,
 #contentInnerWrap,
 #pageLoadDataContainer,
 section#pageLoad {
-  background-color: #E1E6FA;
+  background-color: #EAEEFA;
 }
 
 input[type="text"],
@@ -142,7 +142,7 @@ button[type="submit"] {
 /* color style for all elems with .active */
 .active,
 .globalNavList a.active {
-  color: #375D81;
+  color: #ABC8E2;
 }
 
 /* add border color styles for background image and local nav button border elements */
@@ -155,7 +155,7 @@ section#pageLoad form p {
   color: #C45C5A;
 }
 
-#remoteData > li > span,
+#remoteData > li,
 #userWeatherContent > li {
   background-color: #375D81;
 }
@@ -172,7 +172,7 @@ section#pageLoad figure.icon {
   width: 4em;
   background-size: cover;
   background-position: center;
-  margin: 2em auto;
+  margin: 0 auto;
 }
 
 figure#waveIcon.icon {
@@ -206,6 +206,11 @@ section#pageLoad form {
 section#pageLoad a {
   display: block;
   width: 20em;
+  margin: 2em auto 0;
+}
+
+section#pageLoad a:first-of-type {
+  margin-top: 4em;
 }
 
 section#pageLoad a:hover {
@@ -265,6 +270,10 @@ ul#globalNavContent {
 /* Disabled while building the module for the list item returns -------------- READ THIS ------------ */
 #content {
   display: none;
+}
+
+#contentInnerWrap {
+  padding-bottom: 2em;
 }
 
 #content > figure#backgd {
@@ -573,6 +582,10 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
   section#pageLoad a {
     display: block;
     width: 100%;
+  }
+
+  section#pageLoad a:first-of-type {
+    margin-top: 3em;
   }
 
   #content > figure#backgd {
