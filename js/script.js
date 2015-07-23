@@ -56,10 +56,11 @@ var model = {
     time: function() {
       var gmt = new Date();
       var time = gmt.toLocaleTimeString();
+      var localTime = time.slice(0,11);
       // return time as a string
       //return console.log(time);
       //return view.contentItemBuilder(time);
-      return time;
+      return localTime;
     },
 
     winddirection: function(data) {

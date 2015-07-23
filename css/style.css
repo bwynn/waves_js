@@ -553,7 +553,7 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
   }
 
   nav#globalNav {
-    top: -11px;
+    top: -14px;
   }
 
   section#pageLoad figure.icon {
@@ -586,6 +586,10 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
 
   section#pageLoad a:first-of-type {
     margin-top: 3em;
+  }
+
+  section#pageLoad p {
+    margin-top: 1em;
   }
 
   #content > figure#backgd {
@@ -634,10 +638,6 @@ only screen and (min-width: 769px) and (min-resolution: 2dppx) {
   #conditionsInfo > #remoteData > li > span small,
   #userWeatherContent > li > span small {
     font-size: .5rem;
-  }
-
-  footer p {
-    display: none;
   }
 }
 
