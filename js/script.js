@@ -7,7 +7,7 @@ var model = {
     name: ["Steamer Lane", "Rincon", "Trestles"],
     id: ["santaCruz", "carpenteria", "sanClemente"],
     className: ["santaCruz", "carpenteria", "sanClemente"],
-    conditionsLabel: ["Time", "Wind Direction", "Air Temp F (degrees f)", "Wind Speed (mph)", "Skies", "Wave Size (feet)", "Swell Direction", "Water Temp (degrees f)", "Swell Period (seconds)"]
+    conditionsLabel: ["Time", "Wind Direction", "Air Temp F (degrees f)", "Wind Speed (mph)", "Skies", "Wave Size (feet)", "Swell Direction", "Water Temp (degrees f)", "Swell Period (seconds)", "Max Temp", "Sunrise", "Sunset"]
   },
   // data objects that are compartmentalized and passed individual arguments
   // from the wave data object. Allowing for customized and individual
@@ -105,6 +105,20 @@ var model = {
       //return view.contentItemBuilder(currently);
       return currently;
     },
+    maxTemp: function(data) {
+      var maxTemp = data.data.weather[0].maxtempF;
+
+      return maxTemp;
+    },
+    /*sunRise: function(data) {
+      var sunRise = data.data.weather[0]astronomy[0].sunrise[0];
+
+      return sunRise;
+    },
+    sunSet: function(data) {
+      var sunSet = data.data.astronomy[0].sunset;
+      return sunSet;
+    },*/
     waveSize: function(data) {
       // get swell height - returned as a number
       var wSizeM = data.data.weather[0].hourly[0].swellHeight_m,
@@ -262,6 +276,32 @@ Location.prototype.weather = function(urlString, cont, index) {
           }
   });
 };
+
+Location.prototype.userWeather = function(urlString, cont, index) {
+  $.ajax({
+          type: "POST",
+          url: urlString[index],
+          dataType: 'jsonp',
+          success: function(data) {
+            // local time
+            view.pageStructure.listBuilder(model.local.time(), model.locations.conditionsLabel[0], cont);
+            // air temp
+            view.pageStructure.listBuilder(model.local.airTemp(data), model.locations.conditionsLabel[2], cont);
+            // skies
+            view.pageStructure.listBuilder(model.local.skies(data), model.locations.conditionsLabel[4], cont);
+            // wind direction
+            view.pageStructure.listBuilder(model.local.winddirection(data), model.locations.conditionsLabel[1], cont);
+            // wind speed
+            view.pageStructure.listBuilder(model.local.windspeed(data), model.locations.conditionsLabel[3], cont);
+            // max Temp
+            view.pageStructure.listBuilder(model.local.maxTemp(data), model.locations.conditionsLabel[9], cont);
+            // Sun Rise
+            /*view.pageStructure.listBuilder(model.local.sunRise(data), model.locations.conditionsLabel[10], cont);
+            // Sun Set
+            view.pageStructure.listBuilder(model.local.sunSet(data), model.locations.conditionsLabel[11], cont);*/
+          }
+  });
+}
 
 // create new objects from the constructor, include index in comments to reference
 
@@ -488,7 +528,7 @@ var wave = new Wave(); // wave.conditions(arg);
         //console.log(zipUrl[0]);
         //console.log(cont);
         // constructor function for building page content based on user input zip code
-        city.weather(zipUrl, cont, 0);
+        city.userWeather(zipUrl, cont, 0);
       },
       buildLocation: function(arg) {
         // add conditional to determine index for ajaxCalls
