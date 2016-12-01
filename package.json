@@ -1,0 +1,26 @@
+{
+  "name": "waves",
+  "version": "1.1.2",
+  "description": "A static javascript based application built on a node server, routed through Express.js",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bwynn/waves_js.git"
+  },
+  "author": "Brian Wynn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bwynn/waves_js/issues"
+  },
+  "homepage": "https://github.com/bwynn/waves_js#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "path": "^0.12.7"
+  }
+}
