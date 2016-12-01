@@ -138,7 +138,7 @@
         var i = arg;
         // get rid of list items inside content area using jquery empty() method.
         $content.empty();
-        $.getJSON('../waves/data/data.json', function(data) {
+        $.getJSON('/data/data.json', function(data) {
           $content.append($('<li><strong>Wave:</strong> ' + data.locations[i].title + '</li>'));
           $content.append($('<li><strong>City:</strong> ' + data.locations[i].city + '</li>'));
           $content.append($('<li><strong>About:</strong> ' + data.locations[i].description + '</li>'));

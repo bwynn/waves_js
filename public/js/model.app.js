@@ -2,17 +2,17 @@
 // WEATHER AND MARINE INFO CALLS
 // store the ajax object, wave object, weather object all into the same
 // immediately instantiated call
-var model = (function() {
-  var locations = {
+var model = {
+  locations: {
     name: ["Steamer Lane", "Rincon", "Trestles"],
     id: ["santaCruz", "carpenteria", "sanClemente"],
     className: ["santaCruz", "carpenteria", "sanClemente"],
     conditionsLabel: ["Time", "Wind Direction", "Air Temp F (degrees f)", "Wind Speed (mph)", "Skies", "Wave Size (feet)", "Swell Direction", "Water Temp (degrees f)", "Swell Period (seconds)", "Max Temp", "Sunrise", "Sunset"]
-  };
+  },
   // data objects that are compartmentalized and passed individual arguments
   // from the wave data object. Allowing for customized and individual
   // ajax calls to the worldweatheronline server
-  var ajaxCall = {
+  ajaxCall: {
     cityUrl: [
       // santa cruz(0)
       "http://api.worldweatheronline.com/free/v1/weather.ashx?q=95062&format=json&date=today&key=c9cda4e16df76d61eb092e6b5c5910ee3f0c6f3c",
@@ -34,9 +34,9 @@ var model = (function() {
     // set this function to shoot back a message if there are any issues with
     // the external ajax call
     error: function(){ console.log('better luck next time, bud!');}
-  };
+  },
 
-  var local = {
+  local: {
     // add an object that lists off content to load into the template
     // this can be string-based
     // and then add a function that assigns out the information into the
@@ -176,11 +176,11 @@ var model = (function() {
       //return view.contentItemBuilder(sPeriod);
       return sPeriod;
     }
-  };  // end local object
-
+  },  // end local object
+};
   // CONSTRUCTOR FUNCTIONS
   // create a new constructor function calling the location information
-  var Location = function() {};
+  Location = function() {};
 
   // create new objects from the constructor, include index in comments to reference
 
@@ -262,6 +262,3 @@ var model = (function() {
             }
     });
   };
-
-
-}());
