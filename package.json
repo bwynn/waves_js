@@ -11,6 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/bwynn/waves_js.git"
   },
+  "engines": {
+    "node": "6.2.2"
+  },
   "author": "Brian Wynn",
   "license": "ISC",
   "bugs": {
